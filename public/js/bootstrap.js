@@ -1,4 +1,14 @@
 var normalize = require('normalize-css');
+var ACE2D = require('./ACE2D');
+
+var MundoSenai = new ACE2D();
+
+/*
+*
+*	Tests with ACE3D :P
+*
+*/
+/*
 var ACE3D = require('./ACE3D');
 
 var MundoSenai = new ACE3D();
@@ -40,3 +50,4 @@ MundoSenai.callback(function () {
 		MundoSenai.helpers.onWindowResize(MundoSenai);
 	}, false);
 });
+*/

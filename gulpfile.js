@@ -27,3 +27,7 @@ gulp.task('build', function() {
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./public/js'));
 });
+
+gulp.task('watch', function () {
+  gulp.watch('./public/js/**/*.js', ['build']);
+});
