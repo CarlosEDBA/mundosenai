@@ -1,7 +1,7 @@
 var normalize = require('normalize-css');
-var Ace = require('./ace/ace');
+var ACE3D = require('./ACE3D');
 
-var MundoSenai = new Ace();
+var MundoSenai = new ACE3D();
 
 var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;
@@ -40,5 +40,3 @@ MundoSenai.callback(function () {
 		MundoSenai.helpers.onWindowResize(MundoSenai);
 	}, false);
 });
-
-//MundoSenai.addControls();

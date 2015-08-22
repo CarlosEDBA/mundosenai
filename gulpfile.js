@@ -21,9 +21,9 @@ gulp.task('build-react', function() {
         .pipe(gulp.dest('./public/js'));
 });
 
-gulp.task('build-ace', function() {
+gulp.task('build', function() {
     return browserify('./public/js/bootstrap.js')
         .bundle()
-        .pipe(source('ace-bundle.js'))
+        .pipe(source('bundle.js'))
         .pipe(gulp.dest('./public/js'));
 });
