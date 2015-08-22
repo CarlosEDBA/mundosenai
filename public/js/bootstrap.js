@@ -21,13 +21,24 @@ MundoSenai.newLight();
 MundoSenai.render(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 MundoSenai.callback(function () {
+	// Adiciona os controles
+	MundoSenai.helpers.addControls(MundoSenai);
+
+	// Cria a caixinha de teste
 	MundoSenai.helpers.createBox(MundoSenai.scene);
 
+	// Anima os frames c:
 	function animate () {
 		requestAnimationFrame(animate);
 		MundoSenai.renderer.render(MundoSenai.scene, MundoSenai.camera);
+		MundoSenai.controls.update();
 	}
+
 	animate();
+
+	window.addEventListener('resize', function () {
+		MundoSenai.helpers.onWindowResize(MundoSenai);
+	}, false);
 });
 
-MundoSenai.addControls();
+//MundoSenai.addControls();

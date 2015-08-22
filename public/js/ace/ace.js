@@ -6,6 +6,7 @@ var Ace = function () {
 	this.scene;
 	this.raycaster;
 	this.renderer;
+	this.controls;
 };
 
 Ace.prototype.helper = {
@@ -72,7 +73,7 @@ Ace.prototype.animate = function (that) {
 }
 
 Ace.prototype.addControls = function () {
-	var controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+	this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 }
 
 Ace.prototype.callback = function (callback) {

@@ -35,6 +35,7 @@ var Ace = function () {
 	this.scene;
 	this.raycaster;
 	this.renderer;
+	this.controls;
 };
 
 Ace.prototype.helper = {
@@ -101,7 +102,7 @@ Ace.prototype.animate = function (that) {
 }
 
 Ace.prototype.addControls = function () {
-	var controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+	this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 }
 
 Ace.prototype.callback = function (callback) {
@@ -134,16 +135,28 @@ MundoSenai.newLight();
 MundoSenai.render(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 MundoSenai.callback(function () {
+
+	// Cria a caixinha de teste
 	MundoSenai.helpers.createBox(MundoSenai.scene);
 
+	// Anima os frames c:
 	function animate () {
 		requestAnimationFrame(animate);
 		MundoSenai.renderer.render(MundoSenai.scene, MundoSenai.camera);
+		MundoSenai.controls.update();
 	}
+
 	animate();
+
+	// Adiciona os controles
+	MundoSenai.helpers.addControls(MundoSenai);
+
+	window.addEventListener('resize', function () {
+		MundoSenai.helpers.onWindowResize(MundoSenai);
+	}, false);
 });
 
-MundoSenai.addControls();
+//MundoSenai.addControls();
 },{"./ace/ace":4,"./helpers":6,"normalize-css":1}],6:[function(require,module,exports){
 module.exports = {
 	createBox: function (scene) {
@@ -165,6 +178,21 @@ module.exports = {
 		cube = new THREE.Mesh( cubeGeometry, cubeMaterials );
 		cube.position.set(-100, 100, -300);
 		scene.add(cube);
+	},
+
+	onWindowResize: function (twoo) {
+		twoo.camera.aspect = window.innerWidth / window.innerHeight;
+		twoo.camera.updateProjectionMatrix();
+
+		twoo.renderer.setSize(window.innerWidth, window.innerHeight);
+		twoo.renderer.render(twoo.scene, twoo.camera);
+	},
+
+	addControls: function (twoo) {
+		twoo.controls = new THREE.OrbitControls(twoo.camera, twoo.renderer.domElement);
+		twoo.controls.addEventListener('change', function () {
+			twoo.renderer.render(twoo.scene, twoo.camera);
+		});
 	}
 };
 },{}]},{},[5]);
