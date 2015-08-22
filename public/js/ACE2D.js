@@ -21,23 +21,31 @@ var ACE2D = ACE2D || function () {
 	  .translate(0, 0, 0.5)
 	, azul);
 
+	iso.add(Shape.Prism(new Point(0, 0, 0), 20, 5, 6)
+	  .translate(0, 0, 0.5)
+	, azul);
+
+	iso.add(Shape.Prism(new Point(15, 14.8, 0), 3, 0.2, 3.5)
+	  .translate(0, 0, 0.5)
+	, gay);
+
+	iso.add(Shape.Prism(new Point(12, 14.8, 0), 3, 0.2, 3.5)
+	  .translate(0, 0, 0.5)
+	, azulverde);
+
 	iso.add(Shape.Prism(new Point(9, 14.8, 0), 3, 0.2, 3.5)
-	  /* (1.5, 1.5) is the center of the prism */
 	  .translate(0, 0, 0.5)
 	, gay);
 
 	iso.add(Shape.Prism(new Point(6, 14.8, 0), 3, 0.2, 3.5)
-	  /* (1.5, 1.5) is the center of the prism */
 	  .translate(0, 0, 0.5)
 	, azulverde);
 
 	iso.add(Shape.Prism(new Point(3, 14.8, 0), 3, 0.2, 3.5)
-	  /* (1.5, 1.5) is the center of the prism */
 	  .translate(0, 0, 0.5)
 	, gay);
 
 	iso.add(Shape.Prism(new Point(0, 14.8, 0), 3, 0.2, 3.5)
-	  /* (1.5, 1.5) is the center of the prism */
 	  .translate(0, 0, 0.5)
 	, azulverde);
 
