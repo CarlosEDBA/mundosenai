@@ -2,7 +2,7 @@ Mundo Senai 2015 - Boqueirão
 =========================
 
 
-Aplicação web que mostra o que acontecerá em cada sala da unidade do SENAI no Boqueirão, Curitiba.
+Aplicação web que mostra o que acontecerá em cada sala da unidade do SENAI Boqueirão durante o Mundo Senai.
 
 ----------
 
