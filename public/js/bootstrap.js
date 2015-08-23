@@ -1,7 +1,17 @@
 var normalize = require('normalize-css');
 var ACE2D = require('./ACE2D');
 
-var MundoSenai = new ACE2D();
+var MundoSenai = new ACE2D(document.querySelector('canvas'));
+
+// Chão
+MundoSenai.newBox([0, 0, 0], [20, 20, 0.5], MundoSenai.colors.grey);
+// Prédios
+MundoSenai.newBox([10.5, 16.5, 0], [10, 4, 7], MundoSenai.colors.lightblue);
+MundoSenai.newBox([0.5, 16.5, 0], [10, 4, 7], MundoSenai.colors.black);
+MundoSenai.newBox([0.5, 0.5, 0], [20, 4, 7], MundoSenai.colors.black);
+// Portas
+MundoSenai.newBox([2, 17, -0.6], [2, 0.2, 3.5], MundoSenai.colors.lightblue);
+MundoSenai.newBox([11.5, 16.5, 0], [2, 0.2, 3.5], MundoSenai.colors.black);
 
 /*
 *

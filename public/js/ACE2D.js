@@ -1,64 +1,44 @@
-var ACE2D = ACE2D || function () {
+var ACE2D = ACE2D || function (canvas) {
 
-	// Isomer Defaults
-	var Point  = Isomer.Point;
-	var Path   = Isomer.Path;
-	var Shape  = Isomer.Shape;
-	var Vector = Isomer.Vector;
-	var Color  = Isomer.Color;
+	this.canvas = new Isomer(canvas);
+	this.Point = Isomer.Point;
+	this.Path = Isomer.Path;
+	this.Shape = Isomer.Shape;
+	this.Vector = Isomer.Vector;
+	this.Color = Isomer.Color;
+	this.colors = {
+		black: new this.Color(0, 0, 0),
+		white: new this.Color(255, 255, 255),
+		red: new this.Color(244, 67, 54),
+		pink: new this.Color(233, 30, 99),
+		purple: new this.Color(156, 39, 176),
+		deeppurple: new this.Color(103, 58, 183),
+		indigo: new this.Color(63, 81, 181),
+		blue: new this.Color(33, 150, 243),
+		lightblue: new this.Color(3, 169, 244),
+		cyan: new this.Color(0, 188, 212),
+		teal: new this.Color(0, 150, 136),
+		green: new this.Color(76, 175, 80),
+		lightgreen: new this.Color(139, 195, 74),
+		lime: new this.Color(205, 220, 57),
+		yellow: new this.Color(255, 235, 59),
+		amber: new this.Color(255, 193, 7),
+		orange: new this.Color(255, 152, 0),
+		deeporange: new this.Color(255, 87, 34),
+		brown: new this.Color(121, 85, 72),
+		grey: new this.Color(158, 158, 158),
+		bluegrey: new this.Color(96, 158, 158)
+	};
 
-	var iso = new Isomer(document.querySelector('canvas'));
+};
 
-	var gay = new Color(255, 0, 93);
-	var azulverde = new Color(0, 229, 225);
-	var azul = new Color(50, 60, 160);
-
-	// Chão
-	var cube = Shape.Prism(Point.ORIGIN, 20, 20, 0.5)
-	  .rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 2.5)
-	iso.add(cube);
-
-	iso.add(Shape.Prism(new Point(0, 16, 0), 20, 4, 6)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, azul);
-
-	iso.add(Shape.Prism(new Point(0, 0, 0), 20, 4, 6)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, azul);
-
-	iso.add(Shape.Prism(new Point(15, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, gay);
-
-	iso.add(Shape.Prism(new Point(12, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, azulverde);
-
-	iso.add(Shape.Prism(new Point(9, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, gay);
-
-	iso.add(Shape.Prism(new Point(6, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, azulverde);
-
-	iso.add(Shape.Prism(new Point(3, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, gay);
-
-	iso.add(Shape.Prism(new Point(0, 15.8, 0), 3, 0.2, 3.5)
-		.rotateZ(Point(1.5, 1.5, 0), Math.PI / 12)
-	  .translate(0, -2.5, 3)
-	, azulverde);
-
+ACE2D.prototype.newBox = function (coord, xyz, color, callback) {
+	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
+	if (callback) {
+		this.canvas.add(box.callback, color);
+	} else {
+		this.canvas.add(box, color);
+	}
 };
 
 module.exports = ACE2D;
