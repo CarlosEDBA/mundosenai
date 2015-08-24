@@ -32,13 +32,18 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 };
 
-ACE2D.prototype.newBox = function (coord, xyz, color, callback) {
+ACE2D.prototype.newBox = function (coord, xyz, color, pointIt, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
+
 	if (callback) {
 		this.canvas.add(box, color);
 		callback(this, box);
 	} else {
 		this.canvas.add(box, color);
+	}
+	
+	if (pointIt) {
+		this.pointIt(box);
 	}
 };
 

@@ -61,13 +61,18 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 };
 
-ACE2D.prototype.newBox = function (coord, xyz, color, callback) {
+ACE2D.prototype.newBox = function (coord, xyz, color, pointIt, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
+
 	if (callback) {
 		this.canvas.add(box, color);
 		callback(this, box);
 	} else {
 		this.canvas.add(box, color);
+	}
+	
+	if (pointIt) {
+		this.pointIt(box);
 	}
 };
 
@@ -206,24 +211,12 @@ var MundoSenai = new ACE2D(canvas, {
 MundoSenai.newBox([0, 0, 0], [30, 25, 0.5], MundoSenai.colors.grey);
 
 // Salas da Direita
-MundoSenai.newBox([24, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
-MundoSenai.newBox([20, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
-MundoSenai.newBox([16, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
-MundoSenai.newBox([12, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
-MundoSenai.newBox([8, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
-MundoSenai.newBox([4, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
-	ACE2D.pointIt(box);
-});
+MundoSenai.newBox([24, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MundoSenai.newBox([20, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MundoSenai.newBox([16, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MundoSenai.newBox([12, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MundoSenai.newBox([8, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MundoSenai.newBox([4, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
 
 // Portas da Direita
 MundoSenai.newBox([24.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
