@@ -35,8 +35,8 @@ var ACE2D = ACE2D || function (canvas, options) {
 ACE2D.prototype.newBox = function (coord, xyz, color, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	if (callback) {
-		callback(this, box);
 		this.canvas.add(box, color);
+		callback(this, box);
 	} else {
 		this.canvas.add(box, color);
 	}
@@ -56,10 +56,10 @@ ACE2D.prototype.pointIt = function (shape) {
 	var canvas = document.querySelector('canvas');
 	var ctx = canvas.getContext("2d");
 	var TRANSFORMATION = [];
-	var SCALE = 14;
-	var ANGLE = Math.PI / 6;
-	var originX = canvas.width / 2;
-	var originY = 450;
+	var SCALE = this.canvas.scale;
+	var ANGLE = this.canvas.angle;
+	var originX = this.canvas.originX;
+	var originY = this.canvas.originY;
 
 	var Point = Isomer.Point;
 	var Path = Isomer.Path;
@@ -144,9 +144,9 @@ ACE2D.prototype.pointIt = function (shape) {
 		ctx.beginPath();
 		ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
 		ctx.fillStyle = "#FF00E1";
-		//ctx.font = '15px Arial';
-		//ctx.fillText('x: ' + x, x, y);
-		//ctx.fillText('y: ' + y, x, y + 50);
+		ctx.font = '10px Roboto';
+		ctx.fillText('x: ' + parseInt(x), x, y);
+		ctx.fillText('y: ' + parseInt(y), x, y + 10);
 		ctx.fill();
 		ctx.stroke();
 		//ctx.fillRect(x, y, 12, 12);

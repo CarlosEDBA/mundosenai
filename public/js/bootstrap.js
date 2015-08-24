@@ -6,29 +6,51 @@ var inWidth = window.innerWidth;
 var inHeight = window.innerHeight;
 
 var MundoSenai = new ACE2D(canvas, {
-	scale: 14,
+	scale: 15,
 	originY: 450
 });
 
 // Chão
-MundoSenai.newBox([0, 0, 0], [20, 20, 0.5], MundoSenai.colors.grey);
-// Prédios
-MundoSenai.newBox([10.5, 16.5, 0], [10, 4, 7], MundoSenai.colors.black);
-MundoSenai.newBox([16, 8, -0.5], [8, 9, 7], MundoSenai.colors.cyan);
-MundoSenai.newBox([0.5, 16.5, 0], [10, 4, 7], MundoSenai.colors.black);
-MundoSenai.newBox([0.5, 0.5, 0], [20, 4, 7], MundoSenai.colors.black, function (ACE2D, box) {
-	//ACE2D.pointIt(box);
-});
-// Portas
-MundoSenai.newBox([2, 17, -0.6], [2, 0.2, 3.5], MundoSenai.colors.brown);
-MundoSenai.newBox([11.5, 16.5, 0], [2, 0.2, 3.5], MundoSenai.colors.brown, function (ACE2D, box) {
-	console.log(ACE2D);
+MundoSenai.newBox([0, 0, 0], [30, 25, 0.5], MundoSenai.colors.grey);
+
+// Salas da Direita
+MundoSenai.newBox([24, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
 	ACE2D.pointIt(box);
-	//console.log(box);
+});
+MundoSenai.newBox([20, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
+	ACE2D.pointIt(box);
+});
+MundoSenai.newBox([16, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
+	ACE2D.pointIt(box);
+});
+MundoSenai.newBox([12, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
+	ACE2D.pointIt(box);
+});
+MundoSenai.newBox([8, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
+	ACE2D.pointIt(box);
+});
+MundoSenai.newBox([4, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, function (ACE2D, box) {
+	ACE2D.pointIt(box);
 });
 
+// Portas da Direita
+MundoSenai.newBox([24.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MundoSenai.newBox([20.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MundoSenai.newBox([16.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MundoSenai.newBox([12.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MundoSenai.newBox([8.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MundoSenai.newBox([4.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
 
-//mouseCoords();
+// Salas da Direita
+MundoSenai.newBox([24, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MundoSenai.newBox([20, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MundoSenai.newBox([16, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MundoSenai.newBox([12, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MundoSenai.newBox([8, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MundoSenai.newBox([4, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+
+
+mouseCoords();
 
 function mouseCoords () {
 	document.addEventListener('mousemove', function (e) {
