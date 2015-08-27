@@ -1,6 +1,10 @@
+var ReverseI = require('./ReverseI');
+
 var ACE2D = ACE2D || function (canvas, options) {
 
-	this.canvas = new Isomer(canvas, options);
+	this.isomer = new Isomer(canvas, options);
+	this.canvas = document.querySelector('canvas');
+	this.counter = 0;
 	this.Point = Isomer.Point;
 	this.Path = Isomer.Path;
 	this.Shape = Isomer.Shape;
@@ -30,137 +34,164 @@ var ACE2D = ACE2D || function (canvas, options) {
 		bluegrey: new this.Color(96, 158, 158)
 	};
 
+	this.caixinhas = [];
+	this.caixinhasLen = this.caixinhas.length;
+
+	document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
+
 };
 
-ACE2D.prototype.newBox = function (coord, xyz, color, pointIt, callback) {
+ACE2D.prototype.setCounter = function () {
+	this.counter += 1;
+	//console.log(this.counter);
+};
+
+ACE2D.prototype.getCounter = function () {
+	return this.counter;
+};
+
+ACE2D.prototype.newBox = function (position, coord, xyz, color, setCoords, roomNum, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
+	var coords;
 
-	if (callback) {
-		this.canvas.add(box, color);
-		callback(this, box);
-	} else {
-		this.canvas.add(box, color);
+	if (position) { // Esquerda
+		if (callback) {
+			this.isomer.add(box, color);
+			callback(this, box);
+		} else {
+			this.isomer.add(box, color);
+		}
+	} else if (!position) { // Direita
+		if (callback) {
+			this.isomer.add(box
+				.rotateZ(this.Point(1.5, 1.5, 0), Math.PI / 12)
+			, color);
+			callback(this, box);
+		} else {
+			this.isomer.add(box
+				.rotateZ(this.Point(12.5, 12.5, 0), Math.PI / 2.5)
+			, color);
+		}
 	}
-	
-	if (pointIt) {
-		this.pointIt(box);
+
+	// Grava coordenadas
+	if (setCoords) {
+		coords = this.setCoords(box);
+	}
+
+	// Adiciona Sala
+	if (roomNum && roomNum !== 0) {
+		var x = [];
+		var room = coords.length - 1;
+
+		console.log(room);
+		//console.log(coords[room][0]);
+
+		coords[room][0].forEach(function (el, ind, arr) {
+			x.push(el.xDoMouse);
+		});
+
+		console.log(x);
+		this.newRoom(roomNum, x);
 	}
 };
 
-ACE2D.prototype.init = function (shape) {
-	var paths = shape.orderedPaths();
-	    for (var i in paths) {
-	      if (paths.hasOwnProperty(i)) {
-	      	console.log(paths[i]);
-	        _addPath(paths[i]);
-	      }
-	    }
-};
+ACE2D.prototype.setCoords = function (shape) {
+	var ReI = new ReverseI(this, this.canvas);
+	var ctx = this.canvas.getContext('2d');
+	var rect = this.canvas.getBoundingClientRect();
 
-ACE2D.prototype.pointIt = function (shape) {
-	var canvas = document.querySelector('canvas');
-	var ctx = canvas.getContext("2d");
-	var TRANSFORMATION = [];
-	var SCALE = this.canvas.scale;
-	var ANGLE = this.canvas.angle;
-	var originX = this.canvas.originX;
-	var originY = this.canvas.originY;
+	var faces = [];
+	var vertices = [];
+	var verticesLen = vertices.length;
 
-	var Point = Isomer.Point;
-	var Path = Isomer.Path;
-	var Shape = Isomer.Shape;
-	var Vector = Isomer.Vector;
+	//console.log('Essa é uma caixinha composta de 6 faces de 4 vertices');
 
-	function init (shape) {
-		var paths = shape.orderedPaths();
-	    for (var i in paths) {
-	      if (paths.hasOwnProperty(i)) {
-	      	console.log(paths[i]);
-	        _addPath(paths[i]);
-	      }
-	    }
-	}
+	this.caixinhas.push(this.counter);
+	this.caixinhasLen = this.counter;
 
-	function orderedPaths (shape) {
-		var paths = shape.slice();
+	ReI.setShape(shape);
 
-		/**
-		* Sort the list of faces by distance then map the entries, returning
-		* only the path and not the added "further point" from earlier.
-		*/
+	ReI.init(function (data) { // Faces
+		faces.push(data);
+		data.forEach(function (el, ind, arr) { // Vértices
 
-		return paths.sort(function (pathA, pathB) {
-			return depth(pathB) - depth(pathA);
+			//vertices.push(el);
+			//verticesLen = ind;
+
+			ctx.beginPath();
+			ctx.arc(el.x, el.y, 3, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#FF00E1";
+			ctx.font = '10px Roboto';
+			ctx.fillText('x: ' + el.x, el.x, el.y);
+			ctx.fillText('y: ' + el.y, el.x, el.y + 10);
+			ctx.fill();
+			ctx.stroke();
 		});
-	}
+	});
 
-	function depth (path) {
-		var i, total = 0;
-		for (i = 0; i < path.length; i++) {
-			total += depth(path[i]);
-	  	}
+	this.setCounter();
 
-	  	return total / (path.length || 1);
-	}
+	this.caixinhas[this.caixinhasLen] = faces;
 
-	function _addPath (path) {
-		path.points.map(function (i) {
-			console.log(i)
-		});
-		path.points.map(_translatePoint);
-	}
+	//console.log(this.caixinhas);
+	//console.log(faces);
+	//console.log(vertices);
 
-	function _calculateTransformation () {
-	  TRANSFORMATION = [
-	    [
-	      SCALE * Math.cos(ANGLE),
-	      SCALE * Math.sin(ANGLE)
-	    ],
-	    [
-	      SCALE * Math.cos(Math.PI - ANGLE),
-	      SCALE * Math.sin(Math.PI - ANGLE)
-	    ]
-	  ];
-	}
-
-	function _translatePoint (point) {
-		var xMap = new Point(
-			point.x * TRANSFORMATION[0][0],
-			point.x * TRANSFORMATION[0][1]);
-
-		var yMap = new Point(
-	  		point.y * TRANSFORMATION[1][0],
-	  		point.y * TRANSFORMATION[1][1]);
-
-		var x = originX + xMap.x + yMap.x;
-		var y = originY - xMap.y - yMap.y - (point.z * SCALE);
-
-		var x4K = 3840;
-		var y4K = 2160;
-		var xNot = 1366;
-		var yNot = 768;
-
-		var xDoMouse = x4K - xNot - x;
-		var yDoMouse = y4K - yNot - y;
-
-		console.log('x: ' + x);
-		console.log('y: ' + y);
-
-		ctx.beginPath();
-		ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
-		ctx.fillStyle = "#FF00E1";
-		ctx.font = '10px Roboto';
-		ctx.fillText('x: ' + parseInt(x), x, y);
-		ctx.fillText('y: ' + parseInt(y), x, y + 10);
-		ctx.fill();
-		ctx.stroke();
-		//ctx.fillRect(x, y, 12, 12);
-
-		//return new Point(x, y);
-	}
-
-	_calculateTransformation();
-	init(shape);
+	return this.caixinhas;
 }
+
+ACE2D.prototype.mouseCoords = function () {
+	document.addEventListener('mousemove', function (e) {
+		var x = e.pageX;
+		var y = e.pageY;
+		console.log('Mouse Position: x: ' + x + ' - y: ' + y);
+	});
+};
+
+ACE2D.prototype.newRoom = function (number, x) {
+	var room = document.createElement('senai-room');
+	room.dataset.number = number;
+	room.dataset.x1 = x[0];
+	room.dataset.x2 = x[1];
+	room.dataset.x3 = x[2];
+	room.dataset.x4 = x[3];
+	document.body.appendChild(room);
+};
+
+ACE2D.prototype.roomMagic = function () {
+	var rooms = document.querySelectorAll('senai-room');
+	var roomsLen = rooms.length;
+
+	this.canvas.addEventListener('mousedown', letsGo);
+
+	function letsGo (e) {
+		var mouseX = e.x;
+		var mouseY = e.y;
+
+		for (var i=0; i<roomsLen; i++) {
+			if (mouseX > rooms[i].dataset.x1 && mouseX < rooms[i].dataset.x3) {
+				console.log('Sala: ' + rooms[i].dataset.number + ' - x: ' + mouseX + ' - y: ' + mouseY);
+			};
+		}
+	}
+};
+
+ACE2D.prototype.setupModal = function () {
+	var modal = document.querySelector('.modal');
+	var close = document.querySelector('.modal .close');
+	var testes = document.querySelectorAll('.testes button');
+	var testesLen = testes.length;
+
+	for (var i=0; i< testesLen; i++) {
+		testes[i].addEventListener('click', toggleModal);
+	}
+
+	close.addEventListener('click', toggleModal);
+
+	function toggleModal(e) {
+		modal.classList.toggle('open');
+	}
+};
 
 module.exports = ACE2D;
