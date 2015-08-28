@@ -1,17 +1,17 @@
 [
 	{
-		"sala": 201,
-		"titulo": "lalala",
-		"descricao": "lalalalalala"
+		"sala" : "201",
+		"titulo" : "lalala",
+		"descricao" : "lalalalalalalalalalalala"
 	},
 	{
-		"sala": 202,
-		"titulo": "lalala2",
-		"descricao": "lalalalalala2"
+		"sala" : "202",
+		"titulo" : "lalala2",
+		"descricao" : "lalalalalalalalalalalala2"
 	},
 	{
-		"sala": 203,
-		"titulo": "lalala3",
-		"descricao": "lalalalalala3"
+		"sala" : "203",
+		"titulo" : "lalala3",
+		"descricao" : "lalalalalalalalalalalala3"
 	}
 ]

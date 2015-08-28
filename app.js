@@ -3,7 +3,7 @@ global.rootRequire = function(name) {
     return require(__dirname + '/' + name);
 }
 
-global.publicDir = __dirname + '/public';
+global.publicDir = __dirname + '/public/';
 
 // Defaults
 
@@ -12,11 +12,13 @@ global.publicDir = __dirname + '/public';
 var express = require('express');
 var app = express();
 var router = express.Router();
+var io = require('socket.io');
 var program = require('commander');
 
 // Root Modules
 var http = rootRequire('patchs/http');
 var P2C = rootRequire('Print2Console');
+var JSON2File = rootRequire('JSON2File');
 
 program
     .version('0.0.1')
@@ -48,8 +50,25 @@ http.badRequest(app);
 
 // Setup the routes
 rootRequire('routes/logger')(app);
+rootRequire('routes/components')(express, app);
 
 // BootUp the HTTP Server
 var server = app.listen(PORT, function () {
     P2C.info('express', 'Server listening on port ' + PORT);
+});
+
+/*
+//
+// Socket.IO Server
+//
+*/
+
+io = io(server, { log: false });
+
+io.on('connection', function (server) {
+    server.on('saveRequest', function (data) {
+        //server.broadcast.emit('changeSlides', data);
+        //JSON2File('rooms.json', data);
+        console.log(data);
+    });
 });

@@ -23,10 +23,27 @@ header .logo {
 }
 
 canvas {
+	display: block;
 	width: 100%;
-	height: 100%;
+	height: auto;
 }
 
+.focused {
+	transform: translateY(0);
+}
+
+senai-modal  /deep/ .modal {
+	transform: translateY(-1000px) scale(0.5);
+	-webkit-transition: all 0.26s linear;
+	-moz-transition: all 0.26s linear;
+	transition: all 0.26s linear;
+}
+
+senai-modal[state=open] /deep/ .modal {
+	transform: translateY(0) scale(1);
+}
+
+/*
 .modal {
 	position: absolute;
 	top: 150px;
@@ -96,7 +113,7 @@ canvas {
 	content: '×';
 	font: 300 25px 'Roboto', sans-serif;
 	cursor: pointer;
-}
+} */
 
 .main {
 	display: flex;
@@ -128,11 +145,26 @@ canvas {
 	font: 300 30px 'Roboto', sans-serif;
 }
 
-.main .new .container > .title {
+.main .new .container > .room {
 	display: block;
 	width: 300px;
 	height: 25px;
 	margin: 55px 0 0 0;
+	padding: 5px 10px 5px 10px;
+	font: 300 22px 'Roboto', sans-serif;
+	background-color: #fff;
+	border: none;
+	outline: none;
+	-webkit-box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:    2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    box-shadow:         2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.main .new .container > .title {
+	display: block;
+	width: 300px;
+	height: 25px;
+	margin: 15px 0 0 0;
 	padding: 5px 10px 5px 10px;
 	font: 300 22px 'Roboto', sans-serif;
 	background-color: #fff;
@@ -166,8 +198,9 @@ canvas {
 	padding: 10px 10px 10px 10px;
 	border: none;
 	outline: none;
-	color: #212121;
-	background-color: #40FF88;
+	color: #fff;
+	background-color: #40ACFF;
 	border: 2px solid transparent;
 	border-radius: 2px;
+	font: 300 18px 'Roboto', sans-serif;
 }

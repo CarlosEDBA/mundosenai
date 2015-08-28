@@ -8,29 +8,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="import" href="/components/webcomponentsjs/webcomponents.min.js">
+        <link rel="import" href="/components/senai-modal.html">
     </head>
 	<body>
-
         <header>
             <img class="logo" src="img/LogoMundoSenai.png" />
-            <div class="testes">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-            </div>
         </header>
 
-        <canvas width="1200" height="450"></canvas>
+        <canvas id="Terreo" width="1200" height="550"></canvas>
+        <canvas id="Andar1" width="1200" height="550"></canvas>
 
-        <div class="modal">
-            <div class="wrapper">
-                <div class="top">
-                    <span class="title">201 - Lalala</span>
-                    <span class="close"></span>
-                </div>
-                <span class="description">lalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala</span>
-            </div>
-        </div>
+        <senai-modal room="" state=""></senai-modal>
 
         <!-- Isometric JS -->
         <script type="text/javascript" src="/js/isomer.js"></script>

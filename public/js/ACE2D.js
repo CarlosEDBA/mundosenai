@@ -36,9 +36,6 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 	this.caixinhas = [];
 	this.caixinhasLen = this.caixinhas.length;
-
-	document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
-
 };
 
 ACE2D.prototype.setCounter = function () {
@@ -162,35 +159,41 @@ ACE2D.prototype.newRoom = function (number, x) {
 ACE2D.prototype.roomMagic = function () {
 	var rooms = document.querySelectorAll('senai-room');
 	var roomsLen = rooms.length;
+	var that = this;
 
-	this.canvas.addEventListener('mousedown', letsGo);
+	this.canvas.addEventListener('mousedown', function (e, ACE2D) {
+		letsGo(e, this);
+	});
 
-	function letsGo (e) {
+	function letsGo (e, ACE2D) {
 		var mouseX = e.x;
 		var mouseY = e.y;
 
 		for (var i=0; i<roomsLen; i++) {
 			if (mouseX > rooms[i].dataset.x1 && mouseX < rooms[i].dataset.x3) {
 				console.log('Sala: ' + rooms[i].dataset.number + ' - x: ' + mouseX + ' - y: ' + mouseY);
+				console.log(ACE2D);
+				that.openModal(rooms[i].dataset.number);
 			};
 		}
 	}
 };
 
-ACE2D.prototype.setupModal = function () {
-	var modal = document.querySelector('.modal');
-	var close = document.querySelector('.modal .close');
-	var testes = document.querySelectorAll('.testes button');
-	var testesLen = testes.length;
+ACE2D.prototype.openModal = function (room) {
+	var modal = document.querySelector('senai-modal');
+	modal.setAttribute('room', room);
+	modal.setAttribute('state', 'open');
+};
 
-	for (var i=0; i< testesLen; i++) {
-		testes[i].addEventListener('click', toggleModal);
-	}
+ACE2D.prototype.setupModal = function () {
+	var modal = document.querySelector('senai-modal');
+	var close = document.querySelector('senai-modal /deep/ .close');
 
 	close.addEventListener('click', toggleModal);
 
 	function toggleModal(e) {
-		modal.classList.toggle('open');
+		modal.setAttribute('room', '');
+		modal.setAttribute('state', '');
 	}
 };
 

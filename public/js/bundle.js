@@ -65,9 +65,6 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 	this.caixinhas = [];
 	this.caixinhasLen = this.caixinhas.length;
-
-	document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
-
 };
 
 ACE2D.prototype.setCounter = function () {
@@ -191,35 +188,41 @@ ACE2D.prototype.newRoom = function (number, x) {
 ACE2D.prototype.roomMagic = function () {
 	var rooms = document.querySelectorAll('senai-room');
 	var roomsLen = rooms.length;
+	var that = this;
 
-	this.canvas.addEventListener('mousedown', letsGo);
+	this.canvas.addEventListener('mousedown', function (e, ACE2D) {
+		letsGo(e, this);
+	});
 
-	function letsGo (e) {
+	function letsGo (e, ACE2D) {
 		var mouseX = e.x;
 		var mouseY = e.y;
 
 		for (var i=0; i<roomsLen; i++) {
 			if (mouseX > rooms[i].dataset.x1 && mouseX < rooms[i].dataset.x3) {
 				console.log('Sala: ' + rooms[i].dataset.number + ' - x: ' + mouseX + ' - y: ' + mouseY);
+				console.log(ACE2D);
+				that.openModal(rooms[i].dataset.number);
 			};
 		}
 	}
 };
 
-ACE2D.prototype.setupModal = function () {
-	var modal = document.querySelector('.modal');
-	var close = document.querySelector('.modal .close');
-	var testes = document.querySelectorAll('.testes button');
-	var testesLen = testes.length;
+ACE2D.prototype.openModal = function (room) {
+	var modal = document.querySelector('senai-modal');
+	modal.setAttribute('room', room);
+	modal.setAttribute('state', 'open');
+};
 
-	for (var i=0; i< testesLen; i++) {
-		testes[i].addEventListener('click', toggleModal);
-	}
+ACE2D.prototype.setupModal = function () {
+	var modal = document.querySelector('senai-modal');
+	var close = document.querySelector('senai-modal /deep/ .close');
 
 	close.addEventListener('click', toggleModal);
 
 	function toggleModal(e) {
-		modal.classList.toggle('open');
+		modal.setAttribute('room', '');
+		modal.setAttribute('state', '');
 	}
 };
 
@@ -347,43 +350,46 @@ module.exports = ReverseI;
 var normalize = require('normalize-css');
 var ACE2D = require('./ACE2D');
 
-var canvas = document.querySelector('canvas');
+var SenaiRoom = document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
+var Terreo = document.querySelector('#Terreo');
+var Andar1 = document.querySelector('#Andar1');
 var inWidth = window.innerWidth;
 var inHeight = window.innerHeight;
 
-var MundoSenai = new ACE2D(canvas, {
+var MSTerreo = new ACE2D(Terreo, {
 	scale: 15,
-	originY: 450
+	originY: 480
 });
 
 // Chão
-MundoSenai.newBox(1, [0, 0, 0], [30, 25, 0.5], MundoSenai.colors.grey);
+MSTerreo.newBox(1, [0, 0, 0], [32, 30, 0.5], MSTerreo.colors.grey);
 
 // Salas da Direita
-MundoSenai.newBox(1, [24, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1, 201);
-MundoSenai.newBox(1, [20, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1, 202);
-MundoSenai.newBox(1, [16, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1, 203);
-MundoSenai.newBox(1, [12, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
-MundoSenai.newBox(1, [8, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
-MundoSenai.newBox(1, [4, 20, 0.5], [4, 5, 3], MundoSenai.colors.black, 1);
+MSTerreo.newBox(1, [24, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 201);
+MSTerreo.newBox(1, [20, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 202);
+MSTerreo.newBox(1, [16, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 203);
+MSTerreo.newBox(1, [12, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
+MSTerreo.newBox(1, [8, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
+MSTerreo.newBox(1, [4, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
 
 // Portas da Direita
-MundoSenai.newBox(1, [24.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
-MundoSenai.newBox(1, [20.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
-MundoSenai.newBox(1, [16.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
-MundoSenai.newBox(1, [12.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
-MundoSenai.newBox(1, [8.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
-MundoSenai.newBox(1, [4.5, 20, 0.5], [0.5, 0.1, 1], MundoSenai.colors.brown);
+MSTerreo.newBox(1, [24.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
+MSTerreo.newBox(1, [20.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
+MSTerreo.newBox(1, [16.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
+MSTerreo.newBox(1, [12.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
+MSTerreo.newBox(1, [8.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
+MSTerreo.newBox(1, [4.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
 
 // Salas da Direita
-MundoSenai.newBox(1, [24, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
-MundoSenai.newBox(1, [20, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
-MundoSenai.newBox(1, [16, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
-MundoSenai.newBox(1, [12, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
-MundoSenai.newBox(1, [8, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
-MundoSenai.newBox(1, [4, 10, 0.5], [4, 5, 3], MundoSenai.colors.black);
+MSTerreo.newBox(1, [24, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+MSTerreo.newBox(1, [20, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+MSTerreo.newBox(1, [16, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+MSTerreo.newBox(1, [12, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+MSTerreo.newBox(1, [8, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+MSTerreo.newBox(1, [4, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
 
-MundoSenai.setupModal();
-MundoSenai.roomMagic();
-//MundoSenai.mouseCoords();
+MSTerreo.setupModal();
+MSTerreo.roomMagic();
+//MSTerreo.mouseCoords();
+
 },{"./ACE2D":4,"normalize-css":1}]},{},[6]);
