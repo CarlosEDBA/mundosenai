@@ -3,7 +3,7 @@ var ReverseI = require('./ReverseI');
 var ACE2D = ACE2D || function (canvas, options) {
 
 	this.isomer = new Isomer(canvas, options);
-	this.canvas = document.querySelector('canvas');
+	this.canvas = canvas;
 	this.counter = 0;
 	this.Point = Isomer.Point;
 	this.Path = Isomer.Path;
@@ -61,16 +61,16 @@ ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, m
 	} else if (rotate) { // Direita
 		if (callback) {
 			this.isomer.add(box
-				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1])
-				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1])
-				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1])
+				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
+				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
+				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10)
 			, color);
 			callback(this, box);
 		} else {
 			this.isomer.add(box
-				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1])
-				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1])
-				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1])
+				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
+				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
+				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10)
 			, color);
 		}
 	}
@@ -132,14 +132,14 @@ ACE2D.prototype.setCoords = function (shape) {
 			//vertices.push(el);
 			//verticesLen = ind;
 			//console.log(el);
-			ctx.beginPath();
+			/*ctx.beginPath();
 			ctx.arc(el.x, el.y, 2.5, 0, 1.5 * Math.PI, false);
 			ctx.fillStyle = "#212121";
 			ctx.font = '8px Roboto';
 			ctx.fillText('x: ' + el.xDoMouse, el.x + 5, el.y - 2);
 			ctx.fillText('y: ' + el.yDoMouse, el.x + 5, el.y + 6);
 			ctx.fill();
-			ctx.stroke();
+			ctx.stroke();*/
 		});
 	});
 
@@ -177,7 +177,7 @@ ACE2D.prototype.newRoom = function (roomNum, msg, x, y, xm, ym) {
 	document.body.appendChild(room);
 };
 
-ACE2D.prototype.roomMagic = function () {
+ACE2D.prototype.setupRooms = function () {
 	var rooms = document.querySelectorAll('senai-room');
 	var roomsLen = rooms.length;
 	var that = this;
@@ -208,10 +208,10 @@ ACE2D.prototype.roomMagic = function () {
 ACE2D.prototype.printRoomNum = function (roomNum) {
 	var room = document.querySelector('[data-room="' + roomNum + '"]');
 	var ctx = this.canvas.getContext('2d');
-	var x = parseInt(room.dataset.x1) + 22;
-	var y = parseInt(room.dataset.y1) + 4;
+	var x = parseInt(room.dataset.x1) + 18;
+	var y = parseInt(room.dataset.y1) + 2.5;
 	ctx.fillStyle = "#000";
-	ctx.font = '12px Roboto';
+	ctx.font = '10px Roboto';
 	ctx.fillText(room.dataset.room, x, y);
 	//console.log(room);
 };
@@ -220,18 +220,6 @@ ACE2D.prototype.openModal = function (room) {
 	var modal = document.querySelector('senai-modal');
 	modal.setAttribute('room', room);
 	modal.setAttribute('state', 'open');
-};
-
-ACE2D.prototype.setupModal = function () {
-	var modal = document.querySelector('senai-modal');
-	var close = document.querySelector('senai-modal /deep/ .close');
-
-	close.addEventListener('click', toggleModal);
-
-	function toggleModal(e) {
-		modal.setAttribute('room', '');
-		modal.setAttribute('state', '');
-	}
 };
 
 module.exports = ACE2D;

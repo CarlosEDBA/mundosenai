@@ -10,6 +10,18 @@ MundoSenai.prototype.mouseCoords = function () {
 	});
 };
 
+MundoSenai.prototype.setupModal = function () {
+	var modal = document.querySelector('senai-modal');
+	var close = document.querySelector('senai-modal .close');
+
+	close.addEventListener('click', toggleModal);
+
+	function toggleModal(e) {
+		modal.setAttribute('room', '');
+		modal.setAttribute('state', '');
+	}
+};
+
 MundoSenai.prototype.changeMap = function () {
 	var terreo = document.querySelector('senai-map[name="terreo"]');
 	var andar = document.querySelector('senai-map[name="andar"]');

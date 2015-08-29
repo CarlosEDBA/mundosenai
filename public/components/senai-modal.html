@@ -19,6 +19,7 @@
 			-webkit-transition: all 0.26s linear;
 			-moz-transition: all 0.26s linear;
 			transition: all 0.26s linear;
+			z-index: 2000;
 		}
 
 		.modal .wrapper {
@@ -32,6 +33,7 @@
 			flex-flow: row nowrap;
 			justify-content: space-between;
 			align-items: center;
+			margin: 0 0 0 10px;
 		}
 
 		.modal .title {
@@ -70,13 +72,20 @@
 			word-wrap: break-word;
 		}
 
-		.modal .close:after {
-			position: absolute;
-			top: 5px;
-			right: 15px;
-			content: '×';
-			font: 300 25px 'Roboto', sans-serif;
+		.modal .close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 45px;
+			height: 42px;
 			cursor: pointer;
+		}
+
+		.modal .close:after {
+			margin: 0;
+			padding: 0;
+			content: '×';
+			font: 400 30px 'Roboto', sans-serif;
 		}
 	</style>
 	<template>
@@ -88,15 +97,15 @@
 			method="GET">
 		</iron-ajax>
 		<div class$="{{computeState(state)}}">
-            <div class="wrapper">
-                <div class="top">
-                    <div class="title">
-                    	<span class="room">{{room}}</span>
-                    	<span> - </span>
-                    	<span class="title">{{title}}</span>
-                    </div>
-                    <span class="close"></span>
+            <div class="top">
+                <div class="title">
+                	<span class="room">{{room}}</span>
+                	<span> - </span>
+                	<span class="title">{{title}}</span>
                 </div>
+                <span class="close"></span>
+            </div>
+            <div class="wrapper">
                 <span class="description">{{description}}</span>
             </div>
         </div>
