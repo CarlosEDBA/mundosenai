@@ -11,8 +11,9 @@ Requisitos:
 -------------
 
  - [Node.js](https://nodejs.org/download/)
+ - [Gulp](http://gulpjs.com/)
 
 Como rodar:
 ---------------
 
-Executar o arquivo **app.js** e navegar até **localhost:2000** em seu browser.
+Executar o arquivo **app.js** e navegar até [localhost:2000](http://localhost:2000) em seu browser.
