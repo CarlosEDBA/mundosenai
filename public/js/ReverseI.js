@@ -96,8 +96,9 @@ ReverseI.prototype._translatePoint = function (point) {
 		var winWidth = window.innerWidth;
 		var winHeight = window.innerHeight;
 
-		var xDoMouse = ((x * winWidth) / 1200);
-		var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
+		var xDoMouse = ((x * winWidth) / this.canvas.width);
+		var yDoMouse = ((y * winHeight) / this.canvas.height);
+		//var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
 
 		/*console.log({
 			x: parseInt(x),

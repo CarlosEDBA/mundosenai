@@ -76,26 +76,30 @@ ACE2D.prototype.getCounter = function () {
 	return this.counter;
 };
 
-ACE2D.prototype.newBox = function (position, coord, xyz, color, setCoords, roomNum, callback) {
+ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, msg, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	var coords;
 
-	if (position) { // Esquerda
+	if (!rotate) { // Esquerda
 		if (callback) {
 			this.isomer.add(box, color);
 			callback(this, box);
 		} else {
 			this.isomer.add(box, color);
 		}
-	} else if (!position) { // Direita
+	} else if (rotate) { // Direita
 		if (callback) {
 			this.isomer.add(box
-				.rotateZ(this.Point(1.5, 1.5, 0), Math.PI / 12)
+				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1])
+				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1])
+				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1])
 			, color);
 			callback(this, box);
 		} else {
 			this.isomer.add(box
-				.rotateZ(this.Point(12.5, 12.5, 0), Math.PI / 2.5)
+				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1])
+				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1])
+				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1])
 			, color);
 		}
 	}
@@ -103,22 +107,34 @@ ACE2D.prototype.newBox = function (position, coord, xyz, color, setCoords, roomN
 	// Grava coordenadas
 	if (setCoords) {
 		coords = this.setCoords(box);
-	}
+		// Adiciona Sala
+		if (room) {
+			var x = [];
+			var y = [];	
+			var xm = [];
+			var ym = [];
+			var currentRoom = coords.length - 1;
 
-	// Adiciona Sala
-	if (roomNum && roomNum !== 0) {
-		var x = [];
-		var room = coords.length - 1;
+			//console.log(room);
+			//console.log(coords[room][0]);
 
-		console.log(room);
-		//console.log(coords[room][0]);
+			coords[currentRoom][0].forEach(function (el, ind, arr) {
+				x.push(el.x);
+				xm.push(el.xDoMouse);
+			});
+			coords[currentRoom][1].forEach(function (el, ind, arr) {
+				y.push(el.y);
+				ym.push(el.yDoMouse);
+			});
 
-		coords[room][0].forEach(function (el, ind, arr) {
-			x.push(el.xDoMouse);
-		});
+			if (msg) {
+				this.newRoom(room, msg, x, y, xm, ym);
+			} else {
+				this.newRoom(room, null, x, y, xm, ym);
+			}
 
-		console.log(x);
-		this.newRoom(roomNum, x);
+			this.printRoomNum(room);
+		}
 	}
 };
 
@@ -144,13 +160,13 @@ ACE2D.prototype.setCoords = function (shape) {
 
 			//vertices.push(el);
 			//verticesLen = ind;
-
+			//console.log(el);
 			ctx.beginPath();
-			ctx.arc(el.x, el.y, 3, 0, 2 * Math.PI, false);
-			ctx.fillStyle = "#FF00E1";
-			ctx.font = '10px Roboto';
-			ctx.fillText('x: ' + el.x, el.x, el.y);
-			ctx.fillText('y: ' + el.y, el.x, el.y + 10);
+			ctx.arc(el.x, el.y, 2.5, 0, 1.5 * Math.PI, false);
+			ctx.fillStyle = "#212121";
+			ctx.font = '8px Roboto';
+			ctx.fillText('x: ' + el.xDoMouse, el.x + 5, el.y - 2);
+			ctx.fillText('y: ' + el.yDoMouse, el.x + 5, el.y + 6);
 			ctx.fill();
 			ctx.stroke();
 		});
@@ -167,21 +183,26 @@ ACE2D.prototype.setCoords = function (shape) {
 	return this.caixinhas;
 }
 
-ACE2D.prototype.mouseCoords = function () {
-	document.addEventListener('mousemove', function (e) {
-		var x = e.pageX;
-		var y = e.pageY;
-		console.log('Mouse Position: x: ' + x + ' - y: ' + y);
-	});
-};
-
-ACE2D.prototype.newRoom = function (number, x) {
+ACE2D.prototype.newRoom = function (roomNum, msg, x, y, xm, ym) {
 	var room = document.createElement('senai-room');
-	room.dataset.number = number;
+	if (msg) room.dataset.msg = msg;
+	room.dataset.room = roomNum;
 	room.dataset.x1 = x[0];
 	room.dataset.x2 = x[1];
 	room.dataset.x3 = x[2];
 	room.dataset.x4 = x[3];
+	room.dataset.y1 = y[0];
+	room.dataset.y2 = y[1];
+	room.dataset.y3 = y[2];
+	room.dataset.y4 = y[3];
+	room.dataset.xm1 = xm[0];
+	room.dataset.xm2 = xm[1];
+	room.dataset.xm3 = xm[2];
+	room.dataset.xm4 = xm[3];
+	room.dataset.ym1 = ym[0];
+	room.dataset.ym2 = ym[1];
+	room.dataset.ym3 = ym[2];
+	room.dataset.ym4 = ym[3];
 	document.body.appendChild(room);
 };
 
@@ -199,13 +220,29 @@ ACE2D.prototype.roomMagic = function () {
 		var mouseY = e.y;
 
 		for (var i=0; i<roomsLen; i++) {
-			if (mouseX > rooms[i].dataset.x1 && mouseX < rooms[i].dataset.x3) {
-				console.log('Sala: ' + rooms[i].dataset.number + ' - x: ' + mouseX + ' - y: ' + mouseY);
-				console.log(ACE2D);
-				that.openModal(rooms[i].dataset.number);
+			if (
+				mouseX > rooms[i].dataset.xm1 &&
+				mouseX < rooms[i].dataset.xm3 &&
+				mouseY > rooms[i].dataset.ym2 &&
+				mouseY < rooms[i].dataset.ym4)
+			{
+				console.log('Sala: ' + rooms[i].dataset.room + ' - x: ' + mouseX + ' - y: ' + mouseY);
+				//console.log(ACE2D);
+				that.openModal(rooms[i].dataset.room);
 			};
 		}
 	}
+};
+
+ACE2D.prototype.printRoomNum = function (roomNum) {
+	var room = document.querySelector('[data-room="' + roomNum + '"]');
+	var ctx = this.canvas.getContext('2d');
+	var x = parseInt(room.dataset.x1) + 22;
+	var y = parseInt(room.dataset.y1) + 4;
+	ctx.fillStyle = "#000";
+	ctx.font = '12px Roboto';
+	ctx.fillText(room.dataset.room, x, y);
+	//console.log(room);
 };
 
 ACE2D.prototype.openModal = function (room) {
@@ -228,7 +265,44 @@ ACE2D.prototype.setupModal = function () {
 
 module.exports = ACE2D;
 
-},{"./ReverseI":5}],5:[function(require,module,exports){
+},{"./ReverseI":6}],5:[function(require,module,exports){
+var MundoSenai = MundoSenai || function () {
+	var SenaiRoom = document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
+};
+
+MundoSenai.prototype.mouseCoords = function () {
+	document.addEventListener('mousemove', function (e) {
+		var x = e.pageX;
+		var y = e.pageY;
+		console.log('Mouse Position: x: ' + x + ' - y: ' + y);
+	});
+};
+
+MundoSenai.prototype.changeMap = function () {
+	var terreo = document.querySelector('senai-map[name="terreo"]');
+	var andar = document.querySelector('senai-map[name="andar"]');
+	var updown = document.querySelector('senai-updown');
+	var button = document.querySelector('senai-updown .updown');
+
+	button.addEventListener('click', toggleMap);
+
+	function toggleMap (e) {
+		var state = updown.getAttribute('state');
+		if (state == 'up') {
+			terreo.setAttribute('state', '');
+			andar.setAttribute('state', 'open');
+			updown.setAttribute('state', 'down');
+		} else if (state == 'down') {
+			terreo.setAttribute('state', 'open');
+			andar.setAttribute('state', '');
+			updown.setAttribute('state', 'up');
+		}
+	}
+};
+
+module.exports = MundoSenai;
+
+},{}],6:[function(require,module,exports){
 var ReverseI = ReverseI || function (ACE2D, canvas) {
 	this.ACE2D = ACE2D;
 	this.canvas = canvas;
@@ -327,8 +401,9 @@ ReverseI.prototype._translatePoint = function (point) {
 		var winWidth = window.innerWidth;
 		var winHeight = window.innerHeight;
 
-		var xDoMouse = ((x * winWidth) / 1200);
-		var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
+		var xDoMouse = ((x * winWidth) / this.canvas.width);
+		var yDoMouse = ((y * winHeight) / this.canvas.height);
+		//var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
 
 		/*console.log({
 			x: parseInt(x),
@@ -346,50 +421,71 @@ ReverseI.prototype._translatePoint = function (point) {
 };
 
 module.exports = ReverseI;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var normalize = require('normalize-css');
 var ACE2D = require('./ACE2D');
+var MundoSenai = require('./MundoSenai');
 
-var SenaiRoom = document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
-var Terreo = document.querySelector('#Terreo');
-var Andar1 = document.querySelector('#Andar1');
-var inWidth = window.innerWidth;
-var inHeight = window.innerHeight;
+// Andares
+var terreo = document.querySelector('senai-map[name="terreo"] canvas');
+var andar = document.querySelector('senai-map[name="andar"] canvas');
 
-var MSTerreo = new ACE2D(Terreo, {
+
+// Inicia as cosias básicas :P
+var MS = new MundoSenai();
+MS.changeMap();
+
+/*
+/
+/  Terreo
+/
+*/
+
+var MSTerreo = new ACE2D(terreo, {
 	scale: 15,
-	originY: 480
+	originY: 520
 });
 
 // Chão
-MSTerreo.newBox(1, [0, 0, 0], [32, 30, 0.5], MSTerreo.colors.grey);
+MSTerreo.newBox(0, [0, 0, 0], [30, 30, 0.5], MSTerreo.colors.grey);
 
 // Salas da Direita
-MSTerreo.newBox(1, [24, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 201);
-MSTerreo.newBox(1, [20, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 202);
-MSTerreo.newBox(1, [16, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1, 203);
-MSTerreo.newBox(1, [12, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
-MSTerreo.newBox(1, [8, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
-MSTerreo.newBox(1, [4, 20, 0.5], [4, 5, 3], MSTerreo.colors.black, 1);
+MSTerreo.newBox(0, [27.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 218);
+MSTerreo.newBox(0, [25, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 216);
+MSTerreo.newBox(0, [22.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 214);
+MSTerreo.newBox(0, [20, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 212);
+MSTerreo.newBox(0, [17.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 210);
+MSTerreo.newBox(0, [15, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 208);
+MSTerreo.newBox(0, [12.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 206);
+MSTerreo.newBox(0, [10, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 204);
 
-// Portas da Direita
-MSTerreo.newBox(1, [24.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-MSTerreo.newBox(1, [20.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-MSTerreo.newBox(1, [16.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-MSTerreo.newBox(1, [12.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-MSTerreo.newBox(1, [8.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-MSTerreo.newBox(1, [4.5, 20, 0.5], [0.5, 0.1, 1], MSTerreo.colors.brown);
-
-// Salas da Direita
-MSTerreo.newBox(1, [24, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
-MSTerreo.newBox(1, [20, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
-MSTerreo.newBox(1, [16, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
-MSTerreo.newBox(1, [12, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
-MSTerreo.newBox(1, [8, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
-MSTerreo.newBox(1, [4, 10, 0.5], [4, 5, 3], MSTerreo.colors.black);
+// Salas da Esquerda
+MSTerreo.newBox(0, [27.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 217);
+MSTerreo.newBox(0, [25, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 215);
+MSTerreo.newBox(0, [22.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 213);
+MSTerreo.newBox(0, [20, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 211);
+MSTerreo.newBox(0, [17.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 209);
+MSTerreo.newBox(0, [15, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 207);
+MSTerreo.newBox(0, [12.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 205);
+MSTerreo.newBox(0, [10, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 203);
 
 MSTerreo.setupModal();
 MSTerreo.roomMagic();
-//MSTerreo.mouseCoords();
 
-},{"./ACE2D":4,"normalize-css":1}]},{},[6]);
+/*
+/
+/  1º Andar
+/
+*/
+
+var MSAndar = new ACE2D(andar, {
+	scale: 15,
+	originY: 520
+});
+
+MSAndar.newBox(0, [0, 0, 0], [30, 30, 0.5], MSAndar.colors.grey);
+MSAndar.newBox(0, [20, 10, 0.5], [2.5, 2.5, 1.5], MSAndar.colors.lightgreen);
+MSAndar.newBox(0, [11, 10, 0.5], [2.5, 2.5, 1.5], MSAndar.colors.indigo);
+MSAndar.newBox(0, [9, 10, 0.5], [2.5, 2.5, 1.5], MSAndar.colors.lightgreen);
+
+},{"./ACE2D":4,"./MundoSenai":5,"normalize-css":1}]},{},[7]);

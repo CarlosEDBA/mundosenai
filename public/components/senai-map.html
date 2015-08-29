@@ -1,0 +1,48 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="senai-map">
+	<style type="text/css">
+		canvas {
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transform: translateY(2000px);
+			-webkit-transition: all 0.56s ease;
+			-moz-transition: all 0.56s ease;
+			transition: all 0.56s ease;
+		}
+		.open {
+			transform: translateY(0);
+		}
+	</style>
+	<template>
+		<canvas class$="{{computeState(state)}}" width="1200" height="550"></canvas>
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-map',
+			properties: {
+				name: {
+					type: String,
+					notify: true
+				},
+				state: {
+					type: String,
+					notify: true
+				}
+			},
+			computeState: function (state) {
+				return '' + state;
+			},
+			ready: function () {
+				//console.log(this.state);
+			},
+			attributeChanged: function (name, state) {
+				console.log('state changed!');
+			}
+		});
+	</script>
+</dom-module>

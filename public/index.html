@@ -9,28 +9,27 @@
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="import" href="/components/webcomponentsjs/webcomponents.min.js">
+        <link rel="import" href="/components/senai-map.html">
         <link rel="import" href="/components/senai-modal.html">
+        <link rel="import" href="/components/senai-search.html">
+        <link rel="import" href="/components/senai-updown.html">
     </head>
 	<body>
         <header>
             <img class="logo" src="img/LogoMundoSenai.png" />
+            <senai-search></senai-search>
         </header>
 
-        <canvas id="Terreo" width="1200" height="550"></canvas>
-        <canvas id="Andar1" width="1200" height="550"></canvas>
+        <senai-map name="terreo" state="open"></senai-map>
+        <senai-map name="andar" state=""></senai-map>
 
         <senai-modal room="" state=""></senai-modal>
 
-        <!-- Isometric JS -->
+        <footer>
+            <senai-updown state="up"></senai-updown>
+        </footer>
+
         <script type="text/javascript" src="/js/isomer.js"></script>
-
-
-        <!-- 3D JS -->
-        <!--
-        <script type="text/javascript" src="js/three/three.min.js"></script>
-        <script type="text/javascript" src="js/three/controls/OrbitControls.js"></script>
-        -->
-
         <script type="text/javascript" src="js/bundle.js"></script>
 	</body>
 </html>

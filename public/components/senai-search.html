@@ -1,0 +1,56 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="senai-search">
+	<style type="text/css">
+		.search {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			justify-content: flex-end;
+			width: 100px;
+			height: 50px;
+			padding: 5px 15px 5px 10px;
+			margin: 0 50px 0 0;
+			cursor: pointer;
+		}
+
+		.search:hover {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+
+		.search i {
+			font-size: 25px;
+		}
+
+		.search span {
+			margin: 0 15px 0 0;
+			font: 300 20px 'Roboto', sans-serif;
+		}
+	</style>
+	<template>
+        <div class="search">
+            <span>Busca</span>
+            <i class="fa fa-search"></i>
+        </div>
+    </template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-search',
+			properties: {
+				state: {
+					type: String,
+					notify: true
+				}
+			},
+			computeState: function (state) {
+				return '' + state;
+			},
+			ready: function () {
+				//console.log(this.state);
+			},
+			attributeChanged: function (name, state) {
+				console.log('state changed!');
+			}
+		});
+	</script>
+</dom-module>
