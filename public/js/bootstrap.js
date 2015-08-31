@@ -20,18 +20,30 @@ MS.changeMap();
 */
 
 var MSTerreo = new ACE2D(terreo, {
-	scale: 12,
-	originY: 520
+	scale: 11,
+	originY: 0
 });
 
 // Chão
-MSTerreo.newBox(0, [0, 0, 0], [42, 40, 0.5], MSTerreo.colors.grey);
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0], [42, 50, 0.5], MSTerreo.colors.grey);
 
-// Salas da Direita
-MSTerreo.newBox(0, [25, 27, 0.5], [5, 5, 6], MSTerreo.colors.blue, 1, 100);
+// Direita
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 41.5, 0.5], [30, 0.5, 0.5], MSTerreo.colors.blue);
 
-// Salas da Esquerda
-MSTerreo.newBox(0, [15, 6, 0.5], [5, 5, 6], MSTerreo.colors.blue, 1, 101);
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 27, 0.5], [2, 0.5, 0.5], MSTerreo.colors.blue);
+MSTerreo.newBox([[0, 0, 0], 1.4], [6, 27, 0.5], [3, 0.5, 0.5], MSTerreo.colors.blue);
+MSTerreo.newBox([[0, 0, 0], 1.4], [14, 27, 0.5], [3, 0.5, 0.5], MSTerreo.colors.blue);
+
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 27, 0.5], [0.5, 15, 0.5], MSTerreo.colors.blue);
+
+// Esquerda
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0.5], [30, 0.5, 0.5], MSTerreo.colors.blue);
+
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 7, 0.5], [2, 0.5, 0.5], MSTerreo.colors.blue);
+MSTerreo.newBox([[0, 0, 0], 1.4], [6, 7, 0.5], [3, 0.5, 0.5], MSTerreo.colors.blue);
+MSTerreo.newBox([[0, 0, 0], 1.4], [14, 7, 0.5], [3, 0.5, 0.5], MSTerreo.colors.blue);
+
+MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0.5], [0.5, 15, 0.5], MSTerreo.colors.blue);
 
 
 MSTerreo.setupRooms();
@@ -113,8 +125,9 @@ MSAndar.newBox([[0, 0, 0], 1.4], [8.4, 28, 0.5], [6.2, 3, 3], blue5); // Sala do
 MSAndar.newBox([[0, 0, 0], 1.4], [3.2, 28, 0.5], [5.2, 3, 3], blue1, 1, 204); // 204
 MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0.5], [5.2, 3, 3], blue4, 1, 202); // 202
 
-// Parede de Cima
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [0, 28, 3], blue5);
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 10, 0.5], [5, 6, 3], blue1); // Escada
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 23, 0.5], [2, 2, 3], blue5); // Elevador
+
 
 // LADO DIREITOOU
 
@@ -151,5 +164,10 @@ MSAndar.newBox([[0, 0, 0], 1.4], [6, -10, 0.5], [6, 3, 3], blue4, 1, 220); // 22
 //MSAndar.newBox([[0, 0, 0], 1.4], [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
 MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0.5], [3, 13, 3], blue5); // Auditorio
+
+// Parede de Cima
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [0, 10, 3], blue5); // Esquerda
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 16, 0.5], [0, 7, 3], blue5); // Meio
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 25, 0.5], [0, 5, 3], blue5); // Direita
 
 MSAndar.setupRooms();
