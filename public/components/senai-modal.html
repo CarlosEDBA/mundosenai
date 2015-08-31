@@ -90,7 +90,7 @@
 	</style>
 	<template>
 		<iron-ajax auto
-			url="http://localhost:2000/rooms.json"
+			url="{{getNetworkInfo()}}"
 			handle-as="json"
 			on-response="handleResponse"
 			last-response="{{data}}"
@@ -124,6 +124,9 @@
 				},
 				title: String,
 				description: String
+			},
+			getNetworkInfo: function () {
+				return window.location.origin + '/rooms.json';
 			},
 			handleResponse: function (req) {
 				//console.log(this);
