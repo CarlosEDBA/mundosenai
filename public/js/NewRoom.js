@@ -13,13 +13,14 @@ var NewRoom = (function () {
 		var title = container.querySelectorAll('input')[1].value;
 		var description = container.querySelector('.description').value;
 		var data = {
-			room: room,
-			title: title,
-			description: description
+			sala: room,
+			titulo: title,
+			descricao: description
 		};
 
 		socketsClient.emit('saveRequest', data);
-		console.log(data);
+		alert('Dados enviados!');
+		//console.log(data);
 	}
 
 	function boot () {

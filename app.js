@@ -50,7 +50,7 @@ http.badRequest(app);
 
 // Setup the routes
 rootRequire('routes/logger')(app);
-rootRequire('routes/components')(express, app);
+rootRequire('routes/general')(express, app);
 
 // BootUp the HTTP Server
 var server = app.listen(PORT, function () {
@@ -68,7 +68,7 @@ io = io(server, { log: false });
 io.on('connection', function (server) {
     server.on('saveRequest', function (data) {
         //server.broadcast.emit('changeSlides', data);
-        //JSON2File('rooms.json', data);
-        console.log(data);
+        JSON2File('rooms', data);
+        //console.log(data);
     });
 });

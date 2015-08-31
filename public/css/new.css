@@ -107,7 +107,15 @@ header .logo {
 	outline: none;
 	color: #fff;
 	background-color: #40ACFF;
-	border: 2px solid transparent;
+	border: 1px solid transparent;
 	border-radius: 2px;
 	font: 300 18px 'Roboto', sans-serif;
-} 
+	-webkit-transition: all 0.16s ease;
+	-moz-transition: all 0.16s ease;
+	transition: all 0.16s ease;
+	cursor: pointer;
+}
+
+.main .new .save:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
+}
