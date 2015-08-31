@@ -33,6 +33,8 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 	this.isomer = new Isomer(canvas, options);
 	this.canvas = canvas;
+	this.ctx = canvas.getContext('2d');
+	this.rect = canvas.getBoundingClientRect();
 	this.counter = 0;
 	this.Point = Isomer.Point;
 	this.Path = Isomer.Path;
@@ -69,39 +71,26 @@ var ACE2D = ACE2D || function (canvas, options) {
 
 ACE2D.prototype.setCounter = function () {
 	this.counter += 1;
-	//console.log(this.counter);
 };
 
 ACE2D.prototype.getCounter = function () {
 	return this.counter;
 };
 
-ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, msg, callback) {
+ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, msg, msgPos, callback) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	var coords;
 
-	if (!rotate) { // Esquerda
-		if (callback) {
-			this.isomer.add(box, color);
-			callback(this, box);
-		} else {
-			this.isomer.add(box, color);
-		}
-	} else if (rotate) { // Direita
-		if (callback) {
-			this.isomer.add(box
-				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
-				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
-				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10)
-			, color);
-			callback(this, box);
-		} else {
-			this.isomer.add(box
-				.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
-				.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
-				.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10)
-			, color);
-		}
+	box = (rotate) ? box
+		.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
+		.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
+		.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10) : box;
+
+	if (callback) {
+		this.isomer.add(box, color);
+		callback(this, box);
+	} else {
+		this.isomer.add(box, color);
 	}
 
 	// Grava coordenadas
@@ -115,9 +104,6 @@ ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, m
 			var ym = [];
 			var currentRoom = coords.length - 1;
 
-			//console.log(room);
-			//console.log(coords[room][0]);
-
 			coords[currentRoom][0].forEach(function (el, ind, arr) {
 				x.push(el.x);
 				xm.push(el.xDoMouse);
@@ -127,8 +113,10 @@ ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, m
 				ym.push(el.yDoMouse);
 			});
 
-			if (msg) {
+			if (msg && msgPos) {
 				this.newRoom(room, msg, x, y, xm, ym);
+				console.log('lalala');
+				//this.printMsg(msg, { x: x, y: y }, { x: msgPos[0], y: msgPos[1] });
 			} else {
 				this.newRoom(room, null, x, y, xm, ym);
 			}
@@ -136,12 +124,15 @@ ACE2D.prototype.newBox = function (rotate, coord, xyz, color, setCoords, room, m
 			this.printRoomNum(room);
 		}
 	}
+
+	return box;
 };
 
 ACE2D.prototype.setCoords = function (shape) {
+	var that = this;
 	var ReI = new ReverseI(this, this.canvas);
-	var ctx = this.canvas.getContext('2d');
-	var rect = this.canvas.getBoundingClientRect();
+	var ctx = this.ctx;
+	var rect = this.rect;
 
 	var faces = [];
 	var vertices = [];
@@ -157,16 +148,12 @@ ACE2D.prototype.setCoords = function (shape) {
 	ReI.init(function (data) { // Faces
 		faces.push(data);
 		data.forEach(function (el, ind, arr) { // Vértices
-
-			//vertices.push(el);
-			//verticesLen = ind;
-			//console.log(el);
-			/*ctx.beginPath();
+/*			ctx.beginPath();
 			ctx.arc(el.x, el.y, 2.5, 0, 1.5 * Math.PI, false);
 			ctx.fillStyle = "#212121";
 			ctx.font = '8px Roboto';
-			ctx.fillText('x: ' + el.xDoMouse, el.x + 5, el.y - 2);
-			ctx.fillText('y: ' + el.yDoMouse, el.x + 5, el.y + 6);
+			ctx.fillText('x: ' + el.x, el.x + 5, el.y - 2);
+			ctx.fillText('y: ' + el.y, el.x + 5, el.y + 6);
 			ctx.fill();
 			ctx.stroke();*/
 		});
@@ -181,7 +168,7 @@ ACE2D.prototype.setCoords = function (shape) {
 	//console.log(vertices);
 
 	return this.caixinhas;
-}
+};
 
 ACE2D.prototype.newRoom = function (roomNum, msg, x, y, xm, ym) {
 	var room = document.createElement('senai-room');
@@ -206,41 +193,55 @@ ACE2D.prototype.newRoom = function (roomNum, msg, x, y, xm, ym) {
 	document.body.appendChild(room);
 };
 
+ACE2D.prototype.printMsg = function (msg, coords, pos) {
+	this.ctx.fillStyle = "#000";
+	this.ctx.font = '400 10px Roboto';
+	this.ctx.fillText(msg, coords.x + pos.x, coords.y + pos.y);
+};
+
 ACE2D.prototype.setupRooms = function () {
 	var rooms = document.querySelectorAll('senai-room');
 	var roomsLen = rooms.length;
 	var that = this;
+	var ctx = this.canvas.getContext('2d');
 
 	this.canvas.addEventListener('mousedown', function (e, ACE2D) {
 		letsGo(e, this);
 	});
 
+	// ClickBox
+	/*for (var i=0; i<roomsLen; i++) {
+		ctx.fillStyle = "#212121";
+		ctx.fillRect(rooms[i].dataset.x1, rooms[i].dataset.y2, 5, 5);
+		ctx.fillRect(rooms[i].dataset.x3, rooms[i].dataset.y4, 5, 5);
+	};*/
+
 	function letsGo (e, ACE2D) {
 		var mouseX = e.x;
 		var mouseY = e.y;
 
-		for (var i=0; i<roomsLen; i++) {
+		[].forEach.call(rooms, function (el, ind, arr) {
 			if (
-				mouseX > rooms[i].dataset.xm1 &&
-				mouseX < rooms[i].dataset.xm3 &&
-				mouseY > rooms[i].dataset.ym2 &&
-				mouseY < rooms[i].dataset.ym4)
+				mouseX > el.dataset.xm1 &&
+				mouseX < el.dataset.xm3 &&
+				mouseY > el.dataset.ym2 &&
+				mouseY < el.dataset.ym4)
 			{
-				console.log('Sala: ' + rooms[i].dataset.room + ' - x: ' + mouseX + ' - y: ' + mouseY);
+				console.log('Sala: ' + el.dataset.room + ' - x: ' + mouseX + ' - y: ' + mouseY);
 				//console.log(ACE2D);
-				that.openModal(rooms[i].dataset.room);
+				that.openModal(el.dataset.room);
 			};
-		}
+		});
 	}
 };
 
 ACE2D.prototype.printRoomNum = function (roomNum) {
 	var room = document.querySelector('[data-room="' + roomNum + '"]');
 	var ctx = this.canvas.getContext('2d');
-	var x = parseInt(room.dataset.x1) + 18;
-	var y = parseInt(room.dataset.y1) + 2.5;
+	var x = parseInt(room.dataset.x2) - 20;
+	var y = parseInt(room.dataset.y1) - 5;
 	ctx.fillStyle = "#000";
-	ctx.font = '10px Roboto';
+	ctx.font = '400 10px Roboto';
 	ctx.fillText(room.dataset.room, x, y);
 	//console.log(room);
 };
@@ -289,12 +290,12 @@ MundoSenai.prototype.changeMap = function () {
 	function toggleMap (e) {
 		var state = updown.getAttribute('state');
 		if (state == 'up') {
-			terreo.setAttribute('state', '');
+			terreo.setAttribute('state', 'down');
 			andar.setAttribute('state', 'open');
 			updown.setAttribute('state', 'down');
 		} else if (state == 'down') {
 			terreo.setAttribute('state', 'open');
-			andar.setAttribute('state', '');
+			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
 		}
 	}
@@ -388,36 +389,28 @@ ReverseI.prototype._calculateTransformation = function () {
 
 ReverseI.prototype._translatePoint = function (point) {
 	var xMap = new this.Point(
-			point.x * this.transformation[0][0],
-			point.x * this.transformation[0][1]);
+		point.x * this.transformation[0][0],
+		point.x * this.transformation[0][1]);
 
-		var yMap = new this.Point(
-	  		point.y * this.transformation[1][0],
-	  		point.y * this.transformation[1][1]);
+	var yMap = new this.Point(
+  		point.y * this.transformation[1][0],
+  		point.y * this.transformation[1][1]);
 
-		var x = this.originX + xMap.x + yMap.x;
-		var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
+	var x = this.originX + xMap.x + yMap.x;
+	var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
 
-		var winWidth = window.innerWidth;
-		var winHeight = window.innerHeight;
+	var winWidth = window.innerWidth;
+	var winHeight = window.innerHeight;
 
-		var xDoMouse = ((x * winWidth) / this.canvas.width);
-		var yDoMouse = ((y * winHeight) / this.canvas.height);
-		//var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
+	var xDoMouse = ((x * winWidth) / this.canvas.width);
+	var yDoMouse = ((y * winHeight) / this.canvas.height);
 
-		/*console.log({
-			x: parseInt(x),
-			y: parseInt(y),
-			xDoMouse: parseInt(xDoMouse),
-			yDoMouse: parseInt(yDoMouse)
-		});*/
-
-		return {
-			x: parseInt(x),
-			y: parseInt(y),
-			xDoMouse: parseInt(xDoMouse),
-			yDoMouse: parseInt(yDoMouse)
-		};
+	return {
+		x: parseInt(x),
+		y: parseInt(y),
+		xDoMouse: parseInt(xDoMouse),
+		yDoMouse: parseInt(yDoMouse)
+	};
 };
 
 module.exports = ReverseI;
@@ -452,24 +445,11 @@ var MSTerreo = new ACE2D(terreo, {
 MSTerreo.newBox(0, [0, 0, 0], [42, 40, 0.5], MSTerreo.colors.grey);
 
 // Salas da Direita
-MSTerreo.newBox(0, [27.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 218);
-MSTerreo.newBox(0, [25, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 216);
-MSTerreo.newBox(0, [22.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 214);
-MSTerreo.newBox(0, [20, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 212);
-MSTerreo.newBox(0, [17.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue);
-MSTerreo.newBox(0, [15, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 208);
-MSTerreo.newBox(0, [12.5, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 206);
-MSTerreo.newBox(0, [10, 27, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 204);
+MSTerreo.newBox(0, [25, 27, 0.5], [5, 5, 6], MSTerreo.colors.blue, 1, 100);
 
 // Salas da Esquerda
-MSTerreo.newBox(0, [27.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 217);
-MSTerreo.newBox(0, [25, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 215);
-MSTerreo.newBox(0, [22.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 213);
-MSTerreo.newBox(0, [20, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 211);
-MSTerreo.newBox(0, [17.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 209);
-MSTerreo.newBox(0, [15, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 207);
-MSTerreo.newBox(0, [12.5, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.blue, 1, 205);
-MSTerreo.newBox(0, [10, 20, 0.5], [2.5, 2.5, 1.5], MSTerreo.colors.cyan, 1, 203);
+MSTerreo.newBox(0, [15, 6, 0.5], [5, 5, 6], MSTerreo.colors.blue, 1, 101);
+
 
 MSTerreo.setupRooms();
 
@@ -487,40 +467,108 @@ var MSAndar = new ACE2D(andar, {
 var blue1 = new MSAndar.Color(123, 175, 215);
 var blue2 = new MSAndar.Color(115, 186, 230);
 var blue3 = new MSAndar.Color(156, 176, 202);
-var blue4 = new MSAndar.Color(156, 204, 210);
+var blue4 = new MSAndar.Color(176, 190, 225);
 var blue5 = new MSAndar.Color(155, 218, 218);
-var girl = new MSAndar.Color(216, 191, 216);
+var girl = new MSAndar.Color(206, 181, 206);
+var men = new MSAndar.Color(100, 181, 255);
 var door = new MSAndar.Color(60, 40, 20);
-var whitedoor = new MSAndar.Color(225, 225, 225);
+var whitedoor = new MSAndar.Color(215, 215, 215);
+var black = new MSAndar.Color(10, 10, 10);
+var g1 = new MSAndar.Color(100, 100, 100);
+var g2 = new MSAndar.Color(215, 215, 215);
+var door2 = new MSAndar.Color(93, 64, 55);
 
 // Chão
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
 
-// Salas da Direit
-MSAndar.newBox([[0, 0, 0], 1.4], [32.9, 37, 0.5], [3.5, 3, 3], blue4);
-MSAndar.newBox([[0, 0, 0], 1.4], [29.4, 37, 0.5], [3.5, 3, 3], blue1);
-MSAndar.newBox([[0, 0, 0], 1.4], [25.9, 37, 0.5], [3.5, 3, 3], blue2);
+MSAndar.newBox([[0, 0, 0], 1.4], [21, -10, 0], [17, 13, 0.5], MSAndar.colors.grey); // Direita Cima
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 28, 0], [17, 12, 0.5], MSAndar.colors.grey); // Esquerda Cima
+MSAndar.newBox([[0, 0, 0], 1.4], [15, -10, 0], [6, 50, 0.5], MSAndar.colors.grey); // Meio
+MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0], [17, 12, 0.5], MSAndar.colors.grey); // Esquerda Baixo
+MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0], [17, 13, 0.5], MSAndar.colors.grey); // Direita Baixo
 
-MSAndar.newBox([[0, 0, 0], 1.4], [21.9, 37, 0.5], [5, 3, 3], girl); //banheiro fem
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 36, 0.5], [3, 4, 3], blue2);
-MSAndar.newBox([[0, 0, 0], 1.4], [14.9, 37, 0.5], [6, 3, 3], blue2); //banheiro masc
+//MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
 
-MSAndar.newBox([[0, 0, 0], 1.4], [11.5, 37, 0.5], [3.4, 3, 3], blue1); //cordenaçao
-MSAndar.newBox([[0, 0, 0], 1.4], [7, 37, 0.5], [4.5, 3, 3], blue5); //sala201
-MSAndar.newBox([[0, 0, 0], 1.4], [2.5, 37, 0.5], [4.5, 3, 3], blue1); //sala203
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, 37, 0.5], [4.5, 3, 3], blue4); //sala201
+MSAndar.newBox([[0, 0, 0], 1.4], [16, 4, -1], [0, 28, 3], blue5); // Parede branca de baixo
 
+// LADO ESQUERDOOO
+
+// Salas da Esquerda
+MSAndar.newBox([[0, 0, 0], 1.4], [32.9, 37, 0.5], [5, 3, 3], blue4, 1, 218); // 218
+MSAndar.newBox([[0, 0, 0], 1.4], [29.4, 37, 0.5], [3.5, 3, 3], blue1, 1, 216); // 216
+MSAndar.newBox([[0, 0, 0], 1.4], [26.5, 37, 0.5], [3.5, 3, 3], blue2); // ?
+
+MSAndar.newBox([[0, 0, 0], 1.4], [21.5, 38, 0.5], [5, 2, 3], girl, 1, null, 'Banheiro', [3, 1]); // Banheiro Feminino
+MSAndar.newBox([[0, 0, 0], 1.4], [20, 37, 0.5], [3, 3, 3], men); // Banheiro Masculino pt2
+MSAndar.newBox([[0, 0, 0], 1.4], [14.9, 38, 0.5], [5.2, 2, 3], men); // Banheiro Masculino
+
+MSAndar.newBox([[0, 0, 0], 1.4], [11.5, 37, 0.5], [3.4, 3, 3], blue1); // Coordenaçao
+MSAndar.newBox([[0, 0, 0], 1.4], [7, 37, 0.5], [4.5, 3, 3], blue5, 1, 205); // 205
+MSAndar.newBox([[0, 0, 0], 1.4], [2.5, 37, 0.5], [4.5, 3, 3], blue1, 1, 203); // 203
+MSAndar.newBox([[0, 0, 0], 1.4], [-2, 37, 0.5], [4.5, 3, 3], blue4, 1, 201); //201
 
 // Portas da Direita
-MSAndar.newBox([[0, 0, 0], 1.4], [1.5, 37, 0.5], [0.5, 0.1, 1], door);
-MSAndar.newBox([[0, 0, 0], 1.4], [4, 37, 0.5], [0.5, 0.1, 1], door);
-MSAndar.newBox([[0, 0, 0], 1.4], [8, 37, 0.5], [0.5, 0.1, 1], door);
-MSAndar.newBox([[0, 0, 0], 1.4], [14, 37, 0.5], [0.5, 0.1, 1], door);
+MSAndar.newBox([[0, 0, 0], 1.4], [33.6, 37, 0.5], [0.5, 0.1, 1], door2); // 218
+MSAndar.newBox([[0, 0, 0], 1.4], [32, 37, 0.5], [0.5, 0.1, 1], door2); // 216
+MSAndar.newBox([[0, 0, 0], 1.4], [27.5, 37, 0.5], [0.5, 0.1, 1], door2); // ?
 
-//Salas da Direita
-MSAndar.newBox([[0, 0, 0], 1.4], [15, 28, 0.5], [3.4, 3, 3], blue1);
-MSAndar.newBox([[0, 0, 0], 1.4], [10, 28, 0.5], [3.4, 3, 3], blue5);
-MSAndar.newBox([[0, 0, 0], 1.4], [7, 28, 0.5], [3.4, 3, 3], blue3);
-MSAndar.newBox([[0, 0, 0], 1.4], [4, 28, 0.5], [3.4, 3, 3], blue5);
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0.5], [3.4, 3, 3], blue2);
+MSAndar.newBox([[0, 0, 0], 1.4], [24.5, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Feminino
+MSAndar.newBox([[0, 0, 0], 1.4], [17, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Masculino
+
+MSAndar.newBox([[0, 0, 0], 1.4], [1.5, 37, 0.5], [0.5, 0.1, 1], door2); // 201
+MSAndar.newBox([[0, 0, 0], 1.4], [3.3, 37, 0.5], [0.5, 0.1, 1], door2); // 203
+MSAndar.newBox([[0, 0, 0], 1.4], [8, 37, 0.5], [0.5, 0.1, 1], door2); // 205
+MSAndar.newBox([[0, 0, 0], 1.4], [14, 37, 0.5], [0.5, 0.1, 1], door2); // Coordenação
+
+
+// Salas da Direita
+MSAndar.newBox([[0, 0, 0], 1.4], [33, 28, 0.5], [5, 3, 3], blue2, 1, 217); // 217
+MSAndar.newBox([[0, 0, 0], 1.4], [28, 28, 0.5], [5, 3, 3], blue1, 1, 215); // 215
+MSAndar.newBox([[0, 0, 0], 1.4], [23, 28, 0.5], [6, 3, 3], blue2); // Laboratório 1
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 28, 1], [2, 2, 2.5], blue5); // Servidor
+
+MSAndar.newBox([[0, 0, 0], 1.4], [8.4, 28, 0.5], [6.2, 3, 3], blue5); // Sala dos Professores
+MSAndar.newBox([[0, 0, 0], 1.4], [3.2, 28, 0.5], [5.2, 3, 3], blue1, 1, 204); // 204
+MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0.5], [5.2, 3, 3], blue4, 1, 202); // 202
+
+// Parede de Cima
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [0, 28, 3], blue5);
+
+// LADO DIREITOOU
+
+// Salas da Esquerda
+MSAndar.newBox([[0, 0, 0], 1.4], [34, 0, 0.5], [4, 3, 3], blue3, 1, 227); // 227
+MSAndar.newBox([[0, 0, 0], 1.4], [29, 0, 0.5], [5, 3, 3], blue5, 1, 225); // 225
+MSAndar.newBox([[0, 0, 0], 1.4], [25, 0, 0.5], [4, 3, 3], blue2, 1, 223); // 223
+MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [4, 3, 3], blue5, 1, 221); // 221
+
+MSAndar.newBox([[0, 0, 0], 1.4], [9.6, 0, 0.5], [5, 3, 3], blue5); // Lab Adobe
+MSAndar.newBox([[0, 0, 0], 1.4], [7.5, 0, 0.5], [3, 3, 3], blue1); // Lab Redes
+MSAndar.newBox([[0, 0, 0], 1.4], [1, 0, 0.5], [6.5, 3, 3], blue4); // Lab 03
+
+// Portas da Esquerda
+MSAndar.newBox([[0, 0, 0], 1.4], [34.8, 0, 0.5], [0.5, 0.1, 1], door2); // 227
+MSAndar.newBox([[0, 0, 0], 1.4], [33, 0, 0.5], [0.5, 0.1, 1], door2); // 225
+MSAndar.newBox([[0, 0, 0], 1.4], [26, 0, 0.5], [0.5, 0.1, 1], door2); // 223
+MSAndar.newBox([[0, 0, 0], 1.4], [24, 0, 0.5], [0.5, 0.1, 1], door2); // 221
+
+MSAndar.newBox([[0, 0, 0], 1.4], [13.5, 0, 0.5], [0.5, 0.1, 1], door2); // Lab Adobe
+MSAndar.newBox([[0, 0, 0], 1.4], [9.2, 0, 0.5], [0.5, 0.1, 1], door2); // Lab Redes
+MSAndar.newBox([[0, 0, 0], 1.4], [6.8, 0, 0.5], [0.5, 0.1, 1], door2); // Lab 03
+
+// Salas da Direita
+MSAndar.newBox([[0, 0, 0], 1.4], [34, -10, 0.5], [4, 3, 3], blue1, 1, 228); // 228
+MSAndar.newBox([[0, 0, 0], 1.4], [30, -10, 0.5], [4, 3, 3], blue4, 1, 226); // 226
+MSAndar.newBox([[0, 0, 0], 1.4], [26, -10, 0.5], [4, 3, 3], blue5, 1, 224); // 224
+
+MSAndar.newBox([[0, 0, 0], 1.4], [22.8, -10, 0.5], [3.2, 2, 3], girl); // Banheiro Masculino
+MSAndar.newBox([[0, 0, 0], 1.4], [18, -10, 0.5], [4.8, 2, 3], men); // Banheiro Masculino
+
+MSAndar.newBox([[0, 0, 0], 1.4], [12, -10, 0.5], [6, 3, 3], blue1, 1, 222); // 222
+MSAndar.newBox([[0, 0, 0], 1.4], [6, -10, 0.5], [6, 3, 3], blue4, 1, 220); // 220
+//MSAndar.newBox([[0, 0, 0], 1.4], [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
+
+MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0.5], [3, 13, 3], blue5); // Auditorio
+
+MSAndar.setupRooms();
+
 },{"./ACE2D":4,"./MundoSenai":5,"normalize-css":1}]},{},[7]);

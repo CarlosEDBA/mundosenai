@@ -83,36 +83,28 @@ ReverseI.prototype._calculateTransformation = function () {
 
 ReverseI.prototype._translatePoint = function (point) {
 	var xMap = new this.Point(
-			point.x * this.transformation[0][0],
-			point.x * this.transformation[0][1]);
+		point.x * this.transformation[0][0],
+		point.x * this.transformation[0][1]);
 
-		var yMap = new this.Point(
-	  		point.y * this.transformation[1][0],
-	  		point.y * this.transformation[1][1]);
+	var yMap = new this.Point(
+  		point.y * this.transformation[1][0],
+  		point.y * this.transformation[1][1]);
 
-		var x = this.originX + xMap.x + yMap.x;
-		var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
+	var x = this.originX + xMap.x + yMap.x;
+	var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
 
-		var winWidth = window.innerWidth;
-		var winHeight = window.innerHeight;
+	var winWidth = window.innerWidth;
+	var winHeight = window.innerHeight;
 
-		var xDoMouse = ((x * winWidth) / this.canvas.width);
-		var yDoMouse = ((y * winHeight) / this.canvas.height);
-		//var yDoMouse = ((y * winHeight) / 450) + 150 - this.transformation[0][0];
+	var xDoMouse = ((x * winWidth) / this.canvas.width);
+	var yDoMouse = ((y * winHeight) / this.canvas.height);
 
-		/*console.log({
-			x: parseInt(x),
-			y: parseInt(y),
-			xDoMouse: parseInt(xDoMouse),
-			yDoMouse: parseInt(yDoMouse)
-		});*/
-
-		return {
-			x: parseInt(x),
-			y: parseInt(y),
-			xDoMouse: parseInt(xDoMouse),
-			yDoMouse: parseInt(yDoMouse)
-		};
+	return {
+		x: parseInt(x),
+		y: parseInt(y),
+		xDoMouse: parseInt(xDoMouse),
+		yDoMouse: parseInt(yDoMouse)
+	};
 };
 
 module.exports = ReverseI;

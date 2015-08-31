@@ -33,12 +33,12 @@ MundoSenai.prototype.changeMap = function () {
 	function toggleMap (e) {
 		var state = updown.getAttribute('state');
 		if (state == 'up') {
-			terreo.setAttribute('state', '');
+			terreo.setAttribute('state', 'down');
 			andar.setAttribute('state', 'open');
 			updown.setAttribute('state', 'down');
 		} else if (state == 'down') {
 			terreo.setAttribute('state', 'open');
-			andar.setAttribute('state', '');
+			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
 		}
 	}

@@ -36,14 +36,14 @@ senai-map {
 	z-index: 500;
 }
 
-senai-modal  /deep/ .modal {
+senai-modal .modal {
 	transform: translateY(-1000px) scale(0.5);
-	-webkit-transition: all 0.26s linear;
-	-moz-transition: all 0.26s linear;
-	transition: all 0.26s linear;
+	-webkit-transition: all 0.16s ease;
+	-moz-transition: all 0.16s ease;
+	transition: all 0.16s ease;
 }
 
-senai-modal[state=open] /deep/ .modal {
+senai-modal[state="open"] .modal {
 	transform: translateY(0) scale(1);
 }
 

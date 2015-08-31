@@ -9,13 +9,19 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			transform: translateY(2000px);
+			/* transform: translateY(2000px); */
 			-webkit-transition: all 0.56s ease;
 			-moz-transition: all 0.56s ease;
 			transition: all 0.56s ease;
 		}
 		.open {
 			transform: translateY(0);
+		}
+		.up {
+			transform: translateY(-2000px);
+		}
+		.down {
+			transform: translateY(2000px);
 		}
 	</style>
 	<template>

@@ -240,6 +240,10 @@ Isomer.prototype._translatePoint = function (point) {
 
   var x = this.originX + xMap.x + yMap.x;
   var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
+  /*console.log({
+    x: x,
+    y: y
+  });*/
   return new Point(x, y);
 };
 
@@ -257,11 +261,14 @@ Isomer.prototype.add = function (item, baseColor) {
   } else if (item instanceof Path) {
     this._addPath(item, baseColor);
   } else if (item instanceof Shape) {
+    //console.log(item)
     /* Fetch paths ordered by distance to prevent overlaps */
     var paths = item.orderedPaths();
     for (var i in paths) {
       if (paths.hasOwnProperty(i)) {
         this._addPath(paths[i], baseColor);
+        //console.log(paths[i].points);
+        //return paths[i].points;
       }
     }
   }
@@ -798,7 +805,7 @@ Shape.Prism = function (origin, dx, dy, dz) {
   prism.push(face3.reverse());
   prism.push(face3.translate(0, 0, dz));
 
-  //console.log(prism);
+  //console.log(prism.paths);
   return prism;
 };
 
