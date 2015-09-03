@@ -129,18 +129,22 @@ Ace.prototype.newRoom = function (room) {
 	var senaiRoom = document.createElement('senai-room');
 
 	senaiRoom.dataset.room = room;
+
 	senaiRoom.dataset.x1 = this.coords.x[0];
 	senaiRoom.dataset.x2 = this.coords.x[1];
 	senaiRoom.dataset.x3 = this.coords.x[2];
 	senaiRoom.dataset.x4 = this.coords.x[3];
+
 	senaiRoom.dataset.y1 = this.coords.y[0];
 	senaiRoom.dataset.y2 = this.coords.y[1];
 	senaiRoom.dataset.y3 = this.coords.y[2];
 	senaiRoom.dataset.y4 = this.coords.y[3];
+
 	senaiRoom.dataset.xm1 = this.coords.xMouse[0];
 	senaiRoom.dataset.xm2 = this.coords.xMouse[1];
 	senaiRoom.dataset.xm3 = this.coords.xMouse[2];
 	senaiRoom.dataset.xm4 = this.coords.xMouse[3];
+	
 	senaiRoom.dataset.ym1 = this.coords.yMouse[0];
 	senaiRoom.dataset.ym2 = this.coords.yMouse[1];
 	senaiRoom.dataset.ym3 = this.coords.yMouse[2];

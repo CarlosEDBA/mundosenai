@@ -158,18 +158,22 @@ Ace.prototype.newRoom = function (room) {
 	var senaiRoom = document.createElement('senai-room');
 
 	senaiRoom.dataset.room = room;
+
 	senaiRoom.dataset.x1 = this.coords.x[0];
 	senaiRoom.dataset.x2 = this.coords.x[1];
 	senaiRoom.dataset.x3 = this.coords.x[2];
 	senaiRoom.dataset.x4 = this.coords.x[3];
+
 	senaiRoom.dataset.y1 = this.coords.y[0];
 	senaiRoom.dataset.y2 = this.coords.y[1];
 	senaiRoom.dataset.y3 = this.coords.y[2];
 	senaiRoom.dataset.y4 = this.coords.y[3];
+
 	senaiRoom.dataset.xm1 = this.coords.xMouse[0];
 	senaiRoom.dataset.xm2 = this.coords.xMouse[1];
 	senaiRoom.dataset.xm3 = this.coords.xMouse[2];
 	senaiRoom.dataset.xm4 = this.coords.xMouse[3];
+	
 	senaiRoom.dataset.ym1 = this.coords.yMouse[0];
 	senaiRoom.dataset.ym2 = this.coords.yMouse[1];
 	senaiRoom.dataset.ym3 = this.coords.yMouse[2];
@@ -340,37 +344,37 @@ MundoSenai.prototype.changeMap = function () {
 };
 
 MundoSenai.prototype.viewModes = function () {
-	var wow = document.querySelector('senai-wow');
+	var lalala = document.querySelector('senai-lalala');
 	var updown = document.querySelector('senai-updown');
 	var terreo = document.querySelector('senai-map[name="terreo"]');
 	var terreoCanvas = document.querySelector('senai-map[name="terreo"] canvas');
 	var andar = document.querySelector('senai-map[name="andar"]');
 	var andarCanvas = document.querySelector('senai-map[name="andar"] canvas');
 	
-	wow.addEventListener('click', function (e) {
-		var state = wow.getAttribute('state');
+	lalala.addEventListener('click', function (e) {
+		var state = lalala.getAttribute('state');
 		
 		if (state !== 'dev') {
-			wow.setAttribute('state', 'dev');
+			lalala.setAttribute('state', 'dev');
 			
-			terreo.setAttribute('state', 'hehehe');
-			andar.setAttribute('state', 'hihihi');
+			terreo.setAttribute('state', 'lalala');
+			andar.setAttribute('state', 'asdas');
 
 			terreoCanvas.addEventListener('click', function (e) {
-				wow.setAttribute('state', '');
+				lalala.setAttribute('state', '');
 				updown.setAttribute('state', 'up');
 				terreo.setAttribute('state', 'open');
 				andar.setAttribute('state', 'up');
 			});
 
 			andarCanvas.addEventListener('click', function (e) {
-				wow.setAttribute('state', '');
+				lalala.setAttribute('state', '');
 				updown.setAttribute('state', 'down');
 				terreo.setAttribute('state', 'down');
 				andar.setAttribute('state', 'open');
 			});
 		} else if (state == 'dev') {
-			wow.setAttribute('state', '');
+			lalala.setAttribute('state', '');
 			terreo.setAttribute('state', 'open');
 			andar.setAttribute('state', 'up');
 		}
@@ -508,6 +512,7 @@ MS.changeMap();
 MS.viewModes();
 //MS.mouseCoords();
 
+// Cores
 var ChãoBranco = '#CBCBCB';
 var SalaBranca = '#D9D9D9';
 var SalaCinza = '#BDBDBD';
@@ -586,7 +591,7 @@ MSAndar.newBox(1.4, [15, -10, 0], [6, 50, 0.5], ChãoBranco); // Meio
 MSAndar.newBox(1.4, [-2, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Baixo
 MSAndar.newBox(1.4, [-2, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Baixo
 
-//MSAndar.newBox(1.4, [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
+//MSAndar.newBox(1.4, [-2, -10, 0], [40, 50, 0.5], ChãoBranco);
 
 MSAndar.newBox(1.4, [16, 4, -1], [0, 28, 3], ChãoBranco); // Parede branca de baixo
 
@@ -675,7 +680,7 @@ MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3], SalaBranca); // 222
 MSAndar.newBox(1.4, [6, -10, 0.5], [6, 3, 3], SalaCinza); // 220
 //MSAndar.newBox(1.4, [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
-MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3], SalaBranca); // Auditorio
+MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3], SalaCinza); // Auditorio
 
 // Parede de Cima
 MSAndar.newBox(1.4, [21, 0, 0.5], [0, 10, 3], ChãoBranco); // Esquerda

@@ -14,6 +14,7 @@ MS.changeMap();
 MS.viewModes();
 //MS.mouseCoords();
 
+// Cores
 var ChãoBranco = '#CBCBCB';
 var SalaBranca = '#D9D9D9';
 var SalaCinza = '#BDBDBD';
@@ -92,7 +93,7 @@ MSAndar.newBox(1.4, [15, -10, 0], [6, 50, 0.5], ChãoBranco); // Meio
 MSAndar.newBox(1.4, [-2, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Baixo
 MSAndar.newBox(1.4, [-2, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Baixo
 
-//MSAndar.newBox(1.4, [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
+//MSAndar.newBox(1.4, [-2, -10, 0], [40, 50, 0.5], ChãoBranco);
 
 MSAndar.newBox(1.4, [16, 4, -1], [0, 28, 3], ChãoBranco); // Parede branca de baixo
 
@@ -181,7 +182,7 @@ MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3], SalaBranca); // 222
 MSAndar.newBox(1.4, [6, -10, 0.5], [6, 3, 3], SalaCinza); // 220
 //MSAndar.newBox(1.4, [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
-MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3], SalaBranca); // Auditorio
+MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3], SalaCinza); // Auditorio
 
 // Parede de Cima
 MSAndar.newBox(1.4, [21, 0, 0.5], [0, 10, 3], ChãoBranco); // Esquerda

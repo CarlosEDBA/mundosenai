@@ -67,8 +67,6 @@ io = io(server, { log: false });
 
 io.on('connection', function (server) {
     server.on('saveRequest', function (data) {
-        //server.broadcast.emit('changeSlides', data);
         JSON2File('rooms', data);
-        //console.log(data);
     });
 });
