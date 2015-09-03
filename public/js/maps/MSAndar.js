@@ -49,7 +49,9 @@ module.exports = function (Ace, Canvas) {
 		//.appendText('300 Roboto 15px', '#000', 'HU3BR!', [155, 5])
 		//.appendImg('../img/nick.png', [50, 50], 55, 50); // 218s
 
-	MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3],  Cores.salaCinza); // 216
+	MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3],  Cores.salaCinza)
+		.newRoom(216)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]); // 216
 	MSAndar.newBox(1.4, [26.5, 37, 0.5], [3.5, 3, 3],  Cores.salaBranca); // ?
 
 	MSAndar.newBox(1.4, [21.5, 38, 0.5], [5, 2, 3],  Cores.banheiroRosa); // Banheiro Feminino

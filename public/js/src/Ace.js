@@ -37,6 +37,14 @@ Ace.prototype.getCounter = function () {
 	return this.counter;
 };
 
+Ace.prototype.isEmptyObject = function (obj) {
+	return Object.getOwnPropertyNames(obj).length === 0;
+};
+
+Ace.prototype.isEmptyArray = function (arr) {
+	return arr.length === 0;
+};
+
 Ace.prototype.newBox = function (rotation, coord, xyz, color) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	var coords;
@@ -71,6 +79,7 @@ Ace.prototype.getAxis = function () {
 
 	this.axis = [];
 	this.axisLen = 0;
+
 	this.axis.push(this.counter);
 	this.axisLen = this.counter;
 
@@ -98,6 +107,11 @@ Ace.prototype.getAxis = function () {
 	return this;
 };
 
+Ace.prototype.clearAxis = function () {
+	this.axis = []
+	this.axisLen = 0;
+};
+
 Ace.prototype.getCoords = function () {
 	var x = [];
 	var y = [];	
@@ -105,6 +119,8 @@ Ace.prototype.getCoords = function () {
 	var ym = [];
 
 	var currentBox = this.axisLen - 1;
+
+	this.coords = {};
 
 	this.axis[currentBox][0].forEach(function (el, ind, arr) {
 		x.push(el.x);
@@ -125,6 +141,10 @@ Ace.prototype.getCoords = function () {
 	return this;
 };
 
+Ace.prototype.clearCoords = function () {
+	this.coords = {};
+};
+
 Ace.prototype.bundleData = function () {
 	this.getAxis();
 	this.getCoords();
@@ -133,8 +153,8 @@ Ace.prototype.bundleData = function () {
 
 Ace.prototype.newRoom = function (room) {
 
-	if (!this.axisLen) this.getAxis();
-	if (!this.coords.x) this.getCoords();
+	if (this.isEmptyArray(this.axis)) this.getAxis();
+	if (this.isEmptyObject(this.coords)) this.getCoords();
 
 	var senaiRoom = document.createElement('senai-room');
 
@@ -163,6 +183,9 @@ Ace.prototype.newRoom = function (room) {
 	document.body.appendChild(senaiRoom);
 
 	this.room = room;
+
+	this.clearAxis();
+	this.clearCoords();
 
 	return this;
 };
