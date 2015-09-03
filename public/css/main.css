@@ -29,26 +29,19 @@ header .logo {
 	width: 300px;
 	height: auto;
 	margin: 0 0 0 50px;
-	z-index: 1000;
+	z-index: 3500;
 }
 
 senai-search {
-	z-index: 1000;
+	z-index: 3500;
+}
+
+senai-menu {
+	z-index: 3500;
 }
 
 senai-map {
 	z-index: 500;
-}
-
-senai-modal .modal {
-	transform: translateY(-1000px) scale(0.5);
-	-webkit-transition: all 0.16s ease;
-	-moz-transition: all 0.16s ease;
-	transition: all 0.16s ease;
-}
-
-senai-modal[state="open"] .modal {
-	transform: translateY(0) scale(1);
 }
 
 senai-updown {

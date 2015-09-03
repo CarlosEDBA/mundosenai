@@ -22,7 +22,7 @@ gulp.task('build-react', function() {
 });
 
 gulp.task('build', function() {
-    return browserify('./public/js/bootstrap.js')
+    return browserify('./public/js/src/Bootstrap.js')
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./public/js'));
