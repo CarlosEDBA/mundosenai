@@ -44,4 +44,43 @@ MundoSenai.prototype.changeMap = function () {
 	}
 };
 
+MundoSenai.prototype.viewModes = function () {
+	var wow = document.querySelector('senai-wow');
+	var updown = document.querySelector('senai-updown');
+	var terreo = document.querySelector('senai-map[name="terreo"]');
+	var terreoCanvas = document.querySelector('senai-map[name="terreo"] canvas');
+	var andar = document.querySelector('senai-map[name="andar"]');
+	var andarCanvas = document.querySelector('senai-map[name="andar"] canvas');
+	
+	wow.addEventListener('click', function (e) {
+		var state = wow.getAttribute('state');
+		
+		if (state !== 'dev') {
+			wow.setAttribute('state', 'dev');
+			
+			terreo.setAttribute('state', 'hehehe');
+			andar.setAttribute('state', 'hihihi');
+
+			terreoCanvas.addEventListener('click', function (e) {
+				wow.setAttribute('state', '');
+				updown.setAttribute('state', 'up');
+				terreo.setAttribute('state', 'open');
+				andar.setAttribute('state', 'up');
+			});
+
+			andarCanvas.addEventListener('click', function (e) {
+				wow.setAttribute('state', '');
+				updown.setAttribute('state', 'down');
+				terreo.setAttribute('state', 'down');
+				andar.setAttribute('state', 'open');
+			});
+		} else if (state == 'dev') {
+			wow.setAttribute('state', '');
+			terreo.setAttribute('state', 'open');
+			andar.setAttribute('state', 'up');
+		}
+		
+	});
+};
+
 module.exports = MundoSenai;

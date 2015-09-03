@@ -1,21 +1,21 @@
-var ReverseI = ReverseI || function (ACE2D, canvas) {
-	this.ACE2D = ACE2D;
+var ReverseI = ReverseI || function (Ace, canvas) {
+	this.Ace = Ace;
 	this.canvas = canvas;
 	this.counter = 0;
 
-	this.scale = ACE2D.isomer.scale;
-	this.angle = ACE2D.isomer.angle;
-	this.originX = ACE2D.isomer.originX;
-	this.originY = ACE2D.isomer.originY;
-	this.transformation = ACE2D.isomer.transformation;
+	this.scale = Ace.isomer.scale;
+	this.angle = Ace.isomer.angle;
+	this.originX = Ace.isomer.originX;
+	this.originY = Ace.isomer.originY;
+	this.transformation = Ace.isomer.transformation;
 
 	this.ReverseShape;
 
-	this.Color = ACE2D.Color;
-	this.Path = ACE2D.Path;
-	this.Point = ACE2D.Point;
-	this.Shape = ACE2D.Shape;
-	this.Vector = ACE2D.Vector;
+	this.Color = Ace.Color;
+	this.Path = Ace.Path;
+	this.Point = Ace.Point;
+	this.Shape = Ace.Shape;
+	this.Vector = Ace.Vector;
 };
 
 ReverseI.prototype.setCounter = function () {

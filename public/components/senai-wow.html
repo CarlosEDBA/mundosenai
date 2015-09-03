@@ -1,13 +1,13 @@
 <link rel="import" href="/components/polymer/polymer.html">
 
-<dom-module id="senai-updown">
+<dom-module id="senai-wow">
 	<style type="text/css">
-		.updown {
+		.wow {
 			display: flex;
 			flex-flow: column nowrap;
 			justify-content: center;
 			align-items: center;
-			margin: 0 0 0 50px;
+			margin: 0 50px 0 0;
 			padding: 10px 10px 10px 10px;
 			width: 100px;
 			height: 100px;
@@ -19,53 +19,40 @@
 			transition: all 0.16s ease;
 		}
 
-		.updown:hover {
+		.wow:hover {
 			background-color: rgba(0, 0, 0, 0.05);
 		}
 
-		.updown i {
+		.wow i {
 			font-size: 35px;
 		}
 
-		.updown span {
+		.wow span {
 			margin: 15px 0 0 0;
 			font: 300 20px 'Roboto', sans-serif;
 			text-align: center;
 		}
 	</style>
 	<template>
-	    <div class="updown">
+	    <div class="wow">
 	    	<!-- <i class="fa fa-hand-o-up"></i> -->
-            <i class$="{{computeState(state, 1)}}"></i>
+            <i class="fa fa-connectdevelop"></i>
             <!-- <i class="fa fa-arrow-up"></i> -->
             <!-- <i class="fa fa-chevron-up"></i> -->
             <!-- <i class="fa fa-long-arrow-up"></i> -->
-            <span>{{computeState(state)}}</span>
+            <span>wow</span>
         </div>
 	</template>
 	<script type="text/javascript">
 		Polymer({
-			is: 'senai-updown',
+			is: 'senai-wow',
 			properties: {
 				state: {
 					type: String,
 					notify: true
 				}
 			},
-			computeState: function (state, icon) {
-				if (icon) {
-					if (state == 'up') {
-						return 'fa fa-level-up';
-					} else if (state == 'down') {
-						return 'fa fa-level-down';
-					}
-				} else {
-					if (state == 'up') {
-						return 'Subir Andar';
-					} else if (state == 'down') {
-						return 'Descer Andar';
-					}
-				}
+			computeState: function () {
 			},
 			ready: function () {
 				//console.log(this.state);

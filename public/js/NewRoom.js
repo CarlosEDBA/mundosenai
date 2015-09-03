@@ -9,17 +9,21 @@ var NewRoom = (function () {
 
 	function sendSaveRequest (e) {
 		var container = e.target.parentNode;
-		var room = container.querySelector('.room').value;
-		var title = container.querySelectorAll('input')[1].value;
-		var description = container.querySelector('.description').value;
+		var room = container.querySelector('.room');
+		var title = container.querySelectorAll('input')[1];
+		var description = container.querySelector('.description');
 		var data = {
-			sala: room,
-			titulo: title,
-			descricao: description
+			sala: room.value,
+			titulo: title.value,
+			descricao: description.value
 		};
 
 		socketsClient.emit('saveRequest', data);
 		alert('Dados enviados!');
+
+		room.value = '';
+		title.value = '';
+		description.value = '';
 		//console.log(data);
 	}
 
