@@ -31,14 +31,14 @@ Ace.prototype.getCounter = function () {
 	return this.counter;
 };
 
-Ace.prototype.newBox = function (rotate, coord, xyz, color) {
+Ace.prototype.newBox = function (rotation, coord, xyz, color) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	var coords;
 
-	box = (rotate) ? box
-		.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
-		.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
-		.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10) : box;
+	box = (rotation) ? box
+		.rotateX(this.Point(0, 0, 0), rotation / 10)
+		.rotateY(this.Point(0, 0, 0), rotation / 10)
+		.rotateZ(this.Point(0, 0, 0), rotation / 10) : box;
 
 	if (typeof(color) === 'string') {
 		color = Helpers.hexToRgb(color);
@@ -116,6 +116,12 @@ Ace.prototype.getCoords = function () {
 		yMouse: ym
 	};
 
+	return this;
+};
+
+Ace.prototype.bundleData = function () {
+	this.getAxis();
+	this.getCoords();
 	return this;
 };
 

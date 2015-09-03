@@ -60,14 +60,14 @@ Ace.prototype.getCounter = function () {
 	return this.counter;
 };
 
-Ace.prototype.newBox = function (rotate, coord, xyz, color) {
+Ace.prototype.newBox = function (rotation, coord, xyz, color) {
 	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
 	var coords;
 
-	box = (rotate) ? box
-		.rotateX(this.Point(rotate[0][1], rotate[0][1], rotate[0][1]), rotate[1]/10)
-		.rotateY(this.Point(rotate[0][2], rotate[0][2], rotate[0][2]), rotate[1]/10)
-		.rotateZ(this.Point(rotate[0][3], rotate[0][3], rotate[0][3]), rotate[1]/10) : box;
+	box = (rotation) ? box
+		.rotateX(this.Point(0, 0, 0), rotation / 10)
+		.rotateY(this.Point(0, 0, 0), rotation / 10)
+		.rotateZ(this.Point(0, 0, 0), rotation / 10) : box;
 
 	if (typeof(color) === 'string') {
 		color = Helpers.hexToRgb(color);
@@ -145,6 +145,12 @@ Ace.prototype.getCoords = function () {
 		yMouse: ym
 	};
 
+	return this;
+};
+
+Ace.prototype.bundleData = function () {
+	this.getAxis();
+	this.getCoords();
 	return this;
 };
 
@@ -523,25 +529,25 @@ var MSTerreo = new Ace(terreo, {
 });
 
 // Chão
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0], [42, 50, 0.5], ChãoBranco);
+MSTerreo.newBox(1.4, [-2, -8, 0], [42, 50, 0.5], ChãoBranco);
 
 // Direita
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 41.5, 0.5], [30, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, 41.5, 0.5], [30, 0.5, 0.5], Azulzinho);
 
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 27, 0.5], [2, 0.5, 0.5], Azulzinho);
-MSTerreo.newBox([[0, 0, 0], 1.4], [6, 27, 0.5], [3, 0.5, 0.5], Azulzinho);
-MSTerreo.newBox([[0, 0, 0], 1.4], [14, 27, 0.5], [3, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, 27, 0.5], [2, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [6, 27, 0.5], [3, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [14, 27, 0.5], [3, 0.5, 0.5], Azulzinho);
 
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 27, 0.5], [0.5, 15, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, 27, 0.5], [0.5, 15, 0.5], Azulzinho);
 
 // Esquerda
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0.5], [30, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, -8, 0.5], [30, 0.5, 0.5], Azulzinho);
 
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, 7, 0.5], [2, 0.5, 0.5], Azulzinho);
-MSTerreo.newBox([[0, 0, 0], 1.4], [6, 7, 0.5], [3, 0.5, 0.5], Azulzinho);
-MSTerreo.newBox([[0, 0, 0], 1.4], [14, 7, 0.5], [3, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, 7, 0.5], [2, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [6, 7, 0.5], [3, 0.5, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [14, 7, 0.5], [3, 0.5, 0.5], Azulzinho);
 
-MSTerreo.newBox([[0, 0, 0], 1.4], [-2, -8, 0.5], [0.5, 15, 0.5], Azulzinho);
+MSTerreo.newBox(1.4, [-2, -8, 0.5], [0.5, 15, 0.5], Azulzinho);
 
 
 MSTerreo.setupRooms();
@@ -574,108 +580,107 @@ var door2 = new MSAndar.Color(93, 64, 55);
 
 // Chão
 
-MSAndar.newBox([[0, 0, 0], 1.4], [21, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Cima
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Cima
-MSAndar.newBox([[0, 0, 0], 1.4], [15, -10, 0], [6, 50, 0.5], ChãoBranco); // Meio
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Baixo
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Baixo
+MSAndar.newBox(1.4, [21, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Cima
+MSAndar.newBox(1.4, [21, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Cima
+MSAndar.newBox(1.4, [15, -10, 0], [6, 50, 0.5], ChãoBranco); // Meio
+MSAndar.newBox(1.4, [-2, 28, 0], [17, 12, 0.5], ChãoBranco); // Esquerda Baixo
+MSAndar.newBox(1.4, [-2, -10, 0], [17, 13, 0.5], ChãoBranco); // Direita Baixo
 
-//MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
+//MSAndar.newBox(1.4, [-2, -10, 0], [40, 50, 0.5], MSAndar.colors.grey);
 
-MSAndar.newBox([[0, 0, 0], 1.4], [16, 4, -1], [0, 28, 3], ChãoBranco); // Parede branca de baixo
+MSAndar.newBox(1.4, [16, 4, -1], [0, 28, 3], ChãoBranco); // Parede branca de baixo
 
 // LADO ESQUERDOOO
 
 // Salas da Esquerda
 MSAndar
-	.newBox([[0, 0, 0], 1.4], [32.9, 37, 0.5], [5, 3, 3], SalaBranca)
-	.getAxis()
-	.getCoords()
+	.newBox(1.4, [32.9, 37, 0.5], [5, 3, 3], SalaBranca)
+	.bundleData()
 	.newRoom(218)
 	.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 	//.appendText('300 Roboto 15px', '#000', 'HU3BR!', [25, 5])
 	//.appendImg('../img/nick.png', [5, 5], 55, 50); // 218
 
-MSAndar.newBox([[0, 0, 0], 1.4], [29.4, 37, 0.5], [3.5, 3, 3], SalaCinza); // 216
-MSAndar.newBox([[0, 0, 0], 1.4], [26.5, 37, 0.5], [3.5, 3, 3], SalaBranca); // ?
+MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3], SalaCinza); // 216
+MSAndar.newBox(1.4, [26.5, 37, 0.5], [3.5, 3, 3], SalaBranca); // ?
 
-MSAndar.newBox([[0, 0, 0], 1.4], [21.5, 38, 0.5], [5, 2, 3], BanheiroRosa); // Banheiro Feminino
-MSAndar.newBox([[0, 0, 0], 1.4], [20, 37, 0.5], [3, 3, 3], BanheiroAzul); // Banheiro Masculino pt2
-MSAndar.newBox([[0, 0, 0], 1.4], [14.9, 38, 0.5], [5.2, 2, 3], BanheiroAzul); // Banheiro Masculino
+MSAndar.newBox(1.4, [21.5, 38, 0.5], [5, 2, 3], BanheiroRosa); // Banheiro Feminino
+MSAndar.newBox(1.4, [20, 37, 0.5], [3, 3, 3], BanheiroAzul); // Banheiro Masculino pt2
+MSAndar.newBox(1.4, [14.9, 38, 0.5], [5.2, 2, 3], BanheiroAzul); // Banheiro Masculino
 
-MSAndar.newBox([[0, 0, 0], 1.4], [11.5, 37, 0.5], [3.4, 3, 3], SalaBranca); // Coordenaçao
-MSAndar.newBox([[0, 0, 0], 1.4], [7, 37, 0.5], [4.5, 3, 3], SalaCinza); // 205
-MSAndar.newBox([[0, 0, 0], 1.4], [2.5, 37, 0.5], [4.5, 3, 3], SalaBranca); // 203
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, 37, 0.5], [4.5, 3, 3], SalaCinza); //201
+MSAndar.newBox(1.4, [11.5, 37, 0.5], [3.4, 3, 3], SalaBranca); // Coordenaçao
+MSAndar.newBox(1.4, [7, 37, 0.5], [4.5, 3, 3], SalaCinza); // 205
+MSAndar.newBox(1.4, [2.5, 37, 0.5], [4.5, 3, 3], SalaBranca); // 203
+MSAndar.newBox(1.4, [-2, 37, 0.5], [4.5, 3, 3], SalaCinza); //201
 
 // Portas da Direita
-MSAndar.newBox([[0, 0, 0], 1.4], [33.6, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 218
-MSAndar.newBox([[0, 0, 0], 1.4], [32, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 216
-MSAndar.newBox([[0, 0, 0], 1.4], [27.5, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // ?
+MSAndar.newBox(1.4, [33.6, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 218
+MSAndar.newBox(1.4, [32, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 216
+MSAndar.newBox(1.4, [27.5, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // ?
 
-MSAndar.newBox([[0, 0, 0], 1.4], [24.5, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Feminino
-MSAndar.newBox([[0, 0, 0], 1.4], [17, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Masculino
+MSAndar.newBox(1.4, [24.5, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Feminino
+MSAndar.newBox(1.4, [17, 38, 0.5], [1, 0.1, 1.6], whitedoor); // Banheiro Masculino
 
-MSAndar.newBox([[0, 0, 0], 1.4], [1.5, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 201
-MSAndar.newBox([[0, 0, 0], 1.4], [3.3, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 203
-MSAndar.newBox([[0, 0, 0], 1.4], [8, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 205
-MSAndar.newBox([[0, 0, 0], 1.4], [14, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // Coordenação
+MSAndar.newBox(1.4, [1.5, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 201
+MSAndar.newBox(1.4, [3.3, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 203
+MSAndar.newBox(1.4, [8, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // 205
+MSAndar.newBox(1.4, [14, 37, 0.5], [0.5, 0.1, 1], PortaMarrom); // Coordenação
 
 
 // Salas da Direita
-MSAndar.newBox([[0, 0, 0], 1.4], [33, 28, 0.5], [5, 3, 3], SalaBranca); // 217
-MSAndar.newBox([[0, 0, 0], 1.4], [28, 28, 0.5], [5, 3, 3], SalaCinza); // 215
-MSAndar.newBox([[0, 0, 0], 1.4], [23, 28, 0.5], [6, 3, 3], SalaBranca); // Laboratório 1
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 28, 1], [2, 2, 2.5], SalaCinza); // Servidor
+MSAndar.newBox(1.4, [33, 28, 0.5], [5, 3, 3], SalaBranca); // 217
+MSAndar.newBox(1.4, [28, 28, 0.5], [5, 3, 3], SalaCinza); // 215
+MSAndar.newBox(1.4, [23, 28, 0.5], [6, 3, 3], SalaBranca); // Laboratório 1
+MSAndar.newBox(1.4, [21, 28, 1], [2, 2, 2.5], SalaCinza); // Servidor
 
-MSAndar.newBox([[0, 0, 0], 1.4], [8.4, 28, 0.5], [6.2, 3, 3], SalaBranca); // Sala dos Professores
-MSAndar.newBox([[0, 0, 0], 1.4], [3.2, 28, 0.5], [5.2, 3, 3], SalaCinza); // 204
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, 28, 0.5], [5.2, 3, 3], SalaBranca); // 202
+MSAndar.newBox(1.4, [8.4, 28, 0.5], [6.2, 3, 3], SalaBranca); // Sala dos Professores
+MSAndar.newBox(1.4, [3.2, 28, 0.5], [5.2, 3, 3], SalaCinza); // 204
+MSAndar.newBox(1.4, [-2, 28, 0.5], [5.2, 3, 3], SalaBranca); // 202
 
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 10, 0.5], [5, 6, 3], Verdinho); // Escada
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 23, 0.5], [2, 2, 3], Verdinho); // Elevador
+MSAndar.newBox(1.4, [21, 10, 0.5], [5, 6, 3], Verdinho); // Escada
+MSAndar.newBox(1.4, [21, 23, 0.5], [2, 2, 3], Verdinho); // Elevador
 
 
 // LADO DIREITOOU
 
 // Salas da Esquerda
-MSAndar.newBox([[0, 0, 0], 1.4], [34, 0, 0.5], [4, 3, 3], SalaBranca); // 227
-MSAndar.newBox([[0, 0, 0], 1.4], [29, 0, 0.5], [5, 3, 3], SalaCinza); // 225
-MSAndar.newBox([[0, 0, 0], 1.4], [25, 0, 0.5], [4, 3, 3], SalaBranca); // 223
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [4, 3, 3], SalaCinza); // 221
+MSAndar.newBox(1.4, [34, 0, 0.5], [4, 3, 3], SalaBranca); // 227
+MSAndar.newBox(1.4, [29, 0, 0.5], [5, 3, 3], SalaCinza); // 225
+MSAndar.newBox(1.4, [25, 0, 0.5], [4, 3, 3], SalaBranca); // 223
+MSAndar.newBox(1.4, [21, 0, 0.5], [4, 3, 3], SalaCinza); // 221
 
-MSAndar.newBox([[0, 0, 0], 1.4], [9.6, 0, 0.5], [5, 3, 3], SalaBranca); // Lab Adobe
-MSAndar.newBox([[0, 0, 0], 1.4], [7.5, 0, 0.5], [3, 3, 3], SalaCinza); // Lab Redes
-MSAndar.newBox([[0, 0, 0], 1.4], [1, 0, 0.5], [6.5, 3, 3], SalaBranca); // Lab 03
+MSAndar.newBox(1.4, [9.6, 0, 0.5], [5, 3, 3], SalaBranca); // Lab Adobe
+MSAndar.newBox(1.4, [7.5, 0, 0.5], [3, 3, 3], SalaCinza); // Lab Redes
+MSAndar.newBox(1.4, [1, 0, 0.5], [6.5, 3, 3], SalaBranca); // Lab 03
 
 // Portas da Esquerda
-MSAndar.newBox([[0, 0, 0], 1.4], [34.8, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 227
-MSAndar.newBox([[0, 0, 0], 1.4], [33, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 225
-MSAndar.newBox([[0, 0, 0], 1.4], [26, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 223
-MSAndar.newBox([[0, 0, 0], 1.4], [24, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 221
+MSAndar.newBox(1.4, [34.8, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 227
+MSAndar.newBox(1.4, [33, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 225
+MSAndar.newBox(1.4, [26, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 223
+MSAndar.newBox(1.4, [24, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // 221
 
-MSAndar.newBox([[0, 0, 0], 1.4], [13.5, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab Adobe
-MSAndar.newBox([[0, 0, 0], 1.4], [9.2, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab Redes
-MSAndar.newBox([[0, 0, 0], 1.4], [6.8, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab 03
+MSAndar.newBox(1.4, [13.5, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab Adobe
+MSAndar.newBox(1.4, [9.2, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab Redes
+MSAndar.newBox(1.4, [6.8, 0, 0.5], [0.5, 0.1, 1], PortaMarrom); // Lab 03
 
 // Salas da Direita
-MSAndar.newBox([[0, 0, 0], 1.4], [34, -10, 0.5], [4, 3, 3], SalaBranca); // 228
-MSAndar.newBox([[0, 0, 0], 1.4], [30, -10, 0.5], [4, 3, 3], SalaCinza); // 226
-MSAndar.newBox([[0, 0, 0], 1.4], [26, -10, 0.5], [4, 3, 3], SalaBranca); // 224
+MSAndar.newBox(1.4, [34, -10, 0.5], [4, 3, 3], SalaBranca); // 228
+MSAndar.newBox(1.4, [30, -10, 0.5], [4, 3, 3], SalaCinza); // 226
+MSAndar.newBox(1.4, [26, -10, 0.5], [4, 3, 3], SalaBranca); // 224
 
-MSAndar.newBox([[0, 0, 0], 1.4], [22.8, -10, 0.5], [3.2, 2, 3], BanheiroRosa); // Banheiro Feminino
-MSAndar.newBox([[0, 0, 0], 1.4], [18, -10, 0.5], [4.8, 2, 3], BanheiroAzul); // Banheiro Masculino
+MSAndar.newBox(1.4, [22.8, -10, 0.5], [3.2, 2, 3], BanheiroRosa); // Banheiro Feminino
+MSAndar.newBox(1.4, [18, -10, 0.5], [4.8, 2, 3], BanheiroAzul); // Banheiro Masculino
 
-MSAndar.newBox([[0, 0, 0], 1.4], [12, -10, 0.5], [6, 3, 3], SalaBranca); // 222
-MSAndar.newBox([[0, 0, 0], 1.4], [6, -10, 0.5], [6, 3, 3], SalaCinza); // 220
-//MSAndar.newBox([[0, 0, 0], 1.4], [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
+MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3], SalaBranca); // 222
+MSAndar.newBox(1.4, [6, -10, 0.5], [6, 3, 3], SalaCinza); // 220
+//MSAndar.newBox(1.4, [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
-MSAndar.newBox([[0, 0, 0], 1.4], [-2, -10, 0.5], [3, 13, 3], SalaBranca); // Auditorio
+MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3], SalaBranca); // Auditorio
 
 // Parede de Cima
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 0, 0.5], [0, 10, 3], ChãoBranco); // Esquerda
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 16, 0.5], [0, 7, 3], ChãoBranco); // Meio
-MSAndar.newBox([[0, 0, 0], 1.4], [21, 25, 0.5], [0, 5, 3], ChãoBranco); // Direita
+MSAndar.newBox(1.4, [21, 0, 0.5], [0, 10, 3], ChãoBranco); // Esquerda
+MSAndar.newBox(1.4, [21, 16, 0.5], [0, 7, 3], ChãoBranco); // Meio
+MSAndar.newBox(1.4, [21, 25, 0.5], [0, 5, 3], ChãoBranco); // Direita
 
 MSAndar.setupRooms();
 
