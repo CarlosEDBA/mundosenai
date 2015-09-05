@@ -4,6 +4,7 @@
 // *************************************************** //
 
 var MundoSenai = MundoSenai || function () {
+	var SenaiMaps = document.registerElement('senai-maps', { prototype: Object.create(HTMLElement.prototype) });
 	var SenaiRoom = document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
 };
 

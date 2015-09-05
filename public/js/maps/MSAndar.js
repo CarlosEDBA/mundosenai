@@ -42,26 +42,32 @@ module.exports = function (Ace, Canvas) {
 	// LADO ESQUERDOOO
 
 	// Salas da Esquerda
-	MSAndar
-		.newBox(1.4, [32.9, 37, 0.5], [5, 3, 3],  Cores.salaBranca)
+	MSAndar.newBox(1.4, [32.9, 37, 0.5], [5, 3, 3],  Cores.salaBranca)
 		.newRoom(218)
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 		//.appendText('300 Roboto 15px', '#000', 'HU3BR!', [155, 5])
 		//.appendImg('../img/nick.png', [50, 50], 55, 50); // 218s
-
-	MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3],  Cores.salaCinza)
+	MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3],  Cores.salaCinza) // 216
 		.newRoom(216)
-		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]); // 216
-	MSAndar.newBox(1.4, [26.5, 37, 0.5], [3.5, 3, 3],  Cores.salaBranca); // ?
+		.appendRoomNum('300 Roboto 15px', '#000', [13, 7]);
+	MSAndar.newBox(1.4, [26.5, 37, 0.5], [3.5, 3, 3],  Cores.salaBranca) // ?
+		.newRoom(214)
+		.appendRoomNum('300 Roboto 15px', '#000', [15, 6]);
 
 	MSAndar.newBox(1.4, [21.5, 38, 0.5], [5, 2, 3],  Cores.banheiroRosa); // Banheiro Feminino
 	MSAndar.newBox(1.4, [20, 37, 0.5], [3, 3, 3],  Cores.banheiroAzul); // Banheiro Masculino pt2
 	MSAndar.newBox(1.4, [14.9, 38, 0.5], [5.2, 2, 3],  Cores.banheiroAzul); // Banheiro Masculino
 
 	MSAndar.newBox(1.4, [11.5, 37, 0.5], [3.4, 3, 3],  Cores.salaBranca); // Coordenaçao
-	MSAndar.newBox(1.4, [7, 37, 0.5], [4.5, 3, 3],  Cores.salaCinza); // 205
-	MSAndar.newBox(1.4, [2.5, 37, 0.5], [4.5, 3, 3],  Cores.salaBranca); // 203
-	MSAndar.newBox(1.4, [-2, 37, 0.5], [4.5, 3, 3],  Cores.salaCinza); //201
+	MSAndar.newBox(1.4, [7, 37, 0.5], [4.5, 3, 3],  Cores.salaCinza) // 205
+		.newRoom(205)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
+	MSAndar.newBox(1.4, [2.5, 37, 0.5], [4.5, 3, 3],  Cores.salaBranca) // 203
+		.newRoom(203)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
+	MSAndar.newBox(1.4, [-2, 37, 0.5], [4.5, 3, 3],  Cores.salaCinza) //201
+		.newRoom(201)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 
 	// Portas da Direita
 	MSAndar.newBox(1.4, [33.6, 37, 0.5], [0.5, 0.1, 1],  Cores.portaMarrom); // 218
@@ -78,14 +84,22 @@ module.exports = function (Ace, Canvas) {
 
 
 	// Salas da Direita
-	MSAndar.newBox(1.4, [33, 28, 0.5], [5, 3, 3],  Cores.salaBranca); // 217
-	MSAndar.newBox(1.4, [28, 28, 0.5], [5, 3, 3],  Cores.salaCinza); // 215
+	MSAndar.newBox(1.4, [33, 28, 0.5], [5, 3, 3],  Cores.salaBranca) // 217
+		.newRoom(217)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 7]);
+	MSAndar.newBox(1.4, [28, 28, 0.5], [5, 3, 3],  Cores.salaCinza) // 215
+		.newRoom(215)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 7]);
 	MSAndar.newBox(1.4, [23, 28, 0.5], [6, 3, 3],  Cores.salaBranca); // Laboratório 1
 	MSAndar.newBox(1.4, [21, 28, 1], [2, 2, 2.5],  Cores.salaCinza); // Servidor
 
 	MSAndar.newBox(1.4, [8.4, 28, 0.5], [6.2, 3, 3],  Cores.salaBranca); // Sala dos Professores
-	MSAndar.newBox(1.4, [3.2, 28, 0.5], [5.2, 3, 3],  Cores.salaCinza); // 204
-	MSAndar.newBox(1.4, [-2, 28, 0.5], [5.2, 3, 3],  Cores.salaBranca); // 202
+	MSAndar.newBox(1.4, [3.2, 28, 0.5], [5.2, 3, 3],  Cores.salaCinza) // 204		
+		.newRoom(204)
+		.appendRoomNum('300 Roboto 15px', '#000', [19, 6]);
+	MSAndar.newBox(1.4, [-2, 28, 0.5], [5.2, 3, 3],  Cores.salaBranca) // 202
+		.newRoom(202)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 
 	MSAndar.newBox(1.4, [21, 10, 0.5], [5, 6, 3],  Cores.verdinho); // Escada
 	MSAndar.newBox(1.4, [21, 23, 0.5], [2, 2, 3],  Cores.verdinho); // Elevador
@@ -94,10 +108,18 @@ module.exports = function (Ace, Canvas) {
 	// LADO DIREITOOU
 
 	// Salas da Esquerda
-	MSAndar.newBox(1.4, [34, 0, 0.5], [4, 3, 3],  Cores.salaBranca); // 227
-	MSAndar.newBox(1.4, [29, 0, 0.5], [5, 3, 3],  Cores.salaCinza); // 225
-	MSAndar.newBox(1.4, [25, 0, 0.5], [4, 3, 3],  Cores.salaBranca); // 223
-	MSAndar.newBox(1.4, [21, 0, 0.5], [4, 3, 3],  Cores.salaCinza); // 221
+	MSAndar.newBox(1.4, [34, 0, 0.5], [4, 3, 3],  Cores.salaBranca)
+		.newRoom(227)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]); // 227
+	MSAndar.newBox(1.4, [29, 0, 0.5], [5, 3, 3],  Cores.salaCinza) // 225
+		.newRoom(225)
+		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
+	MSAndar.newBox(1.4, [25, 0, 0.5], [4, 3, 3],  Cores.salaBranca) // 223
+		.newRoom(223)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
+	MSAndar.newBox(1.4, [21, 0, 0.5], [4, 3, 3],  Cores.salaCinza) // 221
+		.newRoom(221)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
 
 	MSAndar.newBox(1.4, [9.6, 0, 0.5], [5, 3, 3],  Cores.salaBranca); // Lab Adobe
 	MSAndar.newBox(1.4, [7.5, 0, 0.5], [3, 3, 3],  Cores.salaCinza); // Lab Redes
@@ -114,15 +136,25 @@ module.exports = function (Ace, Canvas) {
 	MSAndar.newBox(1.4, [6.8, 0, 0.5], [0.5, 0.1, 1],  Cores.portaMarrom); // Lab 03
 
 	// Salas da Direita
-	MSAndar.newBox(1.4, [34, -10, 0.5], [4, 3, 3],  Cores.salaBranca); // 228
-	MSAndar.newBox(1.4, [30, -10, 0.5], [4, 3, 3],  Cores.salaCinza); // 226
-	MSAndar.newBox(1.4, [26, -10, 0.5], [4, 3, 3],  Cores.salaBranca); // 224
+	MSAndar.newBox(1.4, [34, -10, 0.5], [4, 3, 3],  Cores.salaBranca) // 228
+		.newRoom(228)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
+	MSAndar.newBox(1.4, [30, -10, 0.5], [4, 3, 3],  Cores.salaCinza) // 226RR
+		.newRoom(226)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
+	MSAndar.newBox(1.4, [26, -10, 0.5], [4, 3, 3],  Cores.salaBranca) // 224
+		.newRoom(224)
+		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
 
 	MSAndar.newBox(1.4, [22.8, -10, 0.5], [3.2, 2, 3],  Cores.banheiroRosa); // Banheiro Feminino
 	MSAndar.newBox(1.4, [18, -10, 0.5], [4.8, 2, 3],  Cores.banheiroAzul); // Banheiro Masculino
 
-	MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3],  Cores.salaBranca); // 222
-	MSAndar.newBox(1.4, [6, -10, 0.5], [6, 3, 3],  Cores.salaCinza); // 220
+	MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3],  Cores.salaBranca) // 222
+		.newRoom(222)
+		.appendRoomNum('300 Roboto 15px', '#000', [24, 0]);
+	MSAndar.newBox(1.4, [6, -10, 0.5], [6, 3, 3],  Cores.salaCinza) // 220
+		.newRoom(220)
+		.appendRoomNum('300 Roboto 15px', '#000', [25, 2]);
 	//MSAndar.newBox(1.4, [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
 	MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3],  Cores.salaCinza); // Auditorio
