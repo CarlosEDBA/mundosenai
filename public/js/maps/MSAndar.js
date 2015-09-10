@@ -47,6 +47,7 @@ module.exports = function (Ace, Canvas) {
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 		//.appendText('300 Roboto 15px', '#000', 'HU3BR!', [155, 5])
 		//.appendImg('../img/nick.png', [50, 50], 55, 50); // 218s
+		//
 	MSAndar.newBox(1.4, [29.4, 37, 0.5], [3.5, 3, 3],  Cores.salaCinza) // 216
 		.newRoom(216)
 		.appendRoomNum('300 Roboto 15px', '#000', [13, 7]);
@@ -54,11 +55,19 @@ module.exports = function (Ace, Canvas) {
 		.newRoom(214)
 		.appendRoomNum('300 Roboto 15px', '#000', [15, 6]);
 
-	MSAndar.newBox(1.4, [21.5, 38, 0.5], [5, 2, 3],  Cores.banheiroRosa); // Banheiro Feminino
-	MSAndar.newBox(1.4, [20, 37, 0.5], [3, 3, 3],  Cores.banheiroAzul); // Banheiro Masculino pt2
-	MSAndar.newBox(1.4, [14.9, 38, 0.5], [5.2, 2, 3],  Cores.banheiroAzul); // Banheiro Masculino
+	MSAndar.newBox(1.4, [21.5, 38, 0.5], [5, 2, 3],  Cores.banheiroRosa)
+		.newRoom(1000)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [115, 22]); // Banheiro Feminino
 
-	MSAndar.newBox(1.4, [11.5, 37, 0.5], [3.4, 3, 3],  Cores.salaBranca); // Coordenaçao
+	MSAndar.newBox(1.4, [20, 37, 0.5], [3, 3, 3],  Cores.banheiroAzul); // Banheiro Masculino pt2
+	MSAndar.newBox(1.4, [14.9, 38, 0.5], [5.2, 2, 3],  Cores.banheiroAzul)
+		.newRoom(1001)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [115, 25]); // Banheiro Masculino
+
+	MSAndar.newBox(1.4, [11.5, 37, 0.5], [3.4, 3, 3],  Cores.salaBranca)
+		.newRoom(1002)
+		.appendText('300 Roboto 15px', '#000', 'Coordenação', [95, 18]); // Coordenaçao
+
 	MSAndar.newBox(1.4, [7, 37, 0.5], [4.5, 3, 3],  Cores.salaCinza) // 205
 		.newRoom(205)
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
@@ -87,10 +96,15 @@ module.exports = function (Ace, Canvas) {
 	MSAndar.newBox(1.4, [33, 28, 0.5], [5, 3, 3],  Cores.salaBranca) // 217
 		.newRoom(217)
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 7]);
+
 	MSAndar.newBox(1.4, [28, 28, 0.5], [5, 3, 3],  Cores.salaCinza) // 215
 		.newRoom(215)
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 7]);
-	MSAndar.newBox(1.4, [23, 28, 0.5], [6, 3, 3],  Cores.salaBranca); // Laboratório 1
+
+	MSAndar.newBox(1.4, [23, 28, 0.5], [6, 3, 3],  Cores.salaBranca)
+		.newRoom(1003)
+		.appendText('300 Roboto 15px', '#000', 'Lab 1', [25.5, 2.5]); // Laboratório 1
+
 	MSAndar.newBox(1.4, [21, 28, 1], [2, 2, 2.5],  Cores.salaCinza); // Servidor
 
 	MSAndar.newBox(1.4, [8.4, 28, 0.5], [6.2, 3, 3],  Cores.salaBranca); // Sala dos Professores
@@ -101,8 +115,13 @@ module.exports = function (Ace, Canvas) {
 		.newRoom(202)
 		.appendRoomNum('300 Roboto 15px', '#000', [20, 5]);
 
-	MSAndar.newBox(1.4, [21, 10, 0.5], [5, 6, 3],  Cores.verdinho); // Escada
-	MSAndar.newBox(1.4, [21, 23, 0.5], [2, 2, 3],  Cores.verdinho); // Elevador
+	MSAndar.newBox(1.4, [21, 10, 0.5], [5, 6, 3],  Cores.verdinho)
+		.newRoom(1004)
+		.appendText('300 Roboto 15px', '#000', 'Escada', [8, 35]); // Escada
+
+	MSAndar.newBox(1.4, [21, 23, 0.5], [2, 2, 3],  Cores.verdinho)
+		.newRoom(1005)
+		.appendText('300 Roboto 15px', '#000', 'Elevador', [-25, 10]); // Elevador
 
 
 	// LADO DIREITOOU
@@ -121,9 +140,17 @@ module.exports = function (Ace, Canvas) {
 		.newRoom(221)
 		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
 
-	MSAndar.newBox(1.4, [9.6, 0, 0.5], [5, 3, 3],  Cores.salaBranca); // Lab Adobe
-	MSAndar.newBox(1.4, [7.5, 0, 0.5], [3, 3, 3],  Cores.salaCinza); // Lab Redes
-	MSAndar.newBox(1.4, [1, 0, 0.5], [6.5, 3, 3],  Cores.salaBranca); // Lab 03
+	MSAndar.newBox(1.4, [9.6, 0, 0.5], [5, 3, 3],  Cores.salaBranca)
+		.newRoom(1006)
+		.appendText('300 Roboto 15px', '#000', 'Lab Adobe', [30, 0]); // Lab Adobe
+
+	MSAndar.newBox(1.4, [7.5, 0, 0.5], [3, 3, 3],  Cores.salaCinza)
+		.newRoom(1007)
+		.appendText('300 Roboto 15px', '#000', 'Lab Redes', [30, 0]); // Lab Redes
+
+	MSAndar.newBox(1.4, [1, 0, 0.5], [6.5, 3, 3],  Cores.salaBranca)
+		.newRoom(1008)
+		.appendText('300 Roboto 15px', '#000', 'Lab 3', [30, 0]); // Lab 03
 
 	// Portas da Esquerda
 	MSAndar.newBox(1.4, [34.8, 0, 0.5], [0.5, 0.1, 1],  Cores.portaMarrom); // 227
@@ -139,15 +166,20 @@ module.exports = function (Ace, Canvas) {
 	MSAndar.newBox(1.4, [34, -10, 0.5], [4, 3, 3],  Cores.salaBranca) // 228
 		.newRoom(228)
 		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
-	MSAndar.newBox(1.4, [30, -10, 0.5], [4, 3, 3],  Cores.salaCinza) // 226RR
+	MSAndar.newBox(1.4, [30, -10, 0.5], [4, 3, 3],  Cores.salaCinza) // 226
 		.newRoom(226)
 		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
 	MSAndar.newBox(1.4, [26, -10, 0.5], [4, 3, 3],  Cores.salaBranca) // 224
 		.newRoom(224)
 		.appendRoomNum('300 Roboto 15px', '#000', [18, 7]);
 
-	MSAndar.newBox(1.4, [22.8, -10, 0.5], [3.2, 2, 3],  Cores.banheiroRosa); // Banheiro Feminino
-	MSAndar.newBox(1.4, [18, -10, 0.5], [4.8, 2, 3],  Cores.banheiroAzul); // Banheiro Masculino
+	MSAndar.newBox(1.4, [22.8, -10, 0.5], [3.2, 2, 3],  Cores.banheiroRosa)
+		.newRoom(1009)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [-30, -30]); // Banheiro Feminino
+
+	MSAndar.newBox(1.4, [18, -10, 0.5], [4.8, 2, 3],  Cores.banheiroAzul)
+		.newRoom(1010)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [-20, -40]); // Banheiro Masculino
 
 	MSAndar.newBox(1.4, [12, -10, 0.5], [6, 3, 3],  Cores.salaBranca) // 222
 		.newRoom(222)
@@ -157,7 +189,9 @@ module.exports = function (Ace, Canvas) {
 		.appendRoomNum('300 Roboto 15px', '#000', [25, 2]);
 	//MSAndar.newBox(1.4, [1, -10, 0.5], [5, 3, 3], blue1); // Espaço Vazio
 
-	MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3],  Cores.salaCinza); // Auditorio
+	MSAndar.newBox(1.4, [-2, -10, 0.5], [3, 13, 3],  Cores.salaCinza)
+		.newRoom(1011)
+		.appendText('300 Roboto 15px', '#000', 'Auditório', [-35, 20]); // Auditorio
 
 	// Parede de Cima
 	MSAndar.newBox(1.4, [21, 0, 0.5], [0, 10, 3],  Cores.chaoBranco); // Esquerda

@@ -26,10 +26,10 @@ MundoSenai.prototype.setUpdown = function () {
 		var state = updown.getAttribute('state');
 		if (state == 'up') {
 			terreo.setAttribute('state', 'down');
-			andar.setAttribute('state', 'open');
+			andar.setAttribute('state', 'visible');
 			updown.setAttribute('state', 'down');
 		} else if (state == 'down') {
-			terreo.setAttribute('state', 'open');
+			terreo.setAttribute('state', 'visible');
 			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
 		}
@@ -68,7 +68,7 @@ MundoSenai.prototype.changeMapsState = function (maps, state) {
 	} else {
 		var map = document.querySelector('senai-map[name="' + state + '"]');
 		var notTheMap = document.querySelectorAll('senai-map:not([name="' + state + '"])');
-		map.setAttribute('state', 'open');
+		map.setAttribute('state', 'visible');
 		[].forEach.call(notTheMap, function (el, ind, arr) {
 			el.setAttribute('state', 'hided');
 		}, this);
@@ -87,7 +87,7 @@ MundoSenai.prototype.changeMapState = function (e) {
 	var map = e.target.parentNode;
 	var mapName = map.getAttribute('name');
 	this.setAttribute('state', mapName);
-	map.setAttribute('state', 'open');
+	map.setAttribute('state', 'visible');
 };
 
 MundoSenai.prototype.mapState = function () {
@@ -136,7 +136,7 @@ MundoSenai.prototype.viewModes = function () {
 			terreoCanvas.addEventListener('click', function (e) {
 				lalala.setAttribute('state', '');
 				updown.setAttribute('state', 'up');
-				terreo.setAttribute('state', 'open');
+				terreo.setAttribute('state', 'visible');
 				andar.setAttribute('state', 'up');
 			});
 
@@ -144,11 +144,11 @@ MundoSenai.prototype.viewModes = function () {
 				lalala.setAttribute('state', '');
 				updown.setAttribute('state', 'down');
 				terreo.setAttribute('state', 'down');
-				andar.setAttribute('state', 'open');
+				andar.setAttribute('state', 'visible');
 			});
 		} else if (state == 'dev') {
 			lalala.setAttribute('state', '');
-			terreo.setAttribute('state', 'open');
+			terreo.setAttribute('state', 'visible');
 			andar.setAttribute('state', 'up');
 		}
 		

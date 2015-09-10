@@ -35,8 +35,9 @@ module.exports = {
 	banheiroRosa : '#FF80AB',
 	banheiroAzul : '#90CAF9',
 	portaMarrom : '#795548',
-	azulzinho : '#448AFF',
+	azulzinho : '#82B1FF',
 	verdinho : '#69F0AE',
 	grama : '#40ba44',
-	grama2 : '#4CAF50'
+	grama2 : '#4CAF50',
+	grama3 : '#4CAF50'
 };
