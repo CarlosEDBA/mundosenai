@@ -27,14 +27,18 @@ module.exports = function (Ace, Canvas) {
 	
 	
 	//Salas 
-	MSTerreo.newBox(1.4, [40, 35, 0.5], [12, 25, 4],  Cores.salaCinza); // Sala Pintura
+	MSTerreo.newBox(1.4, [40, 35, 0.5], [12, 25, 4],  Cores.salaCinza)
+		.newRoom(1106)
+		.appendText('300 Roboto 15px', '#000', 'Sala de Pintura', [-10, -30]); // Sala Pintura
 	MSTerreo.newBox(1.4, [27, 54, 0.5], [4, 5, 4],  Cores.banheiroRosa)
 		.newRoom(1100)
 		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [115, 14]); // banh femin
 	MSTerreo.newBox(1.4, [23, 54, 0.5], [4, 5, 4],  Cores.banheiroAzul)
 		.newRoom(1101)
 		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [115, 14]); // banh masc
-	MSTerreo.newBox(1.4, [25, 39, 0.5], [8, 8, 4],  Cores.salaBranca); //elevador+sala aleatoria
+	MSTerreo.newBox(1.4, [25, 39, 0.5], [8, 8, 4],  Cores.salaBranca)
+		.newRoom(1104)
+		.appendText('300 Roboto 15px', '#000', 'Elevador', [15, 40]); //elevador+sala aleatoria
 	MSTerreo.newBox(1.4, [18, 54, 0.5], [5, 6, 4],  Cores.salaCinza);
 	MSTerreo.newBox(1.4, [14, 54, 0.5], [4, 6, 4],  Cores.salaBranca);
 	MSTerreo.newBox(1.4, [10, 54, 0.5], [4, 6, 4],  Cores.salaCinza);
@@ -43,8 +47,16 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 54, 0.5], [4, 6, 4],  Cores.salaBranca);
 	
 	//linhas verdes
-	MSTerreo.newBox(1.4, [16.5, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [8, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho);
+	MSTerreo.newBox(1.4, [16.5, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1114)
+		.appendText('300 Roboto 15px', '#000', 'Sidnei', [10, -30])
+		.appendText('300 Roboto 15px', '#000', 'Yamaha', [-20, 5]);
+	MSTerreo.newBox(1.4, [10, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1113)
+		.appendText('300 Roboto 15px', '#000', 'Lab do Câmbio', [50, -30]);
+	MSTerreo.newBox(1.4, [3, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1112)
+		.appendText('300 Roboto 15px', '#000', 'Exposição Fiat', [10, -30]);
 	
 	//portas
 	MSTerreo.newBox(1.4, [-1.2, 53.5, 0.5], [1, 0.1, 1.5],  Cores.portaMarrom);
@@ -63,12 +75,12 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 35, 0.5], [55, 0.1, 8],  Cores.salaCinza);
 	
 	//portões
-	MSTerreo.newBox(1.4, [-1, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [7, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [15, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [22, 34.8, 0.5], [2, 0.2, 3],  Cores.banheiroAzul);
-	MSTerreo.newBox(1.4, [37, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [45, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
+	MSTerreo.newBox(1.4, [-1, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [5, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [11.5, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [22, 34.8, 0.5], [2, 0.2, 2],  Cores.banheiroAzul);
+	MSTerreo.newBox(1.4, [36, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [45, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
 	
 
 	
@@ -79,21 +91,38 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 20, 0.5],  [55, 0.1, 8],  Cores.salaCinza);
 
 	//Portoes
-	MSTerreo.newBox(1.4, [-1, 20.5, 0], [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [7.1, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [15, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [22, 20.5, 0],  [2, 0.1, 3],  Cores.banheiroAzul);
-	MSTerreo.newBox(1.4, [36, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [45, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
+	MSTerreo.newBox(1.4, [-1, 20.5, 0], [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [5, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [11.5, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [22.5, 20.5, 0],  [2, 0.1, 2],  Cores.banheiroAzul);
+	MSTerreo.newBox(1.4, [36, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [45, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
 	
 	
 	MSTerreo.newBox(1.4, [24.7, 8, 0.5], [11, 12, 6],  Cores.salaCinza); //recepção e salinha aleatoria
 	
 	//linhas verdes
-	MSTerreo.newBox(1.4, [13.5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho); 
-	MSTerreo.newBox(1.4, [5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [13.5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
+	MSTerreo.newBox(1.4, [16.5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1111)
+		.appendText('300 Roboto 15px', '#000', 'Oficina Interativa', [20, -35])
+		.appendText('300 Roboto 15px', '#000', 'Oficina Interativa', [-20, 0]); 
+	MSTerreo.newBox(1.4, [10, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1110)
+		.appendText('300 Roboto 15px', '#000', 'Pneumática', [10, -40]);
+	MSTerreo.newBox(1.4, [3, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1110)
+		.appendText('300 Roboto 15px', '#000', '', [0, -35]);
+
+	MSTerreo.newBox(1.4, [16.5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1109)
+		.appendText('300 Roboto 15px', '#000', 'Acessórios', [0, -35])
+		.appendText('300 Roboto 15px', '#000', 'Motor Diesel', [-30, 0]);
+	MSTerreo.newBox(1.4, [10, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1108)
+		.appendText('300 Roboto 15px', '#000', 'Motor Ciclo Otto', [10, -40]);
+	MSTerreo.newBox(1.4, [3, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1107)
+		.appendText('300 Roboto 15px', '#000', 'Montagem PCDs', [10, -30]);
 	
 	//corredor preto
 	MSTerreo.newBox(1.4, [-1.5, 4, -0.2],  [55.1, 5, -0.1],  Cores.preto);
@@ -110,7 +139,9 @@ module.exports = function (Ace, Canvas) {
 
 
 	//bloco meio
-	MSTerreo.newBox(1.4, [24.6, 28, 0.5], [8, 7, 8],  Cores.salaCinza);
+	MSTerreo.newBox(1.4, [24.6, 28, 0.5], [8, 7, 8],  Cores.salaCinza)
+		.newRoom(1105)
+		.appendText('300 Roboto 15px', '#000', 'Escada', [30, 10]);
 	//MSTerreo.newBox(1.4, [27.4, 33.8, -2], [0, 3.5, 5],  Cores.banheiroAzul);
 
 	MSTerreo.setupRooms();

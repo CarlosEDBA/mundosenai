@@ -13,20 +13,32 @@
 			-moz-transition: all 0.56s ease;
 			transition: all 0.56s ease;
 		}
+
+		:host[name="tower"][state="overview"] {
+			transform: scale(0.5) translate(260px, -160px);
+		}
 		:host[name="entrada"][state="overview"] {
 			transform: scale(0.5) translate(-200px, 250px);
 		}
 		:host[name="terreo"][state="overview"] {
-			transform: scale(0.3) translate(200px, -600px);
+			transform: scale(0.3) translate(200px, -2000px);
 		}
 		:host[name="andar"][state="overview"] {
-			transform: scale(0.3) translate(1600px, -600px);
+			transform: scale(0.3) translate(1600px, -2000px);
+		}
+
+		:host[name="tower"][state="hided"] {
+			transform: translate(0, -2000px);
+		}
+		:host[name="entrada"][state="hided"] {
+			transform: translate(0, 2000px);
+		}
+
+		:host[state="hided"] {
+			transform: translate(0, -2000px);
 		}
 		:host[state="open"] {
 			transform: scale(1) translate(0, 0);
-		}
-		:host[state="hided"] {
-			transform: translate(0, 1000px);
 		}
 		canvas {
 			position: absolute;

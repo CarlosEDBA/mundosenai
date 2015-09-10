@@ -68,7 +68,12 @@ module.exports = {
 	verdinho : '#69F0AE',
 	grama : '#40ba44',
 	grama2 : '#4CAF50',
-	grama3 : '#4CAF50'
+	grama3 : '#4CAF50',
+	tower : '#F3E1C1',
+	senai : '#243EB1',
+	playground : '#FBAE6E',
+	escada : '#000729',
+	verde : '#469C5A'
 };
 },{}],5:[function(require,module,exports){
 // *************************************************** //
@@ -322,9 +327,13 @@ module.exports = function (Ace, Canvas) {
 	//MSEntrada.newBox(1.4, [19, 23, 0.5], [20, 12, 6], Cores.salaCinza); // Prédio
 
 	MSEntrada.newBox(1.4, [36, 23, 0.5], [3, 12, 3], Cores.material.white); // Adm
-	MSEntrada.newBox(1.4, [33, 23, 0.5], [3, 12, 3], Cores.material.white); // Adm
+	MSEntrada.newBox(1.4, [33, 23, 0.5], [3, 12, 3], Cores.material.white)
+		.newRoom(1203)
+		.appendText('300 Roboto 15px', '#000', 'Feira Adm', [-120, -10]); // Adm
 	MSEntrada.newBox(1.4, [26, 23, 0.5], [7, 12, 3], Cores.salaCinza); // Meio
-	MSEntrada.newBox(1.4, [22.5, 23, 0.5], [3.5, 12, 3], Cores.material.white); // Adm
+	MSEntrada.newBox(1.4, [22.5, 23, 0.5], [3.5, 12, 3], Cores.material.white)
+		.newRoom(1204)
+		.appendText('300 Roboto 15px', '#000', 'Feira Adm', [-110, -20]); // Adm
 	MSEntrada.newBox(1.4, [19, 23, 0.5], [3.5, 12, 3], Cores.salaCinza); // Biblioteca
 
 	MSEntrada.newBox(1.4, [19, 23, 3.5], [20, 12, 3], Cores.salaCinza); // Topo
@@ -348,16 +357,24 @@ module.exports = function (Ace, Canvas) {
 	MSEntrada.newBox(1.4, [27, 16.5, 0.8], [2, 3.5, 0.1], Cores.chaoBranco); // Passarela Cantina
 	MSEntrada.newBox(1.4, [11, 15, 0.5], [29, 2, 0], Cores.chaoBranco); // Passarela Meio
 
-	MSEntrada.newBox(1.4, [21, -5, 0.5], [4, 14, 0.1], '#69F0AE');
+	MSEntrada.newBox(1.4, [21, -5, 0.5], [4, 14, 0.1], '#69F0AE')
+		.newRoom(1205)
+		.appendText('300 Roboto 15px', '#000', 'Turra - Viaturas Antigas', [0, -40]);
 
 	/*
 	**
 	** Estacionamento
 	**
 	*/
-	MSEntrada.newBox(1.4, [1, 13, 0], [3, 22, 0.1], '#69F0AE'); // Carros em Exposição
-	MSEntrada.newBox(1.4, [7, 13, 0], [3, 13, 0.1], '#EEFF41'); // 147 Clube
-	MSEntrada.newBox(1.4, [7, 26, 0], [3, 9, 0.1], '#B2FF59'); // G4 Clube
+	MSEntrada.newBox(1.4, [1, 13, 0], [3, 22, 0.1], '#69F0AE')
+		.newRoom(1200)
+		.appendText('300 Roboto 15px', '#000', 'Carros em exposição', [-50, -30]); // Carros em Exposição
+	MSEntrada.newBox(1.4, [7, 13, 0], [3, 13, 0.1], '#EEFF41')
+		.newRoom(1201)
+		.appendText('300 Roboto 15px', '#000', '147 Clube', [-20, -30]); // 147 Clube
+	MSEntrada.newBox(1.4, [7, 26, 0], [3, 9, 0.1], '#B2FF59')
+		.newRoom(1202)
+		.appendText('300 Roboto 15px', '#000', 'G4 Clube', [-10, -25]); // G4 Clube
 
 	// Ginásio
 	MSEntrada.newBox(1.4, [0, -6, 0.5], [10, 16, 6], Cores.salaCinza);
@@ -388,7 +405,9 @@ module.exports = function (Ace, Canvas) {
 		MSEntrada.newPillar(1.4, [i, 41.5, 0.3], [0.3, 0.3, 3.2], Cores.salaCinza); // Direita - 3ª parte
 	}
 
-	MSEntrada.newBox(1.4, [2.7, 41.6, 0.5], [4, 0.1, 3], Cores.azulzinho); // Portão
+	MSEntrada.newBox(1.4, [2.7, 41.6, 0.5], [4, 0.1, 3], Cores.azulzinho)
+		.newRoom(1206)
+		.appendText('300 Roboto 15px', '#000', 'Portão', [-5, -20]); // Portão
 	MSEntrada.newBox(1.4, [8.5, 41.6, 0.5], [1, 0.1, 3], Cores.azulzinho); // Portão Pedestre
 
 	MSEntrada.newBox(1.4, [9.7, 39.5, 0.5], [1, 1.5, 2], Cores.azulzinho); // Casinha Segurança
@@ -431,14 +450,18 @@ module.exports = function (Ace, Canvas) {
 	
 	
 	//Salas 
-	MSTerreo.newBox(1.4, [40, 35, 0.5], [12, 25, 4],  Cores.salaCinza); // Sala Pintura
+	MSTerreo.newBox(1.4, [40, 35, 0.5], [12, 25, 4],  Cores.salaCinza)
+		.newRoom(1106)
+		.appendText('300 Roboto 15px', '#000', 'Sala de Pintura', [-10, -30]); // Sala Pintura
 	MSTerreo.newBox(1.4, [27, 54, 0.5], [4, 5, 4],  Cores.banheiroRosa)
 		.newRoom(1100)
 		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [115, 14]); // banh femin
 	MSTerreo.newBox(1.4, [23, 54, 0.5], [4, 5, 4],  Cores.banheiroAzul)
 		.newRoom(1101)
 		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [115, 14]); // banh masc
-	MSTerreo.newBox(1.4, [25, 39, 0.5], [8, 8, 4],  Cores.salaBranca); //elevador+sala aleatoria
+	MSTerreo.newBox(1.4, [25, 39, 0.5], [8, 8, 4],  Cores.salaBranca)
+		.newRoom(1104)
+		.appendText('300 Roboto 15px', '#000', 'Elevador', [15, 40]); //elevador+sala aleatoria
 	MSTerreo.newBox(1.4, [18, 54, 0.5], [5, 6, 4],  Cores.salaCinza);
 	MSTerreo.newBox(1.4, [14, 54, 0.5], [4, 6, 4],  Cores.salaBranca);
 	MSTerreo.newBox(1.4, [10, 54, 0.5], [4, 6, 4],  Cores.salaCinza);
@@ -447,8 +470,16 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 54, 0.5], [4, 6, 4],  Cores.salaBranca);
 	
 	//linhas verdes
-	MSTerreo.newBox(1.4, [16.5, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [8, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho);
+	MSTerreo.newBox(1.4, [16.5, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1114)
+		.appendText('300 Roboto 15px', '#000', 'Sidnei', [10, -30])
+		.appendText('300 Roboto 15px', '#000', 'Yamaha', [-20, 5]);
+	MSTerreo.newBox(1.4, [10, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1113)
+		.appendText('300 Roboto 15px', '#000', 'Lab do Câmbio', [50, -30]);
+	MSTerreo.newBox(1.4, [3, 40, 0],  [0.5, 9, 0.1],  Cores.azulzinho)
+		.newRoom(1112)
+		.appendText('300 Roboto 15px', '#000', 'Exposição Fiat', [10, -30]);
 	
 	//portas
 	MSTerreo.newBox(1.4, [-1.2, 53.5, 0.5], [1, 0.1, 1.5],  Cores.portaMarrom);
@@ -467,12 +498,12 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 35, 0.5], [55, 0.1, 8],  Cores.salaCinza);
 	
 	//portões
-	MSTerreo.newBox(1.4, [-1, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [7, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [15, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [22, 34.8, 0.5], [2, 0.2, 3],  Cores.banheiroAzul);
-	MSTerreo.newBox(1.4, [37, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [45, 34.8, 0.5], [5.5, 0.2, 4],  Cores.branco);
+	MSTerreo.newBox(1.4, [-1, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [5, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [11.5, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [22, 34.8, 0.5], [2, 0.2, 2],  Cores.banheiroAzul);
+	MSTerreo.newBox(1.4, [36, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [45, 34.8, 0.5], [4.5, 0.2, 3],  Cores.branco);
 	
 
 	
@@ -483,21 +514,38 @@ module.exports = function (Ace, Canvas) {
 	MSTerreo.newBox(1.4, [-2, 20, 0.5],  [55, 0.1, 8],  Cores.salaCinza);
 
 	//Portoes
-	MSTerreo.newBox(1.4, [-1, 20.5, 0], [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [7.1, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [15, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [22, 20.5, 0],  [2, 0.1, 3],  Cores.banheiroAzul);
-	MSTerreo.newBox(1.4, [36, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
-	MSTerreo.newBox(1.4, [45, 20.5, 0],  [6, 0.1, 4],  Cores.branco);
+	MSTerreo.newBox(1.4, [-1, 20.5, 0], [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [5, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [11.5, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [22.5, 20.5, 0],  [2, 0.1, 2],  Cores.banheiroAzul);
+	MSTerreo.newBox(1.4, [36, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
+	MSTerreo.newBox(1.4, [45, 20.5, 0],  [4, 0.1, 3],  Cores.branco);
 	
 	
 	MSTerreo.newBox(1.4, [24.7, 8, 0.5], [11, 12, 6],  Cores.salaCinza); //recepção e salinha aleatoria
 	
 	//linhas verdes
-	MSTerreo.newBox(1.4, [13.5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho); 
-	MSTerreo.newBox(1.4, [5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [13.5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
-	MSTerreo.newBox(1.4, [5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho);
+	MSTerreo.newBox(1.4, [16.5, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1111)
+		.appendText('300 Roboto 15px', '#000', 'Oficina Interativa', [20, -35])
+		.appendText('300 Roboto 15px', '#000', 'Oficina Interativa', [-20, 0]); 
+	MSTerreo.newBox(1.4, [10, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1110)
+		.appendText('300 Roboto 15px', '#000', 'Pneumática', [10, -40]);
+	MSTerreo.newBox(1.4, [3, 8.2, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1110)
+		.appendText('300 Roboto 15px', '#000', '', [0, -35]);
+
+	MSTerreo.newBox(1.4, [16.5, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1109)
+		.appendText('300 Roboto 15px', '#000', 'Acessórios', [0, -35])
+		.appendText('300 Roboto 15px', '#000', 'Motor Diesel', [-30, 0]);
+	MSTerreo.newBox(1.4, [10, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1108)
+		.appendText('300 Roboto 15px', '#000', 'Motor Ciclo Otto', [10, -40]);
+	MSTerreo.newBox(1.4, [3, -8, 0],  [0.5, 12, 0.1],  Cores.azulzinho)
+		.newRoom(1107)
+		.appendText('300 Roboto 15px', '#000', 'Montagem PCDs', [10, -30]);
 	
 	//corredor preto
 	MSTerreo.newBox(1.4, [-1.5, 4, -0.2],  [55.1, 5, -0.1],  Cores.preto);
@@ -514,13 +562,203 @@ module.exports = function (Ace, Canvas) {
 
 
 	//bloco meio
-	MSTerreo.newBox(1.4, [24.6, 28, 0.5], [8, 7, 8],  Cores.salaCinza);
+	MSTerreo.newBox(1.4, [24.6, 28, 0.5], [8, 7, 8],  Cores.salaCinza)
+		.newRoom(1105)
+		.appendText('300 Roboto 15px', '#000', 'Escada', [30, 10]);
 	//MSTerreo.newBox(1.4, [27.4, 33.8, -2], [0, 3.5, 5],  Cores.banheiroAzul);
 
 	MSTerreo.setupRooms();
 };
 
 },{"./Cores":4}],8:[function(require,module,exports){
+// *************************************************** //
+// * Tower - Mundo Senai **************************** //
+// * Ace Graphics ************************************ //
+// *************************************************** //
+
+var Cores = require('./Cores');
+
+module.exports = function (Ace, Canvas) {
+	
+	var MSTower = new Ace(Canvas, {
+		scale: 8,
+		originY: 0
+	});
+	
+	// Chão
+	MSTower.newBox(1.4, [-2, -8, 0.10], [55, 68, 0.5],  Cores.chaoBranco);
+		//.newRoom(1)
+		//.appendImg('../img/lalala.jpg', [1, 1], 50, 50);
+
+
+	//grama
+	MSTower.newBox(1.4, [-2.5, 52, 1], [56, 8, 0.1], Cores.verdinho);
+	MSTower.newBox(1.4, [32, -8, 1], [21, 35, 0.1], Cores.verdinho);
+
+	//senai
+	MSTower.newBox(1.3, [32, 40, 1], [18, 10, 9], Cores.salaCinza);
+	MSTower.newBox(1.4, [32, 23, 1], [18, 11, 9], Cores.salaCinza);
+	MSTower.newBox(1.3, [38, 30, 2.5], [19, 15, 0.1], Cores.senai);
+	MSTower.newBox(1.3, [38, 44.5, 2.5], [19, 13, 0.1], Cores.senai);
+
+	
+	//parquinho
+	MSTower.newBox(1.4, [10, 28, 1], [11, 20, 0.1], Cores.verdinho);
+	MSTower.newBox(1.4, [10, 18, 1], [15, 10, 0.1], Cores.verde);
+	MSTower.newBox(1.4, [10, 4, 1], [15, 20, 0.1], Cores.playground)
+		.newRoom(2)
+		.appendImg('../img/play.png', [20,10], 120, 90);
+
+
+	
+	//tower
+	MSTower.newBox(1.4, [14, 42, 1], [4, 4, 15], Cores.tower);
+	MSTower.newBox(1.4, [13, 34, 1], [5, 5, 3], Cores.salaCinza);
+	MSTower.newBox(1.4, [14, 42, 13], [4, 4, 3], Cores.salaBranca)
+		.newRoom(3)
+		.appendText('300 Roboto 15px', '#00f', 'SENAI', [18, 5]);
+
+
+
+	// escaada
+	MSTower.newBox(1.4, [28, 39, 2], [2, 1, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [28, 39.8, 2.5], [2, 1, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [28, 40.6, 3], [2, 1, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [28, 41.2, 3.5], [2, 1, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [28, 42, 4], [2, 1, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [28, 42.8, 4.5], [2, 1 , 0.4], Cores.escada);
+	MSTower.newBox(1.4, [29, 43.6, 4], [3.5, 3.5, 0.2], Cores.escada);
+	MSTower.newBox(1.4, [29, 44, 0], [0.1, 0.1, 4], Cores.escada);
+	MSTower.newBox(1.4, [29, 46, 0], [0.1, 0.1, 4], Cores.escada);
+
+	// escaada direita
+	MSTower.newBox(1.4, [39, 21, 0], [1, 2, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [39.8, 21, 0.5], [1, 2, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [40.6, 21, 1], [1, 2, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [41.2, 21, 1.5], [1, 2, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [42, 21, 2], [1, 2, 0.4], Cores.escada);
+	MSTower.newBox(1.4, [42.8, 21, 2.5], [1, 2 , 0.4], Cores.escada);
+	MSTower.newBox(1.4, [44, 21, 2.5], [3.5, 3.5, 0.2], Cores.escada);
+	MSTower.newBox(1.4, [45, 21.5, -2], [0.1, 0.1, 4], Cores.escada);
+	MSTower.newBox(1.4, [48, 21.5, -2], [0.1, 0.1, 4], Cores.escada);
+
+	//portas
+	MSTower.newBox(1.4, [32, 44.5, 5], [0.1, 1, 1.6], Cores.salaBranca);
+	MSTower.newBox(1.4, [32, 29.5, 1], [0.1, 1.5, 2.5], Cores.salaBranca);
+	MSTower.newBox(1.4, [43.5, 22, 5], [1, 0.1, 1.6], Cores.salaBranca);
+	
+
+
+
+
+
+//cercas horizontais
+	MSTower.newBox(1.4, [24, 4, 1], [0.1, 0.1, 3], Cores.verde); //cercas baixo
+	MSTower.newBox(1.4, [23, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [22, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [21, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [20, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [19, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [18, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [17, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [16, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [15, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [14, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [13, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [12, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [11, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [10, 4, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [24, 24, 1], [0.1, 0.1, 3], Cores.verde); //cercas cima2
+	MSTower.newBox(1.4, [23, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [22, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [21, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [20, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [19, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [18, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [17, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [16, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [15, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [14, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [13, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [12, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [11, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [24, 28, 1], [0.1, 0.1, 3], Cores.verde); //cercas cima1
+	MSTower.newBox(1.4, [23, 28, 1], [0.1, 0.1, 3], Cores.verde); 
+	MSTower.newBox(1.4, [22, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [21, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [20, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [19, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [18, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [17, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [16, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [15, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [14, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [13, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [12, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [11, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 28, 1], [0.1, 0.1, 3], Cores.verde);
+
+	//cerca direita
+	MSTower.newBox(1.4, [25, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 27, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 26, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 25, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 23, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 22, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 21, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 20, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 19, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 18, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 17, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 16, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 15, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 14, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 13, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 12, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 11, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 10, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 9, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 8, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 7, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 6, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 5, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [25, 4, 1], [0.1, 0.1, 3], Cores.verde);
+
+	//cerca esquerda
+	MSTower.newBox(1.4, [10, 28, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 27, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 26, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 25, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 24, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 23, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 22, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 21, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 20, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 19, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 18, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 17, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 16, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 15, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 14, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 13, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 12, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 11, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 10, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 9, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 8, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 7, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 6, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 5, 1], [0.1, 0.1, 3], Cores.verde);
+	MSTower.newBox(1.4, [10, 4, 1], [0.1, 0.1, 3], Cores.verde);
+
+
+
+	MSTower.setupRooms();
+};
+
+},{"./Cores":4}],9:[function(require,module,exports){
 // *************************************************** //
 // * ************************************************* //
 // * Ace Graphics ************************************ //
@@ -858,7 +1096,7 @@ Ace.prototype.billboardMsg = function (room) {
 
 module.exports = Ace;
 
-},{"./Helpers":10,"./ReverseI":12}],9:[function(require,module,exports){
+},{"./Helpers":11,"./ReverseI":13}],10:[function(require,module,exports){
 // *************************************************** //
 // * Bootstrap - Mundo Senai ************************* //
 // * Ace Graphics ************************************ //
@@ -878,15 +1116,17 @@ MS.loadData();
 
 // Canvas
 var entrada = document.querySelector('senai-map[name="entrada"] canvas');
+var tower = document.querySelector('senai-map[name="tower"] canvas');
 var terreo = document.querySelector('senai-map[name="terreo"] canvas');
 var andar = document.querySelector('senai-map[name="andar"] canvas');
 
 // Carrega os mapas nos canvas
 require('../maps/MSEntrada')(Ace, entrada);
+require('../maps/MSTower')(Ace, tower);
 require('../maps/MSTerreo')(Ace, terreo);
 require('../maps/MSAndar')(Ace, andar);
 
-},{"../maps/MSAndar":5,"../maps/MSEntrada":6,"../maps/MSTerreo":7,"./Ace":8,"./MundoSenai":11,"normalize-css":1}],10:[function(require,module,exports){
+},{"../maps/MSAndar":5,"../maps/MSEntrada":6,"../maps/MSTerreo":7,"../maps/MSTower":8,"./Ace":9,"./MundoSenai":12,"normalize-css":1}],11:[function(require,module,exports){
 // *************************************************** //
 // * Helpers ***************************************** //
 // * Ace Graphics ************************************ //
@@ -911,7 +1151,7 @@ module.exports = {
 	    } : null;
 	}
 };
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // *************************************************** //
 // *************************************************** //
 // * Mundo Senai ************************************* //
@@ -957,6 +1197,7 @@ MundoSenai.prototype.loadData = function () {
 };
 
 MundoSenai.prototype.setUpdown = function () {
+	var tower = document.querySelector('senai-map[name="tower"]');
 	var terreo = document.querySelector('senai-map[name="terreo"]');
 	var andar = document.querySelector('senai-map[name="andar"]');
 	var updown = document.querySelector('senai-updown');
@@ -969,6 +1210,11 @@ MundoSenai.prototype.setUpdown = function () {
 			andar.setAttribute('state', 'visible');
 			updown.setAttribute('state', 'down');
 		} else if (state == 'down') {
+			terreo.setAttribute('state', 'visible');
+			andar.setAttribute('state', 'up');
+			updown.setAttribute('state', 'up');
+		} else if (state == 'go') {
+			tower.setAttribute('state', 'hided');
 			terreo.setAttribute('state', 'visible');
 			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
@@ -1017,6 +1263,8 @@ MundoSenai.prototype.changeMapsState = function (maps, state) {
 			updown.setAttribute('state', 'up');
 		} else if (state === 'andar') {
 			updown.setAttribute('state', 'down');
+		} else if (state === 'tower') {
+			updown.setAttribute('state', 'go');
 		} else {
 			updown.setAttribute('state', 'inactive');
 		}
@@ -1097,7 +1345,7 @@ MundoSenai.prototype.viewModes = function () {
 
 module.exports = MundoSenai;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // *************************************************** //
 // * Reverse Isomer ********************************** //
 // * Mundo Senai ************************************* //
@@ -1213,4 +1461,4 @@ ReverseI.prototype._translatePoint = function (point) {
 };
 
 module.exports = ReverseI;
-},{}]},{},[9]);
+},{}]},{},[10]);

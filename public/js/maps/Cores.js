@@ -39,5 +39,10 @@ module.exports = {
 	verdinho : '#69F0AE',
 	grama : '#40ba44',
 	grama2 : '#4CAF50',
-	grama3 : '#4CAF50'
+	grama3 : '#4CAF50',
+	tower : '#F3E1C1',
+	senai : '#243EB1',
+	playground : '#FBAE6E',
+	escada : '#000729',
+	verde : '#469C5A'
 };

@@ -45,9 +45,13 @@ module.exports = function (Ace, Canvas) {
 	//MSEntrada.newBox(1.4, [19, 23, 0.5], [20, 12, 6], Cores.salaCinza); // Prédio
 
 	MSEntrada.newBox(1.4, [36, 23, 0.5], [3, 12, 3], Cores.material.white); // Adm
-	MSEntrada.newBox(1.4, [33, 23, 0.5], [3, 12, 3], Cores.material.white); // Adm
+	MSEntrada.newBox(1.4, [33, 23, 0.5], [3, 12, 3], Cores.material.white)
+		.newRoom(1203)
+		.appendText('300 Roboto 15px', '#000', 'Feira Adm', [-120, -10]); // Adm
 	MSEntrada.newBox(1.4, [26, 23, 0.5], [7, 12, 3], Cores.salaCinza); // Meio
-	MSEntrada.newBox(1.4, [22.5, 23, 0.5], [3.5, 12, 3], Cores.material.white); // Adm
+	MSEntrada.newBox(1.4, [22.5, 23, 0.5], [3.5, 12, 3], Cores.material.white)
+		.newRoom(1204)
+		.appendText('300 Roboto 15px', '#000', 'Feira Adm', [-110, -20]); // Adm
 	MSEntrada.newBox(1.4, [19, 23, 0.5], [3.5, 12, 3], Cores.salaCinza); // Biblioteca
 
 	MSEntrada.newBox(1.4, [19, 23, 3.5], [20, 12, 3], Cores.salaCinza); // Topo
@@ -71,16 +75,24 @@ module.exports = function (Ace, Canvas) {
 	MSEntrada.newBox(1.4, [27, 16.5, 0.8], [2, 3.5, 0.1], Cores.chaoBranco); // Passarela Cantina
 	MSEntrada.newBox(1.4, [11, 15, 0.5], [29, 2, 0], Cores.chaoBranco); // Passarela Meio
 
-	MSEntrada.newBox(1.4, [21, -5, 0.5], [4, 14, 0.1], '#69F0AE');
+	MSEntrada.newBox(1.4, [21, -5, 0.5], [4, 14, 0.1], '#69F0AE')
+		.newRoom(1205)
+		.appendText('300 Roboto 15px', '#000', 'Turra - Viaturas Antigas', [0, -40]);
 
 	/*
 	**
 	** Estacionamento
 	**
 	*/
-	MSEntrada.newBox(1.4, [1, 13, 0], [3, 22, 0.1], '#69F0AE'); // Carros em Exposição
-	MSEntrada.newBox(1.4, [7, 13, 0], [3, 13, 0.1], '#EEFF41'); // 147 Clube
-	MSEntrada.newBox(1.4, [7, 26, 0], [3, 9, 0.1], '#B2FF59'); // G4 Clube
+	MSEntrada.newBox(1.4, [1, 13, 0], [3, 22, 0.1], '#69F0AE')
+		.newRoom(1200)
+		.appendText('300 Roboto 15px', '#000', 'Carros em exposição', [-50, -30]); // Carros em Exposição
+	MSEntrada.newBox(1.4, [7, 13, 0], [3, 13, 0.1], '#EEFF41')
+		.newRoom(1201)
+		.appendText('300 Roboto 15px', '#000', '147 Clube', [-20, -30]); // 147 Clube
+	MSEntrada.newBox(1.4, [7, 26, 0], [3, 9, 0.1], '#B2FF59')
+		.newRoom(1202)
+		.appendText('300 Roboto 15px', '#000', 'G4 Clube', [-10, -25]); // G4 Clube
 
 	// Ginásio
 	MSEntrada.newBox(1.4, [0, -6, 0.5], [10, 16, 6], Cores.salaCinza);
@@ -111,7 +123,9 @@ module.exports = function (Ace, Canvas) {
 		MSEntrada.newPillar(1.4, [i, 41.5, 0.3], [0.3, 0.3, 3.2], Cores.salaCinza); // Direita - 3ª parte
 	}
 
-	MSEntrada.newBox(1.4, [2.7, 41.6, 0.5], [4, 0.1, 3], Cores.azulzinho); // Portão
+	MSEntrada.newBox(1.4, [2.7, 41.6, 0.5], [4, 0.1, 3], Cores.azulzinho)
+		.newRoom(1206)
+		.appendText('300 Roboto 15px', '#000', 'Portão', [-5, -20]); // Portão
 	MSEntrada.newBox(1.4, [8.5, 41.6, 0.5], [1, 0.1, 3], Cores.azulzinho); // Portão Pedestre
 
 	MSEntrada.newBox(1.4, [9.7, 39.5, 0.5], [1, 1.5, 2], Cores.azulzinho); // Casinha Segurança

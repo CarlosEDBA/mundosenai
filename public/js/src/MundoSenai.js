@@ -43,6 +43,7 @@ MundoSenai.prototype.loadData = function () {
 };
 
 MundoSenai.prototype.setUpdown = function () {
+	var tower = document.querySelector('senai-map[name="tower"]');
 	var terreo = document.querySelector('senai-map[name="terreo"]');
 	var andar = document.querySelector('senai-map[name="andar"]');
 	var updown = document.querySelector('senai-updown');
@@ -55,6 +56,11 @@ MundoSenai.prototype.setUpdown = function () {
 			andar.setAttribute('state', 'visible');
 			updown.setAttribute('state', 'down');
 		} else if (state == 'down') {
+			terreo.setAttribute('state', 'visible');
+			andar.setAttribute('state', 'up');
+			updown.setAttribute('state', 'up');
+		} else if (state == 'go') {
+			tower.setAttribute('state', 'hided');
 			terreo.setAttribute('state', 'visible');
 			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
@@ -103,6 +109,8 @@ MundoSenai.prototype.changeMapsState = function (maps, state) {
 			updown.setAttribute('state', 'up');
 		} else if (state === 'andar') {
 			updown.setAttribute('state', 'down');
+		} else if (state === 'tower') {
+			updown.setAttribute('state', 'go');
 		} else {
 			updown.setAttribute('state', 'inactive');
 		}
