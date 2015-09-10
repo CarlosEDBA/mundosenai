@@ -592,8 +592,8 @@ module.exports = function (Ace, Canvas) {
 
 
 	//grama
-	MSTower.newBox(1.4, [-2.5, 52, 1], [56, 8, 0.1], Cores.verdinho);
-	MSTower.newBox(1.4, [32, -8, 1], [21, 35, 0.1], Cores.verdinho);
+	MSTower.newBox(1.4, [-2.5, 52, 1], [56, 8, 0.1], Cores.grama3);
+	MSTower.newBox(1.4, [32, -8, 1], [21, 35, 0.1], Cores.grama3);
 
 	//senai
 	MSTower.newBox(1.3, [32, 40, 1], [18, 10, 9], Cores.salaCinza);
@@ -603,8 +603,8 @@ module.exports = function (Ace, Canvas) {
 
 	
 	//parquinho
-	MSTower.newBox(1.4, [10, 28, 1], [11, 20, 0.1], Cores.verdinho);
-	MSTower.newBox(1.4, [10, 18, 1], [15, 10, 0.1], Cores.verde);
+	MSTower.newBox(1.4, [10, 28, 1], [11, 20, 0.1], Cores.grama3);
+	MSTower.newBox(1.4, [10, 18, 1], [15, 10, 0.1], Cores.grama3);
 	MSTower.newBox(1.4, [10, 4, 1], [15, 20, 0.1], Cores.playground)
 		.newRoom(2)
 		.appendImg('../img/play.png', [20,10], 120, 90);
@@ -615,8 +615,8 @@ module.exports = function (Ace, Canvas) {
 	MSTower.newBox(1.4, [14, 42, 1], [4, 4, 15], Cores.tower);
 	MSTower.newBox(1.4, [13, 34, 1], [5, 5, 3], Cores.salaCinza);
 	MSTower.newBox(1.4, [14, 42, 13], [4, 4, 3], Cores.salaBranca)
-		.newRoom(3)
-		.appendText('300 Roboto 15px', '#00f', 'SENAI', [18, 5]);
+		//.newRoom(3)
+		//.appendText('300 Roboto 15px', '#00f', 'SENAI', [18, 5]);
 
 
 
