@@ -1,0 +1,235 @@
+<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/components/senai-cover.html">
+
+<dom-module id="senai-modal">
+	<style type="text/css">
+		:host {
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			transform: translateY(-1000px);
+			-webkit-transition: opacity 0.26s ease;
+			-moz-transition: opacity 0.26s ease;
+			transition: opacity 0.26s ease;
+			z-index: 3000;
+		}
+
+		:host[state="open"] {
+			transform: translateY(0);
+		}
+
+		:host[state="open"] .modal {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+
+		:host[state="open"] senai-cover {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		:host[state=""] .modal {
+			opacity: 0;
+			transform: translateY(0) scale(1);
+		}
+
+		senai-cover {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transform: translateY(-1000px);
+			-webkit-transition: opacity 0.26s ease;
+			-moz-transition: opacity 0.26s ease;
+			transition: opacity 0.26s ease;
+			z-index: 2500;
+		}
+
+		.modal {
+			display: flex;
+			flex-flow: column nowrap;
+			width: 450px;
+			height: 400px;
+			color: #000;
+			background-color: #fff;
+			-webkit-box-shadow: 2px 2px 15px 1px rgba(0, 0, 0, 0.2);
+		    -moz-box-shadow:    2px 2px 15px 1px rgba(0, 0, 0, 0.2);
+		    box-shadow:         2px 2px 15px 1px rgba(0, 0, 0, 0.2);
+		    opacity: 0;
+		    transform: translateY(-600px) scale(0.5);
+			-webkit-transition: all 0.26s ease;
+			-moz-transition: all 0.26s ease;
+			transition: all 0.26s ease;
+			z-index: 3000;
+		}
+
+		.modal .wrapper {
+			width: 425px;
+			height: auto;
+			margin: 0 auto 0 auto;
+		}
+
+		.modal .content {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
+		.modal .top {
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: center;
+			margin: 0 0 0 10px;
+		}
+
+		.modal .title {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			margin: 5px 0 5px 0;
+			font: 300 28px 'Roboto', sans-serif;
+		}
+
+		.modal .title:after {
+			position: relative;
+			content: '';
+			border: 0;
+			width: 100%;
+			height: 1px;
+		    background-color: rgba(0, 0, 0, 0.2);
+		}
+
+		.modal .title > .room {
+			margin: 0 10px 0 0;
+		}
+
+		.modal .title > .title {
+			margin: 0 0 0 10px;
+		}
+
+		.modal .description {
+			display: block;
+			width: 100%;
+			height: auto;
+			margin: 15px 0 0 0;
+			font: 300 15px 'Roboto', sans-serif;
+			word-wrap: break-word;
+		}
+
+		.modal .image {
+			display: block;
+			position: absolute;
+			left: 18px;
+			bottom: 15px;
+			width: 415px;
+			height: auto;
+			max-height: 220px;
+		}
+
+		.modal .close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 45px;
+			height: 42px;
+			cursor: pointer;
+		}
+
+		.modal .close:after {
+			margin: 0;
+			padding: 0;
+			content: '×';
+			font: 400 30px 'Roboto', sans-serif;
+		}
+	</style>
+	<template>
+		<iron-ajax auto
+			url="{{getData()}}"
+			handle-as="json"
+			on-response="handleResponse"
+			last-response="{{data}}"
+			method="GET">
+		</iron-ajax>
+
+		<senai-cover></senai-cover>
+
+		<div class$="{{computeState(state)}}">
+            <div class="top">
+                <div class="title">
+                	<span class="room">{{room}}</span>
+                	<span> - </span>
+                	<span class="title">{{title}}</span>
+                </div>
+                <span class="close"></span>
+            </div>
+            <div class="wrapper">
+            	<div class="content">
+            		<span class="description">{{description}}</span>
+            		<img class="image" src="{{image}}" />
+            	</div>
+            </div>
+        </div>
+
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-modal',
+			properties: {
+				state: {
+					type: String,
+					notify: true
+				},
+				room: {
+					type: String,
+					notify: true
+				},
+				title: String,
+				description: String
+			},
+			getData: function () {
+				return window.location.origin + '/rooms.json';
+			},
+			handleResponse: function (req) {
+				//console.log(this);
+				var room = this.room;
+				this.data.forEach(function (el, ind, arr) {
+					//console.log(el);
+					if (el.sala == room) {
+						this.title = el.titulo;
+						this.description = el.descricao;
+						if (el.imagem) this.image = '/img/fotos/' +  el.imagem;
+					};
+				}, this);
+			},
+			computeState: function (state) {
+				return 'modal ' + state;
+			},
+			ready: function () {
+				var cover = this.querySelector('senai-cover');
+				var close = this.querySelector('.modal .close');
+
+				close.addEventListener('click', this.getOut.bind(this));
+				cover.addEventListener('click', this.getOut.bind(this));
+			},
+			attributeChanged: function (room, state) {
+				var ajax = this.querySelector('iron-ajax');
+				ajax.generateRequest();
+			},
+			getOut: function (e) {
+				this.setAttribute('room', '');
+				this.setAttribute('state', '');
+			}
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,66 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="senai-billboard">
+	<style type="text/css">
+		:host[state="inactive"] {
+			display: none;
+		}
+		
+		.billboard {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: auto;
+			height: auto;
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 25px 50px 25px 50px;
+			margin: 0 50px 0 0;
+			-webkit-transition: all 0.16s ease;
+			-moz-transition: all 0.16s ease;
+			transition: all 0.16s ease;
+		}
+		.billboard span {
+			font: 300 20px 'Roboto', sans-serif;
+		}
+	</style>
+	<template>
+	    <div class="billboard">
+	    	<span>{{msg}}</span>
+        </div>
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-billboard',
+			properties: {
+				state: {
+					type: String,
+					notify: true
+				},
+				room: {
+					type: String,
+					notify: true
+				},
+				msg: {
+					type: String,
+					notify: true
+				}
+			},
+			getData: function () {
+				return JSON.parse(localStorage.getItem('rooms'));
+			},
+			ready: function () {
+			},
+			attributeChanged: function (room, state) {
+					console.log(this.room);
+					var data = this.getData();
+					var room = this.room;
+					data.forEach(function (el, ind, arr) {
+						if (el.sala == room) {
+							this.title = el.titulo;
+						};
+					}, this);
+					this.msg = this.room + ' - ' + this.title;
+			}
+		});
+	</script>
+</dom-module>
