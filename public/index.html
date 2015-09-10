@@ -14,23 +14,27 @@
         <link rel="import" href="/components/senai-map.html">
         <link rel="import" href="/components/senai-menu.html">
         <link rel="import" href="/components/senai-modal.html">
+        <link rel="import" href="/components/senai-overview.html">
         <link rel="import" href="/components/senai-search.html">
         <link rel="import" href="/components/senai-updown.html">
     </head>
 	<body>
         <header>
             <img class="logo" src="img/LogoMundoSenaiBoqueiraoWhite.png" />
-            <senai-menu></senai-menu>
+            <!-- <senai-menu></senai-menu> -->
         </header>
 
-        <senai-map name="terreo" state="open"></senai-map>
-        <senai-map name="andar" state="up"></senai-map>
+        <senai-maps state="overview">
+            <senai-map name="entrada" state="overview"></senai-map>
+            <senai-map name="terreo" state="overview"></senai-map>
+            <senai-map name="andar" state="overview"></senai-map>
+        </senai-maps>
         
         <senai-modal room="" state=""></senai-modal>
 
         <footer>
-            <senai-updown state="up"></senai-updown>
-			<senai-lalala state=""></senai-lalala>
+            <senai-updown state="inactive"></senai-updown>
+			<senai-overview state="active"></senai-overview>
         </footer>
 
         <script type="text/javascript" src="/js/isomer.min.js"></script>

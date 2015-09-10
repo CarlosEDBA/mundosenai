@@ -2,6 +2,10 @@
 
 <dom-module id="senai-updown">
 	<style type="text/css">
+		:host[state="inactive"] {
+			display: none;
+		}
+		
 		.updown {
 			display: flex;
 			flex-flow: column nowrap;

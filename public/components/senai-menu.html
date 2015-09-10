@@ -1,0 +1,59 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="senai-menu">
+	<style type="text/css">
+		.menu {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			justify-content: flex-end;
+			width: 25px;
+			height: 35px;
+			padding: 5px 15px 5px 10px;
+			margin: 0 50px 0 0;
+			color: #fff;
+			cursor: pointer;
+			-webkit-transition: all 0.16s ease;
+			-moz-transition: all 0.16s ease;
+			transition: all 0.16s ease;
+		}
+
+		.menu:hover {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+
+		.menu i {
+			font-weight: 300;
+			font-size: 25px;
+		}
+
+		.menu span {
+			margin: 0 15px 0 0;
+			font: 300 20px 'Roboto', sans-serif;
+		}
+	</style>
+	<template>
+        <div class="menu">
+            <i class="fa fa-navicon"></i>
+        </div>
+    </template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-menu',
+			properties: {
+				state: {
+					type: String,
+					notify: true
+				}
+			},
+			computeState: function (state) {
+				return '' + state;
+			},
+			ready: function () {
+				//console.log(this.state);
+			},
+			attributeChanged: function (name, state) {
+			}
+		});
+	</script>
+</dom-module>

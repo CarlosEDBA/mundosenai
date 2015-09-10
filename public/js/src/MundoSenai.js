@@ -16,15 +16,13 @@ MundoSenai.prototype.mouseCoords = function () {
 	});
 };
 
-MundoSenai.prototype.changeMap = function () {
+MundoSenai.prototype.setUpdown = function () {
 	var terreo = document.querySelector('senai-map[name="terreo"]');
 	var andar = document.querySelector('senai-map[name="andar"]');
 	var updown = document.querySelector('senai-updown');
 	var button = document.querySelector('senai-updown .updown');
 
-	button.addEventListener('click', toggleMap);
-
-	function toggleMap (e) {
+	button.addEventListener('click', function (e) {
 		var state = updown.getAttribute('state');
 		if (state == 'up') {
 			terreo.setAttribute('state', 'down');
@@ -35,7 +33,87 @@ MundoSenai.prototype.changeMap = function () {
 			andar.setAttribute('state', 'up');
 			updown.setAttribute('state', 'up');
 		}
+	});
+};
+
+MundoSenai.prototype.setOverview = function () {
+	var senaiMaps = document.querySelector('senai-maps');
+	var toggleButton = document.querySelector('senai-overview');
+
+	toggleButton.addEventListener('click', function (e) {
+		var mapsState = senaiMaps.getAttribute('state');
+		var toggleState = toggleButton.getAttribute('state');
+		var toggleMap = toggleButton.getAttribute('map');
+
+		if (mapsState !== 'overview') {
+			toggleButton.setAttribute('state', 'active');
+			toggleButton.setAttribute('map', mapsState);
+			senaiMaps.setAttribute('state', 'overview');
+		} else {
+			toggleButton.setAttribute('state', 'inactive');
+			toggleButton.setAttribute('map', '');
+			senaiMaps.setAttribute('state', toggleMap);
+		}
+	});
+};
+
+MundoSenai.prototype.changeMapsState = function (maps, state) {
+	var updown = document.querySelector('senai-updown');
+
+	if (state == 'overview') {
+		updown.setAttribute('state', 'inactive');
+		[].forEach.call(maps, function (el, ind, arr) {
+			el.setAttribute('state', 'overview');
+		}, this);
+	} else {
+		var map = document.querySelector('senai-map[name="' + state + '"]');
+		var notTheMap = document.querySelectorAll('senai-map:not([name="' + state + '"])');
+		map.setAttribute('state', 'open');
+		[].forEach.call(notTheMap, function (el, ind, arr) {
+			el.setAttribute('state', 'hided');
+		}, this);
+
+		if (state === 'terreo') {
+			updown.setAttribute('state', 'up');
+		} else if (state === 'andar') {
+			updown.setAttribute('state', 'down');
+		} else {
+			updown.setAttribute('state', 'inactive');
+		}
 	}
+};
+
+MundoSenai.prototype.changeMapState = function (e) {
+	var map = e.target.parentNode;
+	var mapName = map.getAttribute('name');
+	this.setAttribute('state', mapName);
+	map.setAttribute('state', 'open');
+};
+
+MundoSenai.prototype.mapState = function () {
+	var senaiMaps = document.querySelector('senai-maps');
+	var maps = document.querySelectorAll('senai-map');
+	var changeMapsState = this.changeMapsState;
+
+	var config = {
+		attributes: true,
+		childList: false,
+		characterData: false
+	};
+
+	var observer = new MutationObserver(function (mutations) {
+		mutations.forEach(function (mutation) {
+			var state = mutation.target.getAttribute('state');
+			var maps = mutation.target.children;
+			changeMapsState(maps, state);
+		});
+	});
+
+	[].forEach.call(maps, function (el, ind, arr) {
+		el.addEventListener('click', this.changeMapState.bind(senaiMaps));
+	}, this);
+
+	observer.observe(senaiMaps, config);
 };
 
 MundoSenai.prototype.viewModes = function () {

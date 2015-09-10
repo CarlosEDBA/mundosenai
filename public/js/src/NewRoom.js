@@ -16,10 +16,12 @@ var NewRoom = (function () {
 		var container = e.target.parentNode;
 		var room = container.querySelector('.room');
 		var title = container.querySelectorAll('input')[1];
+		var image = container.querySelector('.image');
 		var description = container.querySelector('.description');
 		var data = {
 			sala: room.value,
 			titulo: title.value,
+			imagem: image.value,
 			descricao: description.value
 		};
 
@@ -28,6 +30,7 @@ var NewRoom = (function () {
 
 		room.value = '';
 		title.value = '';
+		image.value = '';
 		description.value = '';
 		//console.log(data);
 	}

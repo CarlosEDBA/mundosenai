@@ -1,0 +1,33 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="senai-cover">
+	<style type="text/css">
+		.cover {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			-webkit-transition: all 0.26s ease;
+			-moz-transition: all 0.26s ease;
+			transition: all 0.26s ease;
+		}
+	</style>
+	<template>
+		<div class="cover"></div>
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'senai-cover',
+			computeState: function () {
+			},
+			ready: function () {
+				//console.log(this);
+			},
+			attributeChanged: function () {
+			}
+		});
+	</script>
+</dom-module>

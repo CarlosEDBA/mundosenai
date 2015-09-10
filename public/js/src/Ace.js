@@ -65,6 +65,34 @@ Ace.prototype.newBox = function (rotation, coord, xyz, color) {
 	return this;
 };
 
+Ace.prototype.newPillar = function (rotation, coord, xyz, color) {
+	var box = this.Shape.Prism(new this.Point(coord[0], coord[1], coord[2]), xyz[0], xyz[1], xyz[2]);
+	var pymd = this.Shape.Pyramid(new this.Point(coord[0], coord[1], (coord[2] + xyz[2])), 0.3, xyz[1], 0.3);
+	var coords;
+
+	box = (rotation) ? box
+		.rotateX(this.Point(0, 0, 0), rotation / 10)
+		.rotateY(this.Point(0, 0, 0), rotation / 10)
+		.rotateZ(this.Point(0, 0, 0), rotation / 10) : box;
+
+	pymd = (rotation) ? pymd
+		.rotateX(this.Point(0, 0, 0), rotation / 10)
+		.rotateY(this.Point(0, 0, 0), rotation / 10)
+		.rotateZ(this.Point(0, 0, 0), rotation / 10) : pymd;
+
+	if (typeof(color) === 'string') {
+		color = Helpers.hexToRgb(color);
+		color = new this.Color(color.r, color.g, color.b);
+	};
+	
+	this.isomer.add(box, color);
+	this.isomer.add(pymd, color);
+
+	this.shape = box;
+
+	return this;
+};
+
 Ace.prototype.getAxis = function () {
 	var that = this;
 	var ReI = new ReverseI(this, this.canvas);

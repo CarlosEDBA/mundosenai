@@ -9,6 +9,24 @@
 			align-items: center;
 			width: 100%;
 			height: 100%;
+			-webkit-transition: all 0.56s ease;
+			-moz-transition: all 0.56s ease;
+			transition: all 0.56s ease;
+		}
+		:host[name="entrada"][state="overview"] {
+			transform: scale(0.5) translate(-200px, 250px);
+		}
+		:host[name="terreo"][state="overview"] {
+			transform: scale(0.3) translate(200px, -600px);
+		}
+		:host[name="andar"][state="overview"] {
+			transform: scale(0.3) translate(1600px, -600px);
+		}
+		:host[state="open"] {
+			transform: scale(1) translate(0, 0);
+		}
+		:host[state="hided"] {
+			transform: translate(0, 1000px);
 		}
 		canvas {
 			position: absolute;

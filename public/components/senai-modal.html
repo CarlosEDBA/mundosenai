@@ -79,6 +79,12 @@
 			margin: 0 auto 0 auto;
 		}
 
+		.modal .content {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
 		.modal .top {
 			display: flex;
 			flex-flow: row nowrap;
@@ -121,6 +127,16 @@
 			word-wrap: break-word;
 		}
 
+		.modal .image {
+			display: block;
+			position: absolute;
+			left: 18px;
+			bottom: 15px;
+			width: 415px;
+			height: auto;
+			max-height: 220px;
+		}
+
 		.modal .close {
 			display: flex;
 			justify-content: center;
@@ -158,7 +174,10 @@
                 <span class="close"></span>
             </div>
             <div class="wrapper">
-                <span class="description">{{description}}</span>
+            	<div class="content">
+            		<span class="description">{{description}}</span>
+            		<img class="image" src="{{image}}" />
+            	</div>
             </div>
         </div>
 
@@ -189,6 +208,7 @@
 					if (el.sala == room) {
 						this.title = el.titulo;
 						this.description = el.descricao;
+						if (el.imagem) this.image = '/img/fotos/' +  el.imagem;
 					};
 				}, this);
 			},

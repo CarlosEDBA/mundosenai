@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100,900);
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100,900); */
 
 body {
 	display: block;
@@ -41,23 +41,25 @@ senai-menu {
 }
 
 senai-maps {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
+	display: block;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	z-index: 500;
 }
 
 senai-map {
+	position: absolute;
 	z-index: 500;
 }
 
 senai-updown {
+	z-index: 1000;
+}
+
+senai-overview {
 	z-index: 1000;
 }
 
