@@ -40,6 +40,10 @@ senai-menu {
 	z-index: 3500;
 }
 
+senai-billboard {
+	z-index: 3500;
+}
+
 senai-maps {
 	display: block;
 	position: absolute;

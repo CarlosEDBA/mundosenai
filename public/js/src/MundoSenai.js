@@ -4,6 +4,8 @@
 // *************************************************** //
 
 var MundoSenai = MundoSenai || function () {
+	this.localhost = window.location.origin;
+
 	var SenaiMaps = document.registerElement('senai-maps', { prototype: Object.create(HTMLElement.prototype) });
 	var SenaiRoom = document.registerElement('senai-room', { prototype: Object.create(HTMLElement.prototype) });
 };
@@ -13,6 +15,30 @@ MundoSenai.prototype.mouseCoords = function () {
 		var x = e.pageX;
 		var y = e.pageY;
 		console.log('Mouse Position: x: ' + x + ' - y: ' + y);
+	});
+};
+
+MundoSenai.prototype.loadJSON = function (path, success, error) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+    	if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success)
+                	success(JSON.parse(xhr.responseText));
+            } else {
+                if (error)
+                    error(xhr);
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
+};
+
+MundoSenai.prototype.loadData = function () {
+	var data = this.loadJSON(this.localhost + '/rooms.json', function (data) {
+		localStorage.setItem('rooms', JSON.stringify(data));
 	});
 };
 

@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="import" href="/components/webcomponentsjs/webcomponents.min.js">
+        <link rel="import" href="/components/senai-billboard.html">
         <link rel="import" href="/components/senai-cover.html">
         <link rel="import" href="/components/senai-lalala.html">
         <link rel="import" href="/components/senai-map.html">
@@ -22,12 +23,13 @@
         <header>
             <img class="logo" src="img/LogoMundoSenaiBoqueiraoWhite.png" />
             <!-- <senai-menu></senai-menu> -->
+            <senai-billboard room="" state="inactive" msg=""></senai-billboard>
         </header>
 
-        <senai-maps state="andar">
+        <senai-maps state="terreo">
             <senai-map name="entrada" state="hided"></senai-map>
-            <senai-map name="terreo" state="hided"></senai-map>
-            <senai-map name="andar" state="visible"></senai-map>
+            <senai-map name="terreo" state="visible"></senai-map>
+            <senai-map name="andar" state="hided"></senai-map>
         </senai-maps>
         
         <senai-modal room="" state=""></senai-modal>

@@ -28,8 +28,12 @@ module.exports = function (Ace, Canvas) {
 	
 	//Salas 
 	MSTerreo.newBox(1.4, [40, 35, 0.5], [12, 25, 4],  Cores.salaCinza); // Sala Pintura
-	MSTerreo.newBox(1.4, [27, 54, 0.5], [4, 5, 4],  Cores.banheiroRosa); // banh femin
-	MSTerreo.newBox(1.4, [23, 54, 0.5], [4, 5, 4],  Cores.banheiroAzul); // banh masc
+	MSTerreo.newBox(1.4, [27, 54, 0.5], [4, 5, 4],  Cores.banheiroRosa)
+		.newRoom(1100)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [115, 14]); // banh femin
+	MSTerreo.newBox(1.4, [23, 54, 0.5], [4, 5, 4],  Cores.banheiroAzul)
+		.newRoom(1101)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [115, 14]); // banh masc
 	MSTerreo.newBox(1.4, [25, 39, 0.5], [8, 8, 4],  Cores.salaBranca); //elevador+sala aleatoria
 	MSTerreo.newBox(1.4, [18, 54, 0.5], [5, 6, 4],  Cores.salaCinza);
 	MSTerreo.newBox(1.4, [14, 54, 0.5], [4, 6, 4],  Cores.salaBranca);
@@ -97,8 +101,12 @@ module.exports = function (Ace, Canvas) {
 	//salinhas lado direito
 	MSTerreo.newBox(1.4, [44.7, -8.5, 0.5], [10, 12, 5],  Cores.salaCinza);
 	MSTerreo.newBox(1.4, [34.7, -8.5, 0.5], [10, 12, 5],  Cores.salaBranca);
-	MSTerreo.newBox(1.4, [28.7, -8.5, 0.5], [6.5, 8, 5],  Cores.banheiroRosa); // banh femin
-	MSTerreo.newBox(1.4, [24.7, -8.5, 0.5], [6, 8, 5],  Cores.banheiroAzul); // banh masc
+	MSTerreo.newBox(1.4, [28.7, -8.5, 0.5], [6.5, 8, 5],  Cores.banheiroRosa)
+		.newRoom(1102)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Feminino', [-60, -40]); // banh femin
+	MSTerreo.newBox(1.4, [24.7, -8.5, 0.5], [6, 8, 5],  Cores.banheiroAzul)
+		.newRoom(1103)
+		.appendText('300 Roboto 15px', '#000', 'Banheiro Masculino', [-50, -50]); // banh masc
 
 
 	//bloco meio

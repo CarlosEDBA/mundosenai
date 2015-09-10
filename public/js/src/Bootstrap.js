@@ -12,6 +12,7 @@ var MS = new MundoSenai();
 MS.setOverview();
 MS.setUpdown();
 MS.mapState();
+MS.loadData();
 //MS.mouseCoords();
 
 // Canvas

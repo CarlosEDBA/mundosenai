@@ -269,8 +269,10 @@ Ace.prototype.appendImg = function (img, pos, width, height) {
 Ace.prototype.setupRooms = function () {
 	var rooms = document.querySelectorAll('senai-room');
 	var roomsLen = rooms.length;
+	var billboardMsg = this.billboardMsg;
 
 	this.canvas.addEventListener('mousedown', clickBox.bind(this));
+	//this.canvas.addEventListener('mousedown', hoverBox.bind(this));
 
 	function clickBox (e) {
 		var mouseX = e.x;
@@ -289,6 +291,24 @@ Ace.prototype.setupRooms = function () {
 		}, this);
 	}
 
+	function hoverBox (e) {
+
+			var mouseX = e.x;
+			var mouseY = e.y;
+
+			[].forEach.call(rooms, function (el, ind, arr) {
+				if (
+					mouseX > el.dataset.xm1 &&
+					mouseX < el.dataset.xm3 &&
+					mouseY > el.dataset.ym2 &&
+					mouseY < el.dataset.ym4)
+				{
+					console.log('Sala: ' + el.dataset.room + ' - x: ' + mouseX + ' - y: ' + mouseY);
+					billboardMsg(el.dataset.room);
+				};
+			}, this);
+	}
+
 	// draw clickBox
 	/*for (var i=0; i<roomsLen; i++) {
 		this.ctx.fillStyle = "#212121";
@@ -303,6 +323,13 @@ Ace.prototype.openModal = function (room) {
 	var modal = document.querySelector('senai-modal');
 	modal.setAttribute('room', room);
 	modal.setAttribute('state', 'open');
+	return this;
+};
+
+Ace.prototype.billboardMsg = function (room) {
+	var billboard = document.querySelector('senai-billboard');
+	billboard.setAttribute('room', room);
+	billboard.setAttribute('state', 'active');
 	return this;
 };
 

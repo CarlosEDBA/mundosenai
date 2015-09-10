@@ -1,5 +1,4 @@
 <link rel="import" href="/components/polymer/polymer.html">
-<link rel="import" href="/components/iron-ajax/iron-ajax.html">
 <link rel="import" href="/components/senai-cover.html">
 
 <dom-module id="senai-modal">
@@ -95,20 +94,20 @@
 
 		.modal .title {
 			display: flex;
-			flex-flow: row nowrap;
+			flex-flow: row wrap;
 			align-items: center;
 			margin: 5px 0 5px 0;
-			font: 300 28px 'Roboto', sans-serif;
+			font: 300 24px 'Roboto', sans-serif;
 		}
 
-		.modal .title:after {
+		/*.modal .title:after {
 			position: relative;
 			content: '';
 			border: 0;
 			width: 100%;
 			height: 1px;
 		    background-color: rgba(0, 0, 0, 0.2);
-		}
+		}*/
 
 		.modal .title > .room {
 			margin: 0 10px 0 0;
@@ -154,14 +153,6 @@
 		}
 	</style>
 	<template>
-		<iron-ajax auto
-			url="{{getData()}}"
-			handle-as="json"
-			on-response="handleResponse"
-			last-response="{{data}}"
-			method="GET">
-		</iron-ajax>
-
 		<senai-cover></senai-cover>
 
 		<div class$="{{computeState(state)}}">
@@ -198,19 +189,7 @@
 				description: String
 			},
 			getData: function () {
-				return window.location.origin + '/rooms.json';
-			},
-			handleResponse: function (req) {
-				//console.log(this);
-				var room = this.room;
-				this.data.forEach(function (el, ind, arr) {
-					//console.log(el);
-					if (el.sala == room) {
-						this.title = el.titulo;
-						this.description = el.descricao;
-						if (el.imagem) this.image = '/img/fotos/' +  el.imagem;
-					};
-				}, this);
+				return JSON.parse(localStorage.getItem('rooms'));
 			},
 			computeState: function (state) {
 				return 'modal ' + state;
@@ -223,8 +202,16 @@
 				cover.addEventListener('click', this.getOut.bind(this));
 			},
 			attributeChanged: function (room, state) {
-				var ajax = this.querySelector('iron-ajax');
-				ajax.generateRequest();
+				var data = this.getData();
+				var room = this.room;
+				data.forEach(function (el, ind, arr) {
+					//console.log(el);
+					if (el.sala == room) {
+						this.title = el.titulo;
+						this.description = el.descricao;
+						if (el.imagem) this.image = '/img/fotos/' +  el.imagem;
+					};
+				}, this);
 			},
 			getOut: function (e) {
 				this.setAttribute('room', '');
